@@ -2,13 +2,16 @@
   "name": "components",
   "version": "1.0.0",
   "scripts": {
-    "build": "browserify src/index.js -o index.js -t babelify",
-    "dev": "watchify src/index.js -o index.js -d -t babelify",
+    "prestart:occitest": "browserify occitest/server/index.js -o dist/occitest/server/js/occitest.js -t babelify && babel occitest/server/server.js -o dist/occitest/server/server.js",
+    "start:occitest": "node dist/occitest/server/server.js",
+    "watch:tests": "babel -w tests -d dist/occitest/server/tests",
+    "dev:test": "parallelshell \"npm run start:occitest\" \"npm run watch:tests\"",
     "start": "npm run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.13.4",
     "react": "^0.14.8",
     "react-dom": "^0.14.8"
   },
@@ -20,5 +23,6 @@
     "browserify": "^13.0.0",
     "parallelshell": "^2.0.0",
     "watchify": "^3.7.0"
-  }
+  },
+  "private": true
 }

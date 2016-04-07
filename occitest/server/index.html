@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <title>Automated Visual Testing and StyleGuide Thanks to Occitest.js</title>
+</head>
+<body>
+  <div id="tests"></div>
+  <script type="text/javascript" src="occitest.js"></script>
+  <script type="text/javascript">
+    var currentTest = "/tests/" + window.location.pathname
+
+    var script = document.createElement("script")
+    script.type = "text/javascript"
+    script.src = currentTest
+    document.body.appendChild(script)
+
+    script.onload = function() {
+      Occitest.render(document.getElementById("tests"))
+    }
+  </script>
+</body>
+</html>
