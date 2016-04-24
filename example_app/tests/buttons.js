@@ -1,4 +1,5 @@
-import Link from '../../src/components/buttons/Link'
+import Occitest from 'occitest'
+import Link from '../src/components/buttons/Link'
 
 Occitest.describe('Call to actions')
   .component('Simple link', Link, function(component) {
