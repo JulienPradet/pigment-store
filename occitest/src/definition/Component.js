@@ -5,12 +5,12 @@ export default function (Component, displayName) {
     Component,
     displayName,
     features: {},
-    feature(featureName, props, state) {
-      this.features[featureName] = Feature(Component, props, state)
+    feature(featureName, props, actions) {
+      this.features[featureName] = Feature(Component, props, actions)
       return this
     },
-    document(props, state) {
-      this.features.__doc = Feature(Component, props, state)
+    document(props) {
+      this.features.__doc = Feature(Component, props)
       return this
     }
   }

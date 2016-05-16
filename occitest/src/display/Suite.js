@@ -24,22 +24,18 @@ const styles = {
   }
 }
 
-export default class Suite extends React.Component {
-  render() {
-    return <div style={styles.container}>
-      <h2 style={styles.title}>{ this.props.suite.name }</h2>
+const Suite = (props) => <div style={styles.container}>
+  <h2 style={styles.title}>{props.suite.name}</h2>
 
-      <ul style={styles.componentList}>
-        {
-          Object.keys(this.props.suite.components)
-            .map(componentKey => <li key={componentKey} style={styles.componentContainer}>
-              <Component
-                component={this.props.suite.components[componentKey]}
-                name={componentKey}
-              />
-            </li>)
-        }
-      </ul>
-    </div>
-  }
-}
+  <ul style={styles.componentList}>
+    {Object.keys(props.suite.components)
+        .map(componentKey => <li key={componentKey} style={styles.componentContainer}>
+          <Component
+            component={props.suite.components[componentKey]}
+            name={componentKey}
+          />
+        </li>)}
+  </ul>
+</div>
+
+export default Suite

@@ -1,3 +1,3 @@
-export default function Feature(Component, props, state) {
-  return { Component, props, state }
+export default function Feature(Component, props, actions) {
+  return { Component, props, actions }
 }

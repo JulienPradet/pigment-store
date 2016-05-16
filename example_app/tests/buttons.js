@@ -1,24 +1,22 @@
-import Occitest from 'occitest'
+var Occitest = require('occitest')
 import Link from '../src/components/buttons/Link'
 
 Occitest.describe('Call to actions')
   .component('Simple link', Link, function(component) {
     component
       .feature(
-        'default',
+        'Default button',
         {
           href: 'http://google.com',
           children: 'Google'
         }
       )
       .feature(
-        'hovered',
+        'Hovered button',
         {
           href: 'http://google.com',
           children: 'Google'
         },
-        {
-          hovered: true
-        }
+        (component) => component.onHover()
       )
   })
