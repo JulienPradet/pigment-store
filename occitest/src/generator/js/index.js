@@ -1,6 +1,6 @@
 import Rx, {Subject} from 'rx'
 import path from 'path'
-import {getRecursiveFiles, mkdirp, writefile} from '../../util/fs'
+import {getRecursiveFiles, saveFiles} from '../../util/fs'
 import {renderApp, renderVendor} from './renderBundle'
 
 function renderFiles(filesToRender$, testDir, styleguideDir, opts) {
@@ -12,17 +12,6 @@ function renderFiles(filesToRender$, testDir, styleguideDir, opts) {
       return {sourcePath, destPath}
     })
     .flatMap((paths) => renderApp(paths, opts))
-}
-
-function saveFiles(filesToSave$) {
-  return filesToSave$
-    .flatMap(({file, filepath}) => mkdirp(path.dirname(filepath))
-      .withLatestFrom(
-        Rx.Observable.just({file, filepath}),
-        (_, value) => value
-      )
-    )
-    .flatMap(({file, filepath}) => writefile(filepath, file))
 }
 
 export function buildApp(testDir, styleguideDir, opts) {

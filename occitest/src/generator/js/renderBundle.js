@@ -1,5 +1,6 @@
 import Rx from 'rx'
 import browserify from 'browserify'
+import path from 'path'
 
 const renderBundle = ({destPath, b}) => {
   return new Rx.Observable.create((observer) => {
@@ -16,7 +17,8 @@ const renderBundle = ({destPath, b}) => {
 export const renderApp = ({sourcePath, destPath}, {external, babelify}) => {
   return renderBundle({
     destPath,
-    b: browserify(sourcePath)
+    b: browserify({ debug: true })
+      .add(sourcePath)
       .external(external)
       .transform("babelify", babelify)
   })
@@ -25,7 +27,8 @@ export const renderApp = ({sourcePath, destPath}, {external, babelify}) => {
 export const renderVendor = (destPath, modules) => {
   return renderBundle({
     destPath,
-    b: browserify()
-      .require(modules)
+    b: browserify({ debug: true })
+      .require('react')
+      .require('occitest')
   })
 }

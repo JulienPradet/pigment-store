@@ -15,12 +15,12 @@ export function readdir(dirPath) {
   })
 }
 
-export function readfile(filePath) {
+export function readfile(filepath) {
 	return Rx.Observable.create((observer) => {
-		fs.readFile(filePath, (e, file) => {
+		fs.readFile(filepath, (e, file) => {
 			if(e) return observer.onError(e)
 
-      const data = Object.assign(getFilenameMetaData(filePath), { file: file.toString() })
+      const data = { filepath: filepath, file: file.toString() }
 			observer.onNext(data)
 			observer.onCompleted()
 		})
@@ -79,4 +79,21 @@ export function getRecursiveFiles(inputDir$) {
 
   return filesAndDirsWithStats$.filter(({isDirectory}) => !isDirectory)
     .map(({isDirectory, filepath, stats}) => ({filepath, stats}))
+}
+
+export function saveFiles(filesToSave$) {
+  return filesToSave$
+    .flatMap(({file, filepath}) => mkdirp(path.dirname(filepath))
+      .withLatestFrom(
+        Rx.Observable.just({file, filepath}),
+        (_, value) => value
+      )
+    )
+    .flatMap(({file, filepath}) => writefile(filepath, file))
+}
+
+export function copyfile(sourcePath, destPath) {
+  const file$ = readfile(sourcePath)
+    .map(({file}) => ({file, filepath: destPath}))
+  return saveFiles(file$)
 }

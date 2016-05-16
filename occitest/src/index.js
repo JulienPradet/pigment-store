@@ -14,10 +14,12 @@ function render(element, suite) {
   )
 }
 
-export default {
-  describe(name) {
-    currentSuite = describeSuite(name)
-    return currentSuite
-  },
-  render
+function describe(name) {
+  currentSuite = describeSuite(name)
+  return currentSuite
+}
+
+export {
+  render,
+  describe
 }

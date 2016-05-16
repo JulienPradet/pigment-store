@@ -10,14 +10,12 @@ export default class Feature extends React.Component {
     )
 
     if(state) {
+      console.log(component)
       component.setState(state)
     }
   }
 
   render() {
-    return <div>
-      {this.props.name}
-      <div ref="container"></div>
-    </div>
+    return <span ref="container"></span>
   }
 }

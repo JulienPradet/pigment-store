@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel src -d dist",
+    "build": "babel src -d dist && cp src/generator/html/index.html dist/generator/html/index.html",
     "serve": "node --use-strict dist/generator/index.js",
     "build:watch": "babel -w src -d dist",
-    "serve:watch": "nodemon --delay 0.2s --watch dist --use-strict dist/generator/index.js",
+    "serve:watch": "nodemon --watch dist dist/generator/index.js",
     "prestart": "npm run build",
     "start": "npm run serve",
     "dev": "parallelshell \"npm run build:watch\" \"npm run serve:watch\""

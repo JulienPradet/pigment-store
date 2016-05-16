@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>Automated Visual Testing and StyleGuide Thanks to Occitest.js</title>
+</head>
+<body>
+  <div id="tests"></div>
+  <script type="text/javascript">
+    var Occitest;
+    var vendor = "/js/vendor.js"
+    var currentTest = "/js" + window.location.pathname
+
+    var vendorScript = document.createElement("script")
+    vendorScript.type = "text/javascript"
+    vendorScript.src = vendor
+    document.body.appendChild(vendorScript)
+
+    vendorScript.onload = function() {
+      var testScript = document.createElement("script")
+      testScript.type = "text/javascript"
+      testScript.src = currentTest
+      document.body.appendChild(testScript)
+
+      testScript.onload = function() {
+        Occitest = require('occitest')
+        console.log(Occitest)
+        Occitest.render(document.getElementById("tests"))
+      }
+    }
+
+
+  </script>
+</body>
+</html>
