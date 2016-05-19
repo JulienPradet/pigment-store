@@ -54,7 +54,7 @@ const FeatureDetails = (props) => {
   </div>
 }
 
-class Preview extends React.Component {
+export class Preview extends React.Component {
   componentDidMount() {
     const { Component, props, actions } = this.props
     const component = ReactDOM.render(
@@ -68,21 +68,12 @@ class Preview extends React.Component {
   }
 
   render() {
-    return <div ref='container' className='casper-preview'></div>
+    return <span ref='container' className='casper-preview'></span>
   }
 }
 
-const FeaturePreview = (props) => {
-  return <div style={styles.content}>
-    <h5 style={styles.strong}>{props.detailed ? 'Preview' : props.name}:</h5>
-    <Preview {...props} />
-  </div>
-}
-
-const Feature = (props) => <div style={styles.container}>
+export const Feature = (props) => <div style={styles.container}>
   {props.detailed ? <h4 style={styles.title}>{props.name}:</h4> : null}
   {props.detailed ? <FeatureDetails {...props} /> : null}
-  <FeaturePreview {...props} />
+  <div style={styles.content}><Preview {...props} /></div>
 </div>
-
-export default Feature

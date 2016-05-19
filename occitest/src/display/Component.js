@@ -1,5 +1,6 @@
 import React from 'react'
-import Feature from './Feature'
+import {compose, withState, withHandlers} from 'recompose'
+import {Feature, Preview} from './Feature'
 import {colors} from './styles'
 
 const styles = {
@@ -27,52 +28,41 @@ const styles = {
     border: '1px solid ' + colors.white,
     background: colors.white
   },
-  featureContainer: {
+  featureContainerBlock: {
     display: 'block'
+  },
+  featureContainerInline: {
+    display: 'inline-block',
+    margin: '1em'
   }
 }
 
-export default class Component extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
-    this.showComponentDetails = this.showComponentDetails.bind(this)
-    this.hideComponentDetails = this.hideComponentDetails.bind(this)
-    this.toggleComponentDetails = this.toggleComponentDetails.bind(this)
-  }
+export default compose(
+  withState('showDetails', 'setShowDetails', false),
+  withHandlers({
+    showComponentDetails: ({setShowDetails}) => () => setShowDetails(true),
+    hideComponentDetails: ({setShowDetails}) => () => setShowDetails(false)
+  }),
+  withHandlers({
+    toggleComponentDetails: ({showComponentDetails, hideComponentDetails, showDetails}) => () => showDetails
+      ? hideComponentDetails()
+      : showComponentDetails()
+  })
+)((props) => <div style={styles.container}>
+  <h3 style={styles.title}>{props.name}</h3>
+  <button onClick={props.toggleComponentDetails}>Show Details</button>
 
-  showComponentDetails() {
-    this.setState({showDetails: true})
-  }
-
-  hideComponentDetails() {
-    this.setState({showDetails: false})
-  }
-
-  toggleComponentDetails() {
-    if(this.state.showDetails) {
-      this.hideComponentDetails()
-    } else {
-      this.showComponentDetails()
-    }
-  }
-
-  render() {
-    return <div style={styles.container}>
-      <h3 style={styles.title}>{this.props.name}</h3>
-      <button onClick={this.toggleComponentDetails}>Show Details</button>
-
-      <ul style={styles.featureList}>
-        {Object.keys(this.props.component.features)
-            .filter((featureKey) => featureKey !== '__doc')
-            .map(featureKey => <li key={featureKey} style={styles.featureContainer}>
-              <Feature
-                name={featureKey}
-                detailed={this.state.showDetails}
-                {...this.props.component.features[featureKey]}
-              />
-            </li>)}
-      </ul>
-    </div>
-  }
-}
+  <ul style={styles.featureList}>
+    {Object.keys(props.component.features)
+      .filter((featureKey) => featureKey !== '__doc')
+      .map(featureKey => <li key={featureKey} style={props.showDetails ? styles.featureContainerBlock : styles.featureContainerInline}>
+        {props.showDetails
+          ? <Feature
+              name={featureKey}
+              detailed={props.showDetails}
+              {...props.component.features[featureKey]}
+            />
+          : <Preview {...props.component.features[featureKey]} />}
+      </li>)}
+  </ul>
+</div>)
