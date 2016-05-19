@@ -8,7 +8,7 @@ const styles = {
     borderBottom: '1px solid ' + colors.darkGray
   },
   title: {
-    margin: 0,
+    margin: '0 0 ' + (1.1 / 1) + 'em 0',
     fontWeight: 'bold',
     fontSize: '1.1em'
   },
@@ -18,7 +18,7 @@ const styles = {
     fontSize: '1em'
   },
   content: {
-    margin: '1em 0',
+    margin: 0,
     border: '1px solid ' + colors.white,
     background: colors.white,
   }
@@ -68,7 +68,7 @@ class Preview extends React.Component {
   }
 
   render() {
-    return <div ref='container'></div>
+    return <div ref='container' className='casper-preview'></div>
   }
 }
 

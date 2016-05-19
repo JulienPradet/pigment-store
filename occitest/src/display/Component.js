@@ -4,7 +4,7 @@ import {colors} from './styles'
 
 const styles = {
   container: {
-    margin: 0
+    margin: '0',
   },
   title: {
     margin: 0,

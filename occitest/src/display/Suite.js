@@ -1,26 +1,29 @@
 import React from 'react'
+import {compose, withContext, getContext} from 'recompose'
 import Component from './Component'
 import {colors} from './styles'
 
 const styles = {
   container: {
-    padding: '1em 2em',
     margin: 0,
     background: colors.lightGray,
-    color: colors.darkGray
+    color: colors.darkGray,
+    fontFamily: '\'DejaVu Sans\', sans-serif',
+    padding: '1em'
   },
   title: {
-    margin: 0,
+    margin: (1 / 1.5) + 'em',
     fontWeight: 'bold',
     fontSize: '1.5em'
   },
   componentList: {
-    padding: '1em',
+    padding: '0',
     margin: '0',
     border: '1px solid ' + colors.white
   },
   componentContainer: {
-    display: 'block'
+    display: 'block',
+    margin: '1em'
   }
 }
 
@@ -38,4 +41,20 @@ const Suite = (props) => <div style={styles.container}>
   </ul>
 </div>
 
-export default Suite
+export default compose(
+  setState()
+  withContext(
+    { previewKey: React.PropTypes.number.isRequired },
+    ({previewKey, incrementKey}) => ({ previewKey })
+  )
+)(class extends React.Component {
+  constructor(props) {
+    super()
+
+    document.title = props.suite.name
+  }
+
+  render() {
+    return <Suite {...this.props} />
+  }
+})
