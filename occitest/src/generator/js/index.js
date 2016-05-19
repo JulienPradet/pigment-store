@@ -1,55 +1,29 @@
-import Rx, {Subject} from 'rx'
 import path from 'path'
-import {getRecursiveFiles, saveFiles} from '../../util/fs'
-import {renderApp, renderVendor} from './renderBundle'
-
-function renderFiles(filesToRender$, testDir, styleguideDir, opts) {
-  return filesToRender$
-    .map(({filepath}) => filepath)
-    .map((filepath) => {
-      const destPath = path.join(styleguideDir, filepath.substr(testDir.length))
-      const sourcePath = filepath
-      return {sourcePath, destPath}
-    })
-    .flatMap((paths) => renderApp(paths, opts))
-}
+import {renderBundle} from './renderBundle'
+import browserify from 'browserify'
+import babelify from 'babelify'
+import {saveFiles} from '../../util/fs'
 
 export function buildApp(testDir, styleguideDir, opts) {
-  console.log("=== STYLEGUIDE :: JS :: APP :: START")
-  const inputDir$ = new Rx.Subject()
-
-  const filesToRender$ = getRecursiveFiles(inputDir$)
-  const filesToSave$ = renderFiles(filesToRender$, testDir, styleguideDir, opts)
-  const savedFiles$ = saveFiles(filesToSave$)
-
-  savedFiles$.subscribe(
-    (filepath) => console.log("=== STYLEGUIDE :: JS :: APP :: DONE :: " + filepath),
-    (e) => {
-      console.error("=== STYLEGUIDE :: JS :: APP :: ERROR")
-      console.error(e)
-    },
-    () => {
-      console.log("=== STYLEGUIDE :: JS :: APP :: END")
-    }
+  console.log("=== STYLEGUIDE :: BUILD :: TEST :: START")
+  
+  const build$ = saveFiles(
+    renderBundle({
+      destPath: path.join(styleguideDir, 'app.js'),
+      b: browserify({ debug: true })
+        .add(path.join(testDir, 'suites.js'))
+        .transform("babelify", {presets: ["es2015", "react"]})
+    })
   )
 
-  inputDir$.onNext(testDir)
-  inputDir$.onCompleted()
-}
-
-export function buildVendor(destPath, modules) {
-  console.log("=== STYLEGUIDE :: JS :: VENDOR :: START")
-  const vendor$ = renderVendor(destPath, modules)
-  const savedVendor$ = saveFiles(vendor$)
-
-  savedVendor$.subscribe(
-    (filepath) => console.log("=== STYLEGUIDE :: JS :: VENDOR :: DONE :: " + filepath),
+  build$.subscribe(
+    (filepath) => console.log("=== STYLEGUIDE :: BUILD :: TEST :: " + filepath),
     (e) => {
-      console.error("=== STYLEGUIDE :: JS :: VENDOR :: ERROR")
+      console.error("=== STYLEGUIDE :: BUILD :: TEST :: ERROR")
       console.error(e)
     },
     () => {
-      console.log("=== STYLEGUIDE :: JS :: VENDOR :: END")
+      console.log("=== STYLEGUIDE :: BUILD :: TEST :: END")
     }
   )
 }

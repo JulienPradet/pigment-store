@@ -61,23 +61,13 @@ export function mkdirp(path) {
 }
 
 export function getRecursiveFiles(inputDir$) {
-  const dirs$ = new Rx.Subject()
-
-  const dirsAndSubdirs$ = dirs$.merge(inputDir$)
-
-  const filesAndDirs$ = dirsAndSubdirs$
+  return inputDir$
     .flatMap((dirpath) => readdir(dirpath))
     .flatMap((files) => files) // flatten all files
-
-  const filesAndDirsWithStats$ = filesAndDirs$.flatMap((filepath) => stat(filepath))
+    .flatMap((filepath) => stat(filepath))
     .map(({filepath, stats}) => ({ filepath, stats, isDirectory: stats.isDirectory() }))
-    .publish()
-  filesAndDirsWithStats$.connect()
-
-  filesAndDirsWithStats$.filter(({isDirectory}) => isDirectory)
-    .subscribe(({filepath}) => dirs$.onNext(filepath))
-
-  return filesAndDirsWithStats$.filter(({isDirectory}) => !isDirectory)
+    .expand(({filepath, stats, isDirectory}) => isDirectory ? getRecursiveFiles(Rx.Observable.just(filepath)) : Rx.Observable.empty())
+    .filter(({isDirectory}) => !isDirectory)
     .map(({isDirectory, filepath, stats}) => ({filepath, stats}))
 }
 

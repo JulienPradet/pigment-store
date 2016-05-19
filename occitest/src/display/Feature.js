@@ -42,12 +42,12 @@ const getUsageFromFeature = (feature) => {
 const FeatureDetails = (props) => {
   return <div>
     <div style={styles.content}>
-      <h5 style={styles.strong}>Usage :</h5>
+      <h5 style={styles.strong}>Usage:</h5>
       <pre>{getUsageFromFeature(props)}</pre>
     </div>
     {props.actions
       ? <div style={styles.content}>
-          <h5 style={styles.strong}>Actions taken :</h5>
+          <h5 style={styles.strong}>Actions taken:</h5>
           <pre>{props.actions.toString()}</pre>
         </div>
       : null}
@@ -74,7 +74,7 @@ class Preview extends React.Component {
 
 const FeaturePreview = (props) => {
   return <div style={styles.content}>
-    <h5 style={styles.strong}>{props.detailed ? 'Preview' : props.name} :</h5>
+    <h5 style={styles.strong}>{props.detailed ? 'Preview' : props.name}:</h5>
     <Preview {...props} />
   </div>
 }

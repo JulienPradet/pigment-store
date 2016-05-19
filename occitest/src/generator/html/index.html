@@ -6,26 +6,12 @@
 <body>
   <div id="tests"></div>
   <script type="text/javascript">
-    var Occitest;
-    var vendor = "/js/vendor.js"
-    var currentTest = "/js" + window.location.pathname
+    var app = "/js/app.js"
 
-    var vendorScript = document.createElement("script")
-    vendorScript.type = "text/javascript"
-    vendorScript.src = vendor
-    document.body.appendChild(vendorScript)
-
-    vendorScript.onload = function() {
-      var testScript = document.createElement("script")
-      testScript.type = "text/javascript"
-      testScript.src = currentTest
-      document.body.appendChild(testScript)
-
-      testScript.onload = function() {
-        Occitest = require('occitest')
-        Occitest.render(document.getElementById("tests"))
-      }
-    }
+    var appScript = document.createElement("script")
+    appScript.type = "text/javascript"
+    appScript.src = app
+    document.body.appendChild(appScript)
 
 
   </script>

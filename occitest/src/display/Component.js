@@ -25,7 +25,7 @@ const styles = {
     padding: 0,
     margin: '1em 0',
     border: '1px solid ' + colors.white,
-    background: colors.white,
+    background: colors.white
   },
   featureContainer: {
     display: 'block'

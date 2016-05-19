@@ -3,7 +3,7 @@ import path from 'path'
 import {copyfile} from '../../util/fs'
 
 export function buildServer(destPath) {
-  console.log("=== STYLEGUIDE :: HTML :: START")
+  console.log("=== STYLEGUIDE :: SERVER :: START")
   const savedServer$ = copyfile(path.join(__dirname, 'server.js'), path.join(destPath, 'server.js'))
 
   savedServer$.subscribe(

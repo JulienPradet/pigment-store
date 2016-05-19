@@ -1,5 +1,4 @@
 import React from 'react'
-import {compose, withContext, getContext} from 'recompose'
 import Component from './Component'
 import {colors} from './styles'
 
@@ -41,20 +40,13 @@ const Suite = (props) => <div style={styles.container}>
   </ul>
 </div>
 
-export default compose(
-  setState()
-  withContext(
-    { previewKey: React.PropTypes.number.isRequired },
-    ({previewKey, incrementKey}) => ({ previewKey })
-  )
-)(class extends React.Component {
-  constructor(props) {
+export default (suite) => class extends React.Component {
+  constructor () {
     super()
-
-    document.title = props.suite.name
+    document.title = suite.name
   }
 
-  render() {
-    return <Suite {...this.props} />
+  render () {
+    return <Suite {...this.props} suite={suite} />
   }
-})
+}

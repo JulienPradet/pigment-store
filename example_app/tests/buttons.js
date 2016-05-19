@@ -1,7 +1,7 @@
-var Occitest = require('occitest')
+import Occitest from 'occitest'
 import Link from '../src/components/buttons/Link'
 
-Occitest.describe('Call to actions')
+export default Occitest.describe('Buttons')
   .component('Simple link', Link, function(component) {
     component
       .feature(

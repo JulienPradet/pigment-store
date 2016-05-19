@@ -1,25 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import describeSuite from './definition/Suite'
-import Suite from './display/Suite'
+import describe from './definition/Suite'
+import App from './display/App'
 
-let currentSuite
-
-function render(element, suite) {
-  if(typeof suite === "undefined") suite = currentSuite
+function render(...suites) {
   ReactDOM.render(
-    <Suite suite={suite} />,
-    element
+    <App suites={suites} />,
+    document.getElementById('tests')
   )
 }
 
-function describe(name) {
-  currentSuite = describeSuite(name)
-  return currentSuite
-}
-
-export {
+export default {
   render,
   describe
 }

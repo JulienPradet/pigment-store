@@ -1,8 +1,7 @@
 import Rx from 'rx'
 import browserify from 'browserify'
-import path from 'path'
 
-const renderBundle = ({destPath, b}) => {
+export const renderBundle = ({destPath, b}) => {
   return new Rx.Observable.create((observer) => {
     b.bundle((e, file) => {
       if(e) return observer.onError(e)
