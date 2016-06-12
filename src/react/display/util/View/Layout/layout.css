@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.nav {
+  flex: 1;
+  background: #f0f0f0;
+  overflow: auto;
+}
+
+.content {
+  flex: 4;
+  background: #ffffff;
+  overflow: auto;
+}
