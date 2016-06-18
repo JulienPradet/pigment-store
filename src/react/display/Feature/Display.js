@@ -1,7 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
-export default class Display extends React.Component {
+const makeStyle = ({size, zoom}) => ({
+  width: size.width === 'auto' ? 'auto' : `${size.width}px`,
+  height: size.height === 'auto' ? 'auto' : `${size.height}px`,
+  transform: `scale(${zoom / 100})`,
+  transformOrigin: 'top left'
+})
+
+class Display extends React.Component {
   componentDidMount () {
     const { Component, props, actions } = this.props.feature
     const component = ReactDOM.render(
@@ -15,6 +23,10 @@ export default class Display extends React.Component {
   }
 
   render () {
-    return <span ref={(ref) => { this.container = ref }}></span>
+    return <div style={makeStyle(this.props.displayOptions)} ref={(ref) => { this.container = ref }}></div>
   }
 }
+
+export default (
+  getDisplayOptions()
+)(Display)
