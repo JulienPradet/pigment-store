@@ -1,0 +1,68 @@
+.title {
+  display: block;
+  font-size: 2em;
+  margin: 0;
+  padding: 0.5em;
+}
+
+.title, .title a {
+  background: rgb(85, 119, 255);
+  color: white;
+  text-decoration: none;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+}
+
+.list:first-of-type {
+  border-top: 1px solid rgb(200, 200, 200);
+}
+
+.list .list:first-of-type {
+  border-top: 0;
+}
+
+.item {
+  display: block;
+  list-style: none;
+}
+
+.item a {
+  display: block;
+  padding: 1em;
+  border-bottom: 1px solid rgb(200, 200, 200);
+  color: #444;
+  text-decoration: none;
+}
+
+.item mark {
+  background: #444;
+  color: #fff;
+}
+
+.item input:only-child {
+  position: relative;
+  padding: 1em;
+  box-sizing: border-box;
+  width: 100%;
+  border-width: 0;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.activeItem {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.activeItem > a {
+  font-weight: bold;
+}
+
+.list .list .item a {
+  padding-left: 2em;
+}
+
+.list .list .list .item a {
+  padding-left: 3em;
+}

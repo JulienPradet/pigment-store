@@ -1,15 +1,18 @@
 import React from 'react'
 import {compose, withProps} from 'recompose'
 import {Link, withRouter} from 'react-router'
+import Highlighter from 'react-highlight-words'
 
+import {componentContainsSearch} from './index'
 import ComponentNavigation from './ComponentNavigation'
 import {Container, Item} from '../util/View/SidebarMenu'
 import {suiteNameToPath} from '../router'
 
-const SuiteSubNavigation = ({suite, pathPrefix}) => <Container>
+const SuiteSubNavigation = ({suite, pathPrefix, search}) => <Container>
   {Object.keys(suite.components)
-    .map((name) => ({name, component: suite.components[name]}))
-    .map(({name, component}) => <ComponentNavigation key={name} pathPrefix={pathPrefix} name={name} component={component} />)}
+    .map((key) => suite.components[key])
+    .filter(componentContainsSearch(search))
+    .map((component) => <ComponentNavigation key={component.name} pathPrefix={pathPrefix} name={component.name} component={component} search={search} />)}
 </Container>
 
 export default compose(
@@ -20,11 +23,16 @@ export default compose(
   withProps(({router, suite, path}) => ({
     isActive: router.isActive(path)
   }))
-)(({suite, path, isActive}) => {
-  return <Item>
-    <Link to={path}>{suite.name}</Link>
+)(({suite, search, path, isActive}) => {
+  return <Item isActive={isActive}>
+    <Link to={path}>
+      <Highlighter
+        searchWords={[search]}
+        textToHighlight={suite.name}
+      />
+    </Link>
     {isActive
-      ? <SuiteSubNavigation suite={suite} pathPrefix={path} />
+      ? <SuiteSubNavigation suite={suite} pathPrefix={path} search={search} />
       : null}
   </Item>
 })

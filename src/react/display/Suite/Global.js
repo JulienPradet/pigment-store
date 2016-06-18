@@ -4,7 +4,7 @@ import {PageTitle} from '../util/View/Title'
 import ComponentList from '../Component/List'
 
 const Suite = ({suite}) => <div>
-  <PageTitle>{suite.name}2</PageTitle>
+  <PageTitle>{suite.name}</PageTitle>
 
   <ComponentList suite={suite} />
 </div>

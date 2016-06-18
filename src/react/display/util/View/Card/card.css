@@ -1,0 +1,17 @@
+.container {
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    margin: 2em 0;
+}
+
+.title {
+    padding: 1em;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+.title h2 {
+    margin: 0;
+}
+
+.content {
+    padding: 1em;
+}

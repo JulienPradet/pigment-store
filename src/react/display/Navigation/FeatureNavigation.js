@@ -1,4 +1,5 @@
 import React from 'react'
+import Highlighter from 'react-highlight-words'
 import {compose, withProps} from 'recompose'
 import {Link, withRouter} from 'react-router'
 
@@ -13,8 +14,13 @@ export default compose(
   withProps(({router, path}) => ({
     isActive: router.isActive(path)
   }))
-)(({name, component, path, isActive}) => {
-  return <Item>
-    <Link to={path}>{name}</Link>
+)(({name, component, search, path, isActive}) => {
+  return <Item isActive={isActive}>
+    <Link to={path}>
+      <Highlighter
+        searchWords={[search]}
+        textToHighlight={name}
+      />
+    </Link>
   </Item>
 })

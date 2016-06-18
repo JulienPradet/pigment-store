@@ -1,15 +1,18 @@
 import React from 'react'
+import Highlighter from 'react-highlight-words'
 import {compose, withProps} from 'recompose'
 import {Link, withRouter} from 'react-router'
 
+import {featureContainsSearch} from './index'
 import FeatureNavigation from './FeatureNavigation'
 import {Container, Item} from '../util/View/SidebarMenu'
 import {componentNameToPath} from '../router'
 
-const ComponentSubNavigation = ({component, pathPrefix}) => <Container>
+const ComponentSubNavigation = ({component, pathPrefix, search}) => <Container>
   {Object.keys(component.features)
-    .map((name) => ({name, feature: component.features[name]}))
-    .map(({name, feature}) => <FeatureNavigation key={name} pathPrefix={pathPrefix} name={name} feature={feature} />)}
+    .map((key) => component.features[key])
+    .filter(featureContainsSearch(search))
+    .map((feature) => <FeatureNavigation key={feature.name} pathPrefix={pathPrefix} name={feature.name} feature={feature} search={search} />)}
 </Container>
 
 export default compose(
@@ -20,11 +23,16 @@ export default compose(
   withProps(({router, path}) => ({
     isActive: router.isActive(path)
   }))
-)(({name, component, path, isActive}) => {
-  return <Item>
-    <Link to={path}>{name}</Link>
+)(({name, component, search, path, isActive}) => {
+  return <Item isActive={isActive}>
+    <Link to={path}>
+      <Highlighter
+        searchWords={[search]}
+        textToHighlight={name}
+      />
+    </Link>
     {isActive
-      ? <ComponentSubNavigation component={component} pathPrefix={path} />
+      ? <ComponentSubNavigation component={component} pathPrefix={path} search={search} />
       : null}
   </Item>
 })
