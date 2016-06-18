@@ -1,11 +1,11 @@
-import TestComponent from './Component'
+import ComponentDefinition from './Component'
 
-export default function Suite (name) {
+export default (name) => {
   return {
     name,
     components: {},
     component (componentName, Component, callback) {
-      this.components[componentName] = TestComponent(Component)
+      this.components[componentName] = ComponentDefinition(Component, componentName)
       callback(this.components[componentName])
       return this
     }
