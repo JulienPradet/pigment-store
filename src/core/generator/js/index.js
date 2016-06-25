@@ -19,7 +19,6 @@ export function buildApp (testDir, styleguideDir, {dev, babelify}) {
         return createSuitesFile(testDir)
       }
     })
-    .tap(console.log)
     .map((file) => {
       const stream = new Readable()
       stream.push(file)
