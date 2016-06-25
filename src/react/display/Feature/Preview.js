@@ -9,9 +9,9 @@ export default ({suiteName, componentName, name, feature}) => {
   return <Card.Container>
     <Card.Title>
       <SectionTitle>
-        <Link to={'.' + makePath(null, componentName, name)}>
+        <ModalLink to={makePath(suiteName, componentName, name)}>
           {name}
-        </Link>
+        </ModalLink>
       </SectionTitle>
     </Card.Title>
 

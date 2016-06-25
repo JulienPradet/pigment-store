@@ -1,0 +1,24 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  width: 50%;
+  max-height: calc(100vh - 4em);
+  top: 2em;
+  left: 25%;
+  overflow: auto;
+  padding: 2em;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  cursor: initial;
+}

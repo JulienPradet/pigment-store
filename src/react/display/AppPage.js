@@ -4,6 +4,7 @@ import Layout from './util/View/Layout'
 import Navigation from './Navigation'
 import DisplayOptions from './DisplayOptions'
 import {DisplayOptionsProvider} from './DisplayOptions/ContextProvider'
+import {pageWithModal, ChildrenInContext} from './util/View/Modal'
 
 const AppPage = ({suites, overview, children}) => {
   const nav = <Navigation suites={suites} />
@@ -11,7 +12,9 @@ const AppPage = ({suites, overview, children}) => {
 
   return <DisplayOptionsProvider>
     <Layout nav={nav} horizontalNav={displayOptions}>
-      {children}
+      <ChildrenInContext>
+        {children}
+      </ChildrenInContext>
     </Layout>
   </DisplayOptionsProvider>
 }
@@ -21,4 +24,5 @@ export default (suites, overview) => compose(
     suites,
     overview
   }),
+  pageWithModal()
 )(AppPage)
