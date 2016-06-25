@@ -19,7 +19,7 @@ export function buildApp (testDir, styleguideDir, {dev, babelify}) {
       jsonOutput: path.join(styleguideDir, 'app.css.json'),
       global: true
     })
-    .transform('babelify', babelify)
+    .transform('babelify')
 
   const build$ = saveFiles(
     renderBundle({

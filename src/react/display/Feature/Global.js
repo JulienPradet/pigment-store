@@ -11,13 +11,13 @@ const Feature = ({name, feature}) => <div>
   <Usage feature={feature} />
 </div>
 
-export default (name, feature) => class extends React.Component {
+export default (suiteName, componentName, featureName, feature) => class extends React.Component {
   constructor () {
     super()
-    document.title = name
+    document.title = `${suiteName} | ${componentName} | ${featureName}`
   }
 
   render () {
-    return <Feature {...this.props} name={name} feature={feature} />
+    return <Feature {...this.props} name={featureName} feature={feature} />
   }
 }

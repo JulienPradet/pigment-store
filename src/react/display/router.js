@@ -26,20 +26,20 @@ export const makePath = (suiteName, componentName, featureName) => {
 const suiteRoutes = (suites) => suites.map((suite) => ({
   path: suiteNameToPath(suite.name),
   indexRoute: {
-    component: SuiteGlobal(suite)
+    component: SuiteGlobal(suite.name, suite)
   },
   childRoutes: Object.keys(suite.components)
-    .map((componentName) => ({ componentName, component: suite.components[componentName] }))
-    .map(({componentName, component}) => ({
-      path: makePath(suite.name, componentName),
+    .map((componentName) => suite.components[componentName])
+    .map((component) => ({
+      path: makePath(suite.name, component.name),
       indexRoute: {
-        component: ComponentGlobal(componentName, component)
+        component: ComponentGlobal(suite.name, component.name, component)
       },
       childRoutes: Object.keys(component.features)
-        .map((featureName) => ({ featureName, feature: component.features[featureName] }))
-        .map(({featureName, feature}) => ({
-          path: makePath(suite.name, componentName, featureName),
-          component: FeatureGlobal(featureName, feature)
+        .map((featureName) => component.features[featureName])
+        .map((feature) => ({
+          path: makePath(suite.name, component.name, feature.name),
+          component: FeatureGlobal(suite.name, component.name, feature.name, feature)
         }))
     }))
 }))

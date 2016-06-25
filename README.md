@@ -44,4 +44,4 @@
 
 [ ] Render actions directly in html
 [ ] Tag views in order to let users display information however they want
-[ ] detective in order to find deps
+[~] detective in order to find deps

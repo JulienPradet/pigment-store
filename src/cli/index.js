@@ -9,7 +9,9 @@ const argsOptions = parseArgs(process.argv.slice(2), {
 })
 
 const options = Object.assign({
-  babelify: {presets: ['es2015', 'react']}
+  babelify: {
+    babelrc: true
+  }
 }, argsOptions)
 
 const testDir = path.join(__dirname, '../../examples/basic/tests')

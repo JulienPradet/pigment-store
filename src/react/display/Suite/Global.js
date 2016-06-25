@@ -9,10 +9,10 @@ const Suite = ({suite}) => <div>
   <ComponentList suite={suite} />
 </div>
 
-export default (suite) => class extends React.Component {
+export default (suiteName, suite) => class extends React.Component {
   constructor () {
     super()
-    document.title = suite.name
+    document.title = suiteName
   }
 
   render () {
