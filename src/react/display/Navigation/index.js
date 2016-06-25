@@ -4,7 +4,7 @@ import {compose, withState, withHandlers} from 'recompose'
 import {Container, MenuTitle, Item} from '../util/View/SidebarMenu'
 import SuiteNavigation from './SuiteNavigation'
 
-const isMatching = (search, name) => name.match(new RegExp(search, 'i'))
+export const isMatching = (search, name) => name.match(new RegExp(search, 'i'))
 
 export const featureContainsSearch = (search) => feature => {
   return isMatching(search, feature.name)

@@ -3,16 +3,16 @@ import {compose, withProps} from 'recompose'
 import {Link, withRouter} from 'react-router'
 import Highlighter from 'react-highlight-words'
 
-import {componentContainsSearch} from './index'
+import {isMatching, componentContainsSearch} from './index'
 import ComponentNavigation from './ComponentNavigation'
 import {Container, Item} from '../util/View/SidebarMenu'
 import {suiteNameToPath} from '../router'
 
-const SuiteSubNavigation = ({suite, pathPrefix, search}) => <Container>
+const SuiteSubNavigation = ({suite, pathPrefix, search, displayAll}) => <Container>
   {Object.keys(suite.components)
     .map((key) => suite.components[key])
-    .filter(componentContainsSearch(search))
-    .map((component) => <ComponentNavigation key={component.name} pathPrefix={pathPrefix} name={component.name} component={component} search={search} />)}
+    .filter((component) => displayAll || componentContainsSearch(search)(component))
+    .map((component) => <ComponentNavigation key={component.name} pathPrefix={pathPrefix} name={component.name} component={component} search={search} displayAll={displayAll} />)}
 </Container>
 
 export default compose(
@@ -32,7 +32,7 @@ export default compose(
       />
     </Link>
     {isActive
-      ? <SuiteSubNavigation suite={suite} pathPrefix={path} search={search} />
+      ? <SuiteSubNavigation suite={suite} pathPrefix={path} search={search} displayAll={isMatching(search, suite.name)} />
       : null}
   </Item>
 })
