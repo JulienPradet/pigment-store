@@ -10,7 +10,8 @@ function isModuleDependency (path) {
 }
 
 function makeMetaData (t, rootDir, variableName, importPath, fileName) {
-  var result = babel.transformFileSync(path.join(path.dirname(fileName), importPath + '.js'), {
+  importPath = importPath.endsWith('.js') ? importPath : importPath + '.js'
+  var result = babel.transformFileSync(path.join(path.dirname(fileName), importPath), {
     plugins: ['detective']
   })
   var metadata = detective.metadata(result)

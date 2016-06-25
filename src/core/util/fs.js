@@ -4,6 +4,15 @@ import path from 'path'
 import mkdirpLib from 'mkdirp'
 import chokidar from 'chokidar'
 
+export function exists (filePath) {
+  return Rx.Observable.create((observer) => {
+    fs.exists(filePath, (exists) => {
+      observer.onNext(exists)
+      observer.onCompleted()
+    })
+  })
+}
+
 export function watchfile (filePath) {
   return Rx.Observable.create((observer) => {
     chokidar.watch(filePath, {persistent: true})
