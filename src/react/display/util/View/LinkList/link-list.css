@@ -1,0 +1,16 @@
+.container {
+}
+
+.title {
+  color: #a6cf39;
+  font-weight: bold;
+}
+
+.content a {
+  color: #39354b;
+  text-decoration: none;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}

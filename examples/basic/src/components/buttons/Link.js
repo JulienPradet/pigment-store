@@ -1,4 +1,6 @@
 import React from 'react'
+import TextField from '../form/TextField'
+import InputField from '../form/NumberField'
 
 const styles = {
   link: {
@@ -42,7 +44,9 @@ export default class Link extends React.Component {
       styles.link,
       this.state.hovered && styles.hover
     )
-    return <a href={this.props.href} onMouseOver={this.onHover} onMouseLeave={this.onLeave} style={style}>{this.props.children}</a>
+    return <a href={this.props.href} onMouseOver={this.onHover} onMouseLeave={this.onLeave} style={style}>
+      {this.props.children}
+    </a>
   }
 }
 
