@@ -1,47 +1,71 @@
-# Launch :
+# Usage
 
-## production
+## Production
 
 * Broken
 
-## dev mode
+## Dev mode
 
 * npm run dev
 * npm run serve:watch
 * node examples/basic/styleguide/server.js
 
-# TODO
+# Roadmap
 
-## Styleguide itself
+## 0.1.0
 
-[ ] Add hierarchy to suites (a suite should be able to contain another suite ?)
-[~] Make a proper display menu
-[ ] Make a disco mode, etc.
-[ ] Add more place to documentation
-[ ] Previews should be in iframes : think about CSS issues
-[ ] Think about styleguide customisation (ex: only display 'default' feature and show the other ones on 'show details' trigger)
-[ ] Style code snippets and add tooltips (types from Component.PropTypes, etc.)
-[ ] Display a single component with HMR
+### Styleguide
+[ ] Finish card design : icon + bigger toggle button area
+[ ] Make feature links an anchor rather than a popin
+[ ] Suite Global - add anchor link in collapsed suite description
+[ ] Add categories based on folders architecture
+[ ] Style horizontal menu
+[ ] Add button to reset search menu
 
-## Building steps
+### API
+[ ] Finish the pigment-store cli
+[ ] Improve fluent API for tests
 
-[ ] Make it CLI-able directly from app
-[~] Add watcher for styleguide
-[ ] Add React hot loader (3? with babel)
-[ ] Import test suites directly from fs rather than from a file
+### Toolchain
+[ ] Move toward webpack (since it's becoming a more serious thing)
 
-## Testing
+### Documentation
+[ ] Describe how to use the CLI
+[ ] Descrbie how to write a test file
+[ ] Make screens to show how awesome the styleguide is
 
-[ ] Create either one page per feature or create an id mecanisme
-[ ] Make it CLI-able
+## 0.2.0
 
-## Self tested
+### Styleguide
+[ ] Add proptypes to component description
+[ ] Use a index.js or README.md file on test root dir in order to populate the home page
+[ ] Use a index.js or README.md file to add a description for each category
+[ ] Use an iframe to display elements
+[ ] Disco mode
 
-[ ] Once the API settles down a bit, unit test everything
-[ ] Visually test the styleguide too although there wont be much components
+### API
+[ ] Enable CSS inline and relative
 
-#### feedback
+### Testing
+[ ] Add visual testing tooling
 
-[ ] Render actions directly in html
-[ ] Tag views in order to let users display information however they want
-[~] detective in order to find deps
+### Toolchain
+[ ] HMR in dev mode
+
+### Documentation
+[ ] Add full example for the styleguide itself for view elements
+[ ] Add architecture documentation so that one can add any kind of renderer
+
+## 0.3.0
+
+### Styleguide
+[ ] Styleguide display should be in core, and react/display should only have the renderers (component details, etc.)
+[ ] Enable tags that select a specific renderer
+[ ] Add animation on load
+
+### Testing
+[ ] Add proper testing
+
+# Discussions
+
+[ ] Render actions directly in html -> not a big fan of this
