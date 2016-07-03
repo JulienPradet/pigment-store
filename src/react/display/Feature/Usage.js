@@ -1,4 +1,5 @@
 import React from 'react'
+import Markdown from '../util/View/Markdown'
 
 const getUsageFromFeature = (feature) => {
   const ComponentName = feature.Component.name
@@ -18,13 +19,21 @@ const getUsageFromFeature = (feature) => {
 const FeatureUsage = ({feature, displayActions = true}) => {
   return <div>
     <div>
-      <h5>Usage:</h5>
-      <pre>{getUsageFromFeature(feature)}</pre>
+      <h3>Usage:</h3>
+      <Markdown>
+        ```
+        {getUsageFromFeature(feature)}
+        ```
+      </Markdown>
     </div>
     {displayActions && feature.actions
       ? <div>
         <h5>Actions taken:</h5>
-        <pre>{feature.actions.toString()}</pre>
+        <Markdown>
+          ```
+          {feature.actions.toString()}
+          ```
+        </Markdown>
       </div>
       : null}
   </div>
