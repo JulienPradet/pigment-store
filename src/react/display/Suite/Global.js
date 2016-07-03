@@ -2,12 +2,19 @@ import React from 'react'
 
 import {PageTitle} from '../util/View/Title'
 import ComponentList from '../Component/List'
+import Card from '../util/View/Card'
 
-const Suite = ({suite}) => <div>
-  <PageTitle>{suite.name}</PageTitle>
+const Suite = ({suite}) => {
+  const title = <PageTitle>
+    {suite.name}
+  </PageTitle>
 
-  <ComponentList suite={suite} />
-</div>
+  return <div>
+    <Card title={title} />
+
+    <ComponentList suite={suite} />
+  </div>
+}
 
 export default (suiteName, suite) => class extends React.Component {
   constructor () {

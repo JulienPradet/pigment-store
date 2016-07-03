@@ -1,17 +1,55 @@
+
 .container {
-    border: 1px solid rgba(200, 200, 200, 0.5);
-    margin: 2em 0;
+  background: #ffffff;
+  margin: 2em 0;
+  padding: 0.8em 1em 1em;
 }
 
 .title {
-    padding: 1em;
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+  display: flex;
+  align-items: center;
+}
+.title h1, .title h2 {
+  margin: 0;
+  font-family: 'News Cycle', sans-serif;
+}
+.title h1 {
+  font-size: 1.4em;
+}
+.title h2 {
+  font-size: 1.2em;
+}
+.title a {
+  color: #39354b;
+  text-decoration: none;
 }
 
-.title h2 {
-    margin: 0;
+.titleContent {
+  flex: 10;
+}
+.titleButton {
+  flex: 1;
+  text-align: center;
+
+}
+.titleButton button {
+  background: none;
+  border: 0;
 }
 
 .content {
-    padding: 1em;
+  margin-top: 0.5em;
+}
+
+.collapsibleContent {
+  margin-top: 0em;
+  padding: 1em 0 1px 0;
+}
+
+.collapsibleContent pre {
+  margin: 0;
+}
+
+.collapsibleContent h3 {
+  margin-top: 0;
 }

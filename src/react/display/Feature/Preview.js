@@ -1,22 +1,21 @@
 import React from 'react'
 import {ModalLink} from '../util/View/Modal'
 import FeatureDisplay from './Display.js'
+import FeatureUsage from './Usage.js'
 import { makePath } from '../router'
-import * as Card from '../util/View/Card'
+import Card from '../util/View/Card'
 import { SectionTitle } from '../util/View/Title'
 
 export default ({suiteName, componentName, name, feature}) => {
-  return <Card.Container>
-    <Card.Title>
-      <SectionTitle>
-        <ModalLink to={makePath(suiteName, componentName, name)}>
-          {name}
-        </ModalLink>
-      </SectionTitle>
-    </Card.Title>
+  const title = <SectionTitle>
+    <ModalLink to={makePath(suiteName, componentName, name)}>
+      {name}
+    </ModalLink>
+  </SectionTitle>
 
-    <Card.Content>
-      <FeatureDisplay feature={feature} />
-    </Card.Content>
-  </Card.Container>
+  const subTitle = <FeatureDisplay feature={feature} />
+
+  return <Card title={title} subTitle={subTitle} closable defaultClosed>
+    <FeatureUsage feature={feature} />
+  </Card>
 }

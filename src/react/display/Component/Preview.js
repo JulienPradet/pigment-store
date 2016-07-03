@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router'
 import FeatureDisplay from '../Feature/Display.js'
+import FeatureUsage from '../Feature/Usage.js'
 import {makePath} from '../router'
-import {Container as CardContainer, Title as CardTitle, Content as CardContent} from '../util/View/Card'
+import Card from '../util/View/Card'
 import {SectionTitle} from '../util/View/Title'
 
 export default ({suite, name, component}) => {
@@ -12,17 +13,15 @@ export default ({suite, name, component}) => {
     featureToDisplay = component.features[firstKey]
   }
 
-  return <CardContainer>
-    <CardTitle>
-      <SectionTitle>
-        <Link to={makePath(suite.name, name)}>
-          {name}
-        </Link>
-      </SectionTitle>
-    </CardTitle>
+  const title = <SectionTitle>
+    <Link to={makePath(suite.name, name)}>
+      {name}
+    </Link>
+  </SectionTitle>
 
-    <CardContent>
-      <FeatureDisplay feature={featureToDisplay} />
-    </CardContent>
-  </CardContainer>
+  const subTitle = <FeatureDisplay feature={featureToDisplay} />
+
+  return <Card title={title} subTitle={subTitle} closable defaultClosed>
+    <FeatureUsage feature={featureToDisplay} />
+  </Card>
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router'
+import Card from '../util/View/Card'
 import {PageTitle} from '../util/View/Title'
+import {Meta} from '../util/View/Meta'
 import FeatureList from '../Feature/List'
 import {makePath} from '../router'
 
@@ -22,13 +24,20 @@ const ComponentDetails = ({component}) => <div>
   </div>
 </div>
 
-const Component = ({suiteName, name, component}) => <div>
-  <PageTitle>{name}</PageTitle>
+const Component = ({suiteName, name, component}) => {
+  const title = <div>
+    <PageTitle>{name}</PageTitle>
+    <Meta>{component.Component.__PIGMENT_META.file}</Meta>
+  </div>
 
-  <ComponentDetails component={component} />
+  return <div>
+    <Card title={title} closable defaultClosed>
+      <ComponentDetails component={component} />
+    </Card>
 
-  <FeatureList component={component} componentName={name} suiteName={suiteName} />
-</div>
+    <FeatureList component={component} componentName={name} suiteName={suiteName} />
+  </div>
+}
 
 export default (suiteName, componentName, component) => class extends React.Component {
   constructor () {
