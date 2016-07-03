@@ -1,24 +1,41 @@
 body {
   margin: 0;
+  background: #ece7f0;
+  border-right: 0.75em solid #a6cf39;
+  border-bottom: 0.75em solid #a6cf39;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  font-family: 'PT Sans', sans-serif;
+  line-height: 1.5em;
+  font-size: 14pt;
+  color: #39354b;
+}
+
+pre {
+  font-size: 11pt;
+}
+
+a {
+  color: #a6cf39;
 }
 
 .container {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: calc(100vh - 0.75em);
   overflow: hidden;
 }
 
 .nav {
   flex: 1;
-  background: #e0e0e0;
+  background: #fff;
   overflow: auto;
-  border-right: 1px solid rgba(200, 200, 200, 0.5)
 }
 
 .contentContainer {
   flex: 4;
-  background: #ffffff;
   overflow: auto;
 }
 

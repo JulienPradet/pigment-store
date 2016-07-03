@@ -2,6 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
+const makeWrapperStyle = ({size, zoom}) => ({
+  width: size.width === 'auto' ? 'auto' : `${size.width * zoom / 100}px`,
+  height: size.height === 'auto' ? 'auto' : `${size.height * zoom / 100}px`
+})
+
 const makeStyle = ({size, zoom}) => ({
   width: size.width === 'auto' ? 'auto' : `${size.width}px`,
   height: size.height === 'auto' ? 'auto' : `${size.height}px`,
@@ -23,7 +28,9 @@ class Display extends React.Component {
   }
 
   render () {
-    return <div style={makeStyle(this.props.displayOptions)} ref={(ref) => { this.container = ref }}></div>
+    return <div style={makeWrapperStyle(this.props.displayOptions)}>
+      <div style={makeStyle(this.props.displayOptions)} ref={(ref) => { this.container = ref }}></div>
+    </div>
   }
 }
 

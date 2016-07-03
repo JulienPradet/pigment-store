@@ -9,10 +9,10 @@ const displayOptionsContextType = {
 export const DisplayOptionsProvider = compose(
   withState('displayOptions', 'setDisplayOptions', {
     size: {
-      width: '1000',
+      width: '800',
       height: 'auto'
     },
-    zoom: '50'
+    zoom: '100'
   }),
   withContext(
     displayOptionsContextType,

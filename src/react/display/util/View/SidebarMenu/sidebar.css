@@ -2,26 +2,21 @@
   display: block;
   font-size: 2em;
   margin: 0;
-  padding: 0.5em;
+  font-weight: 100;
+  padding: 1em 0.5em 0;
+  font-family: 'News Cycle', sans-serif;
+  line-height: 2em;
 }
 
 .title, .title a {
-  background: rgb(85, 119, 255);
-  color: white;
+  background: #a6cf39;
+  color: #39354b;
   text-decoration: none;
 }
 
 .list {
   margin: 0;
-  padding: 0;
-}
-
-.list:first-of-type {
-  border-top: 1px solid rgb(200, 200, 200);
-}
-
-.list .list:first-of-type {
-  border-top: 0;
+  padding: 0 0 0.5em;
 }
 
 .item {
@@ -30,15 +25,14 @@
 }
 
 .item a {
+  padding: 0.2em 0;
   display: block;
-  padding: 1em;
-  border-bottom: 1px solid rgb(200, 200, 200);
-  color: #444;
+  color: #39354b;
   text-decoration: none;
 }
 
 .item mark {
-  background: #444;
+  background: #a6cf39;
   color: #fff;
 }
 
@@ -47,16 +41,21 @@
   padding: 1em;
   box-sizing: border-box;
   width: 100%;
-  border-width: 0;
-  border-bottom: 1px solid rgb(200, 200, 200);
-}
-
-.activeItem {
-  background: rgba(255, 255, 255, 0.5);
+  border: 0;
+  font-size: 1em;
 }
 
 .activeItem > a {
   font-weight: bold;
+  color: #a6cf39;
+}
+
+.list .list {
+  font-size: 12pt;
+}
+
+.list .item a {
+  padding-left: 1em;
 }
 
 .list .list .item a {

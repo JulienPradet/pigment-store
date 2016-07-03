@@ -28,7 +28,7 @@ const Navigation = ({search, onSearchChange, suites}) => <div>
   <MenuTitle><Link to='/'>Pigment Store</Link></MenuTitle>
   <Container>
     <Item>
-      <input type='text' value={search} onChange={onSearchChange} />
+      <input type='text' value={search} onChange={onSearchChange} placeholder="Search..."/>
     </Item>
   </Container>
   <Container>
