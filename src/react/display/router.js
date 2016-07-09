@@ -1,10 +1,11 @@
 import slug from 'slug'
+import React from 'react'
 
 import AppPage from './AppPage'
 import Home from './Home'
 import {Global as SuiteGlobal} from './Suite'
 import {Global as ComponentGlobal} from './Component'
-import {Global as FeatureGlobal} from './Feature'
+import FeatureDisplay from './Feature/Display'
 
 export const suiteNameToPath = (name) => slug(name, {lower: true})
 export const componentNameToPath = (name) => slug(name, {lower: true})
@@ -23,6 +24,10 @@ export const makePath = (suiteName, componentName, featureName) => {
   return path
 }
 
+export const makeFeatureView = (suiteName, componentName, featureName) => {
+  return `/preview${makePath(suiteName, componentName, featureName)}`
+}
+
 const suiteRoutes = (suites) => suites.map((suite) => ({
   path: suiteNameToPath(suite.name),
   indexRoute: {
@@ -38,8 +43,32 @@ const suiteRoutes = (suites) => suites.map((suite) => ({
 
 const overviewRoutes = () => []
 
+const previewRoute = (suites) => [
+  {
+    path: '/preview/:suiteName/:componentName/:featureName',
+    component: (props) => {
+      const suiteName = props.params.suiteName
+      const componentName = props.params.componentName
+      const featureName = props.params.featureName
+
+      const suite = suites.find((suite) => suiteNameToPath(suite.name) === suiteName)
+
+      const component = Object.keys(suite.components)
+        .map((key) => suite.components[key])
+        .find((component) => componentNameToPath(component.name) === componentName)
+
+      const feature = Object.keys(component.features)
+        .map((key) => component.features[key])
+        .find((feature) => featureNameToPath(feature.name) === featureName)
+
+      return <FeatureDisplay {...props} feature={feature} />
+    }
+  }
+]
+
 export const makeRoutesFromDefinition = ({suites, overview}) => {
   const SuiteRoutes = suiteRoutes(suites)
+  const PreviewRoute = previewRoute(suites)
   const OverviewRoutes = overviewRoutes(overview)
 
   return {
@@ -50,6 +79,7 @@ export const makeRoutesFromDefinition = ({suites, overview}) => {
     },
     childRoutes: [
       ...OverviewRoutes,
+      ...PreviewRoute,
       ...SuiteRoutes
     ]
   }

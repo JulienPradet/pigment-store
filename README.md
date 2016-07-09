@@ -16,7 +16,7 @@
 
 ### Styleguide
 [~] Finish card design : icon + bigger toggle button area
-[ ] Make feature links an anchor rather than a popin
+[~] Make feature links an anchor rather than a popin
 [ ] Suite Global - add anchor link in collapsed suite description
 [ ] Add categories based on folders architecture
 [ ] Style horizontal menu

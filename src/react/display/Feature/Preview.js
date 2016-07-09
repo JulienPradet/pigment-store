@@ -2,13 +2,13 @@ import React from 'react'
 import {ModalLink} from '../util/View/Modal'
 import FeatureDisplay from './Display.js'
 import FeatureUsage from './Usage.js'
-import { makePath } from '../router'
+import { makeFeatureView, featureNameToPath } from '../router'
 import Card from '../util/View/Card'
 import { SectionTitle } from '../util/View/Title'
 
 export default ({suiteName, componentName, name, feature}) => {
   const title = <SectionTitle>
-    <ModalLink to={makePath(suiteName, componentName, name)}>
+    <ModalLink to={makeFeatureView(suiteName, componentName, name)}>
       {name}
     </ModalLink>
   </SectionTitle>
