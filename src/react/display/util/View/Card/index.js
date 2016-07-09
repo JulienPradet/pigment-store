@@ -18,8 +18,8 @@ const Title = ({closed, onClick, children}) => <div className={styles.title}>
 
 const Content = ({children}) => <div className={styles.content}>{children}</div>
 
-const Card = ({closed, title, subTitle, children, toggle}) => {
-  return <div className={styles.container}>
+const Card = ({id, closed, title, subTitle, children, toggle}) => {
+  return <div className={styles.container} id={id}>
     <div className={styles.titleContainer} onClick={toggle}>
       <Title closed={closed} onClick={toggle}>{title}</Title>
       {subTitle ? <Content>{subTitle}</Content> : null}

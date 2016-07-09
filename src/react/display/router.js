@@ -31,16 +31,8 @@ const suiteRoutes = (suites) => suites.map((suite) => ({
   childRoutes: Object.keys(suite.components)
     .map((componentName) => suite.components[componentName])
     .map((component) => ({
-      path: makePath(suite.name, component.name),
-      indexRoute: {
-        component: ComponentGlobal(suite.name, component.name, component)
-      },
-      childRoutes: Object.keys(component.features)
-        .map((featureName) => component.features[featureName])
-        .map((feature) => ({
-          path: makePath(suite.name, component.name, feature.name),
-          component: FeatureGlobal(suite.name, component.name, feature.name, feature)
-        }))
+      path: makePath(suite.name, component.name) + '(/:featureName)',
+      component: ComponentGlobal(suite.name, component.name, component)
     }))
 }))
 

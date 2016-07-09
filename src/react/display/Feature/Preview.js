@@ -15,7 +15,7 @@ export default ({suiteName, componentName, name, feature}) => {
 
   const subTitle = <FeatureDisplay feature={feature} />
 
-  return <Card title={title} subTitle={subTitle} closable defaultClosed>
+  return <Card id={featureNameToPath(name)} title={title} subTitle={subTitle} closable defaultClosed>
     <FeatureUsage feature={feature} />
   </Card>
 }

@@ -14,7 +14,7 @@ const Component = ({suiteName, name, component}) => {
   </div>
 
   return <div>
-    <Card title={title} closable defaultClosed>
+    <Card id='component' title={title} closable defaultClosed>
       <ComponentDetails component={component} />
     </Card>
 
@@ -26,6 +26,13 @@ export default (suiteName, componentName, component) => class extends React.Comp
   constructor () {
     super()
     document.title = `${suiteName} | ${componentName}`
+  }
+
+  componentDidUpdate () {
+    const featureName = this.props.params.featureName
+    if (featureName) {
+      document.getElementById(featureName).scrollIntoView()
+    }
   }
 
   render () {
