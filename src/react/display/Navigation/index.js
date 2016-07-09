@@ -24,23 +24,24 @@ export const suiteContainsSearch = (search) => (suite) => {
       .some(componentContainsSearch(search))
 }
 
-const Navigation = ({search, onSearchChange, suites}) => <div>
+const Navigation = ({search, onSearchChange, suites, isActive}) => <div>
   <MenuTitle><Link to='/'>Pigment Store</Link></MenuTitle>
   <Container>
     <Item>
-      <input type='text' value={search} onChange={onSearchChange} placeholder="Search..."/>
+      <input type='text' value={search} onChange={onSearchChange} placeholder='Search...' />
     </Item>
   </Container>
   <Container>
     {suites
       .filter(suiteContainsSearch(search))
-      .map((suite) => <SuiteNavigation key={suite.name} pathPrefix='/' suite={suite} search={search} />)}
+      .map((suite) => <SuiteNavigation key={suite.name} pathPrefix='/' suite={suite} search={search} isActive={isActive} />)}
   </Container>
 </div>
 
 export default compose(
   withState('search', 'setSearch', ''),
   withHandlers({
-    onSearchChange: ({setSearch}) => (event) => setSearch(event.currentTarget.value)
+    onSearchChange: ({setSearch}) => (event) => setSearch(event.currentTarget.value),
+    isActive: ({location}) => (path) => location.pathname.startsWith(path)
   })
 )(Navigation)
