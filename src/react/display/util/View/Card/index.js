@@ -1,7 +1,5 @@
 import React from 'react'
-import Transition from 'react-motion-ui-pack'
 import Collapse from 'react-collapse'
-import { spring } from 'react-motion'
 import {compose, branch, withHandlers, withState} from 'recompose'
 import styles from './card.css'
 
@@ -11,7 +9,9 @@ const Title = ({closed, onClick, children}) => <div className={styles.title}>
   </div>
   {onClick
     ? <div className={styles.titleButton}>
-      <button onClick={onClick}>{closed ? 'v' : '^'}</button>
+      <button onClick={onClick}>
+        <i className='material-icons'>{closed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}</i>
+      </button>
     </div>
     : null}
 </div>
@@ -20,8 +20,10 @@ const Content = ({children}) => <div className={styles.content}>{children}</div>
 
 const Card = ({closed, title, subTitle, children, toggle}) => {
   return <div className={styles.container}>
-    <Title closed={closed} onClick={toggle}>{title}</Title>
-    {subTitle ? <Content>{subTitle}</Content> : null}
+    <div className={styles.titleContainer} onClick={toggle}>
+      <Title closed={closed} onClick={toggle}>{title}</Title>
+      {subTitle ? <Content>{subTitle}</Content> : null}
+    </div>
     {children
       ? <Collapse
         isOpened={!closed}

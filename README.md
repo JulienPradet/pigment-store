@@ -15,7 +15,7 @@
 ## 0.1.0
 
 ### Styleguide
-[ ] Finish card design : icon + bigger toggle button area
+[~] Finish card design : icon + bigger toggle button area
 [ ] Make feature links an anchor rather than a popin
 [ ] Suite Global - add anchor link in collapsed suite description
 [ ] Add categories based on folders architecture

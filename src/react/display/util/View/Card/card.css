@@ -2,7 +2,12 @@
 .container {
   background: #ffffff;
   margin: 2em 0;
-  padding: 0.8em 1em 1em;
+  padding: 0;
+}
+
+.titleContainer {
+  padding: 1em;
+  cursor: pointer;
 }
 
 .title {
@@ -25,25 +30,25 @@
 }
 
 .titleContent {
-  flex: 10;
+  flex: 11;
 }
 .titleButton {
   flex: 1;
   text-align: center;
-
+  font-size: 2em;
 }
 .titleButton button {
   background: none;
   border: 0;
 }
 
-.content {
-  margin-top: 0.5em;
+.content {;
 }
 
 .collapsibleContent {
   margin-top: 0em;
-  padding: 1em 0 1px 0;
+  border-top: 1px solid #ece7f0;
+  padding: 1em;
 }
 
 .collapsibleContent pre {

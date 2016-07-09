@@ -21,6 +21,15 @@ a {
   color: #a6cf39;
 }
 
+button {
+  font-size: inherit;
+}
+
+:global .material-icons {
+  font-size: inherit !important;
+  vertical-align: middle;
+}
+
 .container {
   display: flex;
   flex-direction: row;
