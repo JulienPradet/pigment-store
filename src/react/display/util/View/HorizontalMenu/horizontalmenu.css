@@ -29,3 +29,23 @@
 .item input:hover {
   background: #ddd;
 }
+
+.presetList {
+  display: flex;
+}
+
+.preset {
+  margin: 0 0.5em;
+}
+
+.preset button {
+  padding: 0.7em 1em;
+  color: #fff;
+  font-weight: bold;
+  background: #39354b;
+  cursor: pointer;
+  border: 0;
+}
+.preset button:hover, .preset button:focus, .preset.presetActive button {
+  background: #a6cf39;
+}
