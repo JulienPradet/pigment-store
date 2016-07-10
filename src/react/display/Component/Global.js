@@ -7,9 +7,9 @@ import Dependencies from './Dependencies'
 
 const ComponentDetails = ({component}) => <Dependencies component={component} />
 
-const Component = ({suiteName, name, component}) => {
+const Component = ({prefix, component}) => {
   const title = <div>
-    <PageTitle>{name}</PageTitle>
+    <PageTitle>{component.name}</PageTitle>
     <Meta>{component.Component.__PIGMENT_META.file}</Meta>
   </div>
 
@@ -18,14 +18,14 @@ const Component = ({suiteName, name, component}) => {
       <ComponentDetails component={component} />
     </Card>
 
-    <FeatureList component={component} componentName={name} suiteName={suiteName} />
+    <FeatureList component={component} prefix={prefix} />
   </div>
 }
 
-export default (suiteName, componentName, component) => class extends React.Component {
+export default ({prefix, component}) => class extends React.Component {
   constructor () {
     super()
-    document.title = `${suiteName} | ${componentName}`
+    document.title = `${component.name}`
   }
 
   componentDidUpdate () {
@@ -36,6 +36,6 @@ export default (suiteName, componentName, component) => class extends React.Comp
   }
 
   render () {
-    return <Component {...this.props} suiteName={suiteName} name={componentName} component={component} />
+    return <Component {...this.props} prefix={prefix} component={component} />
   }
 }

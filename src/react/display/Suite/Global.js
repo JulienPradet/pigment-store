@@ -4,7 +4,7 @@ import {PageTitle} from '../util/View/Title'
 import ComponentList from '../Component/List'
 import Card from '../util/View/Card'
 
-const Suite = ({suite}) => {
+const Suite = ({suite, prefix}) => {
   const title = <PageTitle>
     {suite.name}
   </PageTitle>
@@ -12,17 +12,17 @@ const Suite = ({suite}) => {
   return <div>
     <Card title={title} />
 
-    <ComponentList suite={suite} />
+    <ComponentList suite={suite} prefix={prefix} />
   </div>
 }
 
-export default (suiteName, suite) => class extends React.Component {
+export default ({suite, prefix}) => class extends React.Component {
   constructor () {
     super()
-    document.title = suiteName
+    document.title = suite.name
   }
 
   render () {
-    return <Suite {...this.props} suite={suite} />
+    return <Suite {...this.props} suite={suite} prefix={prefix} />
   }
 }

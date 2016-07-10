@@ -1,14 +1,14 @@
 import React from 'react'
 
 import FeaturePreview from './Preview'
+import {makePath} from '../router'
 
-const FeatureList = ({component, componentName, suiteName}) => <div>
+const FeatureList = ({component, prefix}) => <div>
   {Object.keys(component.features)
     .map((name) => ({name, feature: component.features[name]}))
     .map(({name, feature}) => <FeaturePreview
       key={name}
-      suiteName={suiteName}
-      componentName={componentName}
+      prefix={makePath(prefix, component.name)}
       name={name}
       feature={feature}
     />)}

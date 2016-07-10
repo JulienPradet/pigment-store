@@ -18,13 +18,19 @@ export const makeFeatureView = (...names) => {
 const makeSuiteRoute = (prefix) => (suite) => ({
   path: makePath(prefix, suite.name),
   indexRoute: {
-    component: SuiteGlobal(suite.name, suite)
+    component: SuiteGlobal({
+      suite,
+      prefix: prefix
+    })
   },
   childRoutes: Object.keys(suite.components)
     .map((componentName) => suite.components[componentName])
     .map((component) => ({
       path: makePath(prefix, suite.name, component.name) + '(/:featureName)',
-      component: ComponentGlobal(suite.name, component.name, component)
+      component: ComponentGlobal({
+        component,
+        prefix: makePath(prefix, suite.name)
+      })
     }))
 })
 

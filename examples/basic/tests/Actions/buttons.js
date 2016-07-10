@@ -1,5 +1,5 @@
 import PigmentStore from 'pigment-store'
-import Link from '../src/components/buttons/Link'
+import Link from '../../src/components/buttons/Link'
 
 export default PigmentStore.React
   .describe('Buttons')
