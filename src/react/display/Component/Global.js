@@ -28,11 +28,20 @@ export default ({prefix, component}) => class extends React.Component {
     document.title = `${component.name}`
   }
 
-  componentDidUpdate () {
+  scrollIfNeeded () {
     const featureName = this.props.params.featureName
-    if (featureName) {
+    if (featureName && this.featureName !== featureName) {
       document.getElementById(featureName).scrollIntoView()
+      this.featureName = featureName
     }
+  }
+
+  componentDidMount () {
+    this.scrollIfNeeded()
+  }
+
+  componentDidUpdate () {
+    this.scrollIfNeeded()
   }
 
   render () {
