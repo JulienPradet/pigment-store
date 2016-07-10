@@ -12,22 +12,18 @@ const stackDependencies = (dependencies = []) => {
       children: path.slice(1).filter((path) => path.length > 0)
     }))
     .reduce((stacks, {path, children}) => {
-      if (stacks.hasOwnProperty(path)) {
-        return Object.assign(
-          {},
-          stacks,
-          {
-            [path]: [...stacks[path], children]
-          }
-        )
-      } else {
-        return {
-          [path]: [children]
-        }
-      }
+      const pathStack = stacks.hasOwnProperty(path)
+        ? [...stacks[path], children]
+        : [children]
+
+      return Object.assign(
+        {},
+        stacks,
+        {[path]: pathStack}
+      )
     }, {})
 
-  return Object
+  const stackedDependencies = Object
     .keys(firstLevelStackObject)
     .map((key) => ({
       path: key,
@@ -37,6 +33,8 @@ const stackDependencies = (dependencies = []) => {
       path,
       children: stackDependencies(children)
     }))
+
+  return stackedDependencies
 }
 
 const StackedDependencyList = ({prefix = '', stackedDependencies}) => <StackedList.Container>

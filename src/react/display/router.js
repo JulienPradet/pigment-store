@@ -49,7 +49,6 @@ const makeCategoryRoute = (prefix) => ({name, category}) => ({
 })
 
 const makePreviewRoutes = (previews) => {
-  console.log(previews)
   return previews.map(({path, feature}) => ({
     path: makePath('/preview', ...path),
     component: (props) => <FeatureDisplay feature={feature} />
