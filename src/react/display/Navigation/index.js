@@ -42,6 +42,6 @@ export default compose(
   withState('search', 'setSearch', ''),
   withHandlers({
     onSearchChange: ({setSearch}) => (search) => setSearch(search),
-    isActive: ({location}) => (path) => location.pathname.startsWith(path)
+    isActive: ({location}) => (path) => location.pathname.startsWith(path) || location.pathname.startsWith('/preview' + path)
   })
 )(Navigation)

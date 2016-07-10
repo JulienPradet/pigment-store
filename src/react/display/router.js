@@ -1,3 +1,4 @@
+import React from 'react'
 import slug from 'slug'
 import AppPage from './AppPage'
 import Home from './Home'
@@ -47,39 +48,15 @@ const makeCategoryRoute = (prefix) => ({name, category}) => ({
   childRoutes: makeCategoryChildRoutes(makePath(prefix, name), category)
 })
 
-const makePreviewRoutes = (suites) => [
-  {
-    path: '/preview/:suiteName/:componentName/:featureName',
-    component: (props) => {
-      const suiteName = props.params.suiteName
-      const componentName = props.params.componentName
-      const featureName = props.params.featureName
+const makePreviewRoutes = (previews) => {
+  console.log(previews)
+  return previews.map(({path, feature}) => ({
+    path: makePath('/preview', ...path),
+    component: (props) => <FeatureDisplay feature={feature} />
+  }))
+}
 
-      const suite = suites.find((suite) => nameToPath(suite.name) === suiteName)
-      if(!suite) {
-        return null
-      }
-
-      const component = Object.keys(suite.components)
-        .map((key) => suite.components[key])
-        .find((component) => nameToPath(component.name) === componentName)
-      if(!component) {
-        return null
-      }
-
-      const feature = Object.keys(component.features)
-        .map((key) => component.features[key])
-        .find((feature) => nameToPath(feature.name) === featureName)
-      if(!feature) {
-        return null
-      }
-
-      return <FeatureDisplay {...props} feature={feature} />
-    }
-  }
-]
-
-export const makeRoutesFromDefinition = (category) => {
+export const makeRoutesFromDefinition = (category, previews) => {
   return {
     path: '/',
     component: AppPage(category),
@@ -88,7 +65,7 @@ export const makeRoutesFromDefinition = (category) => {
     },
     childRoutes: [
       ...makeCategoryChildRoutes('', category),
-      ...makePreviewRoutes([])
+      ...makePreviewRoutes(previews)
     ]
   }
 }
