@@ -19,7 +19,7 @@
 [~] Make feature links an anchor rather than a popin
 [~] Add categories based on folders architecture
 [ ] Style horizontal menu
-[ ] Add button to reset search menu
+[~] Add button to reset search menu
 
 ### API
 [ ] Finish the pigment-store cli

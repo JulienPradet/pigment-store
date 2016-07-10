@@ -36,13 +36,27 @@
   color: #fff;
 }
 
-.item input:only-child {
+.search {
   position: relative;
-  padding: 1em;
+}
+
+.search input {
+  padding: 1em 3em 1em 1em;
   box-sizing: border-box;
   width: 100%;
   border: 0;
   font-size: 1em;
+}
+
+.search button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  border: 0;
+  background: none;
+  color: #aaa;
+  cursor: pointer;
 }
 
 .activeItem > a {

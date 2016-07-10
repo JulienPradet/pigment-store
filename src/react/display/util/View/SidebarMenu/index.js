@@ -11,3 +11,14 @@ export const Container = ({children}) => <ul className={styles.list}>
 export const Item = ({isActive, children}) => <li className={classnames(styles.item, {[styles.activeItem]: isActive})}>
   {children}
 </li>
+
+export const Search = ({search, onChange}) => {
+  return <div className={styles.search}>
+    <input type='text' value={search} onChange={(e) => onChange(e.target.value)} placeholder='Search...' />
+    <button onClick={() => onChange('')}>
+      <i className='material-icons'>
+        {search ? 'close' : 'search'}
+      </i>
+    </button>
+  </div>
+}
