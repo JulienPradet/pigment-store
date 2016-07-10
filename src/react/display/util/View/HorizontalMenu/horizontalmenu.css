@@ -1,7 +1,7 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   background: #fff;
   padding: 0.5em;
   height: 6em;
@@ -9,25 +9,18 @@
 }
 
 .group {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
+  border-left: 1px solid #ece7f0;
+}
+.group:first-child {
+  border-left: 0;
 }
 
 .item {
   margin: 0 1em;
-}
-
-.item input {
-  width: 3em;
-  text-align: right;
-  padding: 0.5em;
-  margin: 0.4em;
-  background: none;
-  border: 0;
-}
-
-.item input:hover {
-  background: #ddd;
 }
 
 .presetList {
@@ -48,4 +41,41 @@
 }
 .preset button:hover, .preset button:focus, .preset.presetActive button {
   background: #a6cf39;
+}
+
+.size {
+}
+
+.sizeInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sizeInput > div {
+  margin: 0 0.5em;
+}
+
+.sizeInput input, .zoom input {
+  width: 5em;
+  text-align: right;
+  padding: 0.5em 0 0.5em 0.5em;
+  margin: 0 0.5em;
+  background: none;
+  border: 0;
+}
+
+.sizeInput input:hover, .zoom input:hover {
+  background: #eee;
+}
+
+.zoom {
+}
+
+.zoomItem {
+  min-height: 1em;
+}
+
+.zoomSlider {
+  margin-top: 1em;
 }

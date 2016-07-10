@@ -35,6 +35,8 @@
     "markdown-it": "^7.0.0",
     "mkdirp": "^0.5.1",
     "prismjs": "^1.5.1",
+    "rc-slider": "^3.7.3",
+    "rc-switch": "^1.4.2",
     "react": "^0.14.8",
     "react-collapse": "^2.3.0",
     "react-dom": "^0.14.8",

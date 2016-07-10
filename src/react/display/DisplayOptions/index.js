@@ -1,22 +1,33 @@
 import React from 'react'
 import {compose, withHandlers} from 'recompose'
-import Size from './Size'
-import Zoom from './Zoom'
+import Size from '../util/View/HorizontalMenu/Size'
+import Zoom from '../util/View/HorizontalMenu/Zoom'
 import {PresetList} from '../util/View/HorizontalMenu/Preset'
 import {getDisplayOptions} from './ContextProvider'
-import {Container} from '../util/View/HorizontalMenu'
+import {Container, Group} from '../util/View/HorizontalMenu'
 import presets from './presets'
 
 const DisplayOptions = ({displayOptions, updateOptions, setOptions}) => <Container>
-  <Size size={displayOptions.size} onChange={updateOptions} />
-  <Zoom zoom={displayOptions.zoom} onChange={updateOptions} />
-  <PresetList selected={displayOptions} presets={presets} onSelect={setOptions} />
+  <Group>
+    <Size size={displayOptions.size} onChange={updateOptions} />
+  </Group>
+  <Group>
+    <Zoom zoom={displayOptions.zoom} onChange={updateOptions} />
+  </Group>
+  <Group>
+    <PresetList selected={displayOptions} presets={presets} onSelect={setOptions} />
+  </Group>
 </Container>
 
 export default compose(
   getDisplayOptions(),
   withHandlers({
     updateOptions: ({setDisplayOptions, displayOptions}) => (options) => {
+      console.log(Object.assign(
+        {},
+        displayOptions,
+        options
+      ))
       setDisplayOptions(Object.assign(
         {},
         displayOptions,

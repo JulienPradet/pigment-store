@@ -7,5 +7,4 @@ const Search = ({search, onChange}) => {
   </div>
 }
 
-
 export default Search

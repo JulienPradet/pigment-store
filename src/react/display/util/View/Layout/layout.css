@@ -21,7 +21,7 @@ a {
   color: #a6cf39;
 }
 
-button {
+button, input {
   font-size: inherit;
 }
 
