@@ -50,18 +50,6 @@
   color: #a6cf39;
 }
 
-.list .list {
-  font-size: 12pt;
-}
-
-.list .item a {
+.list {
   padding-left: 1em;
-}
-
-.list .list .item a {
-  padding-left: 2em;
-}
-
-.list .list .list .item a {
-  padding-left: 3em;
 }

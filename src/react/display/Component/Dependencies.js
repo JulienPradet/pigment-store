@@ -4,49 +4,61 @@ import * as StackedList from '../util/View/StackedList'
 import * as LinkList from '../util/View/LinkList'
 import {makePath} from '../router'
 
-const stackDependencies = (dependencies) => {
-  const stackedDependencies = dependencies
-    .reduce((stackedDependencies, dependency) => {
-      let currentStack
-      if (stackedDependencies.hasOwnProperty(dependency.suiteName)) {
-        currentStack = [...stackedDependencies[dependency.suiteName], dependency.componentName]
+const stackDependencies = (dependencies = []) => {
+  const firstLevelStackObject = dependencies
+    .filter((path) => path.length > 0)
+    .map((path) => ({
+      path: path[0],
+      children: path.slice(1).filter((path) => path.length > 0)
+    }))
+    .reduce((stacks, {path, children}) => {
+      if (stacks.hasOwnProperty(path)) {
+        return Object.assign(
+          {},
+          stacks,
+          {
+            [path]: [...stacks[path], children]
+          }
+        )
       } else {
-        currentStack = [dependency.componentName]
+        return {
+          [path]: [children]
+        }
       }
-
-      return Object.assign({},
-        stackedDependencies,
-        {[dependency.suiteName]: currentStack}
-      )
     }, {})
 
-  return Object.keys(stackedDependencies)
-    .map((suiteName) => ({
-      suiteName,
-      components: stackedDependencies[suiteName]
+  return Object
+    .keys(firstLevelStackObject)
+    .map((key) => ({
+      path: key,
+      children: firstLevelStackObject[key]
+    }))
+    .map(({path, children}) => ({
+      path,
+      children: stackDependencies(children)
     }))
 }
 
-const DependencyList = ({dependencies}) => <StackedList.Container>
-  {stackDependencies(dependencies)
-    .map(({suiteName, components}, index) => <StackedList.Row key={index}>
+const StackedDependencyList = ({prefix = '', stackedDependencies}) => <StackedList.Container>
+  {stackedDependencies
+    .map(({path, children}, index) => <StackedList.Row key={index}>
       <StackedList.Item>
-        <Link to={makePath(suiteName)}>{suiteName}</Link>
+        <Link to={makePath(prefix, path)}>{path}</Link>
       </StackedList.Item>
-      <StackedList.Item>
-        <StackedList.Container>
-          {components.map((componentName) => <StackedList.Row key={componentName}>
-            <StackedList.Item>
-              <Link to={makePath(suiteName, componentName)}>{componentName}</Link>
-            </StackedList.Item>
-          </StackedList.Row>)}
-        </StackedList.Container>
-      </StackedList.Item>
+      {children && children.length > 0
+        ? <StackedList.Item>
+          <StackedDependencyList prefix={makePath(prefix, path)} stackedDependencies={children} />
+        </StackedList.Item>
+        : null}
     </StackedList.Row>)}
 </StackedList.Container>
 
+const DependencyList = ({dependencies}) => <StackedDependencyList
+  stackedDependencies={stackDependencies(dependencies.map(({path}) => path))}
+/>
+
 export default ({component}) => <div>
-  {Object.keys(component.Component.__PIGMENT_META.reliesOn).length > 0
+  {Object.keys(component.Component.__PIGMENT_META.reliesOn || {}).length > 0
     ? <LinkList.Container>
       <LinkList.Title>Relies on</LinkList.Title>
       <LinkList.Content>
@@ -54,7 +66,7 @@ export default ({component}) => <div>
       </LinkList.Content>
     </LinkList.Container>
     : null}
-  {Object.keys(component.Component.__PIGMENT_META.isReliedOnBy).length > 0
+  {Object.keys(component.Component.__PIGMENT_META.isReliedOnBy || {}).length > 0
     ? <LinkList.Container>
       <LinkList.Title>Is relied on by</LinkList.Title>
       <LinkList.Content>

@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import {compose, withState, withHandlers} from 'recompose'
 import {Container, MenuTitle, Item} from '../util/View/SidebarMenu'
-import SuiteNavigation from './SuiteNavigation'
+import {CategorySubNavigation} from './CategoryNavigation'
 
 export const isMatching = (search, name) => name.match(new RegExp(search, 'i'))
 
@@ -24,18 +24,18 @@ export const suiteContainsSearch = (search) => (suite) => {
       .some(componentContainsSearch(search))
 }
 
-const Navigation = ({search, onSearchChange, suites, isActive}) => <div>
+export const categoryContainsSearch = (search) => ({name, category}) => {
+  return isMatching(search, name) ||
+    category.suites.some(suiteContainsSearch(search)) ||
+    category.categories.some(categoryContainsSearch(search))
+}
+
+const Navigation = ({search, onSearchChange, indexCategory, isActive}) => <div>
   <MenuTitle><Link to='/'>Pigment Store</Link></MenuTitle>
-  <Container>
-    <Item>
-      <input type='text' value={search} onChange={onSearchChange} placeholder='Search...' />
-    </Item>
-  </Container>
-  <Container>
-    {suites
-      .filter(suiteContainsSearch(search))
-      .map((suite) => <SuiteNavigation key={suite.name} pathPrefix='/' suite={suite} search={search} isActive={isActive} />)}
-  </Container>
+  <Item>
+    <input type='text' value={search} onChange={onSearchChange} placeholder='Search...' />
+  </Item>
+  <CategorySubNavigation category={indexCategory} pathPrefix='' search={search} isActive={isActive} />
 </div>
 
 export default compose(

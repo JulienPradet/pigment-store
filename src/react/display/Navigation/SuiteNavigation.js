@@ -6,7 +6,7 @@ import Highlighter from 'react-highlight-words'
 import {isMatching, componentContainsSearch} from './index'
 import ComponentNavigation from './ComponentNavigation'
 import {Container, Item} from '../util/View/SidebarMenu'
-import {suiteNameToPath} from '../router'
+import {makePath} from '../router'
 
 const SuiteSubNavigation = ({suite, pathPrefix, search, displayAll, isActive}) => <Container>
   {Object.keys(suite.components)
@@ -25,12 +25,12 @@ const SuiteSubNavigation = ({suite, pathPrefix, search, displayAll, isActive}) =
 
 export default compose(
   withProps(({pathPrefix, suite}) => ({
-    path: `${pathPrefix}${suiteNameToPath(suite.name)}`
+    path: makePath(pathPrefix, suite.name)
   })),
   withProps(({isActive, path}) => ({
     active: isActive(path)
   }))
-)(({suite, search, path, active, isActive}) => {
+)(({suite, search, path, active, isActive, displayAll}) => {
   return <Item isActive={active}>
     <Link to={path}>
       <Highlighter
@@ -43,7 +43,7 @@ export default compose(
         suite={suite}
         pathPrefix={path}
         search={search}
-        displayAll={isMatching(search, suite.name)}
+        displayAll={displayAll || isMatching(search, suite.name)}
         isActive={isActive}
       />
       : null}

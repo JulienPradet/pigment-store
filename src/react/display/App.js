@@ -2,9 +2,8 @@ import React from 'react'
 import {makeRoutesFromDefinition} from './router'
 import {Router, browserHistory} from 'react-router'
 
-const App = ({suites, overview}) => {
-  const routes = makeRoutesFromDefinition({suites, overview})
-
+const App = ({indexCategory, previews}) => {
+  const routes = makeRoutesFromDefinition(indexCategory, previews)
   return <Router history={browserHistory} routes={routes} />
 }
 

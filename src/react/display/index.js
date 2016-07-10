@@ -1,65 +1,77 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import compose from 'lodash/function/flow'
 import App from './App'
 
-const resolveComponentDependencies = (Component, suites) => {
-  const reliesOn = Component.__PIGMENT_META.dependencies
-    .map((file) => {
-      const suite = suites.find(({components}) => {
-        return Object.keys(components)
-          .map((key) => components[key])
-          .find(({Component}) => Component.__PIGMENT_META.file === file)
-      })
+const extractComponentsFromSuite = (prefix) => (suite) => {
+  const components = Object
+    .keys(suite.components)
+    .map((key) => suite.components[key])
 
-      if (suite) {
-        const component = Object.keys(suite.components)
-          .map((key) => suite.components[key])
-          .find(({Component}) => Component.__PIGMENT_META.file === file)
+  return components
+    .map((component) => ({
+      path: [...prefix, component.name],
+      component
+    }))
+}
 
-        return {
-          componentName: component.name,
-          suiteName: suite.name
-        }
-      }
-    })
+const extractComponentsFromCategory = (prefix) => (category) => {
+  return [
+    ...category.categories
+      .map(({name, category}) => extractComponentsFromCategory([...prefix, name])(category))
+      .reduce((acc, array) => [...acc, ...array], []),
+    ...category.suites
+      .map((suite) => extractComponentsFromSuite([...prefix, suite.name])(suite))
+      .reduce((acc, array) => [...acc, ...array], [])
+  ]
+}
+
+const resolveComponentDependencies = ({path, component}, components) => {
+  const currentFile = component.Component.__PIGMENT_META.file
+  const currentDependencies = component.Component.__PIGMENT_META.dependencies
+
+  const reliesOn = currentDependencies
+    .map((file) => components.find(({component}) => component.Component.__PIGMENT_META.file === file))
     .filter((dependency) => dependency)
 
-  const isReliedOnBy = suites.map((suite) => {
-    return Object.keys(suite.components)
-      .map((key) => suite.components[key])
-      .filter((component) => component.Component.__PIGMENT_META.dependencies.some((file) => file === Component.__PIGMENT_META.file))
-      .map(({name}) => ({suiteName: suite.name, componentName: name}))
-  }).reduce((acc, reliances) => [...acc, ...reliances], [])
+  const isReliedOnBy = components
+    .filter(({component}) => component.Component.__PIGMENT_META.dependencies.some((file) => file === currentFile))
 
-  Component.__PIGMENT_META = Object.assign({},
-    Component.__PIGMENT_META,
+  component.Component.__PIGMENT_META = Object.assign({},
+    component.Component.__PIGMENT_META,
     { reliesOn, isReliedOnBy }
   )
 
-  return Component
+  return {
+    path,
+    component
+  }
 }
 
-const resolveSuiteComponentsDependencies = (components, suites) => {
-  return Object.keys(components)
-    .map((key) => components[key])
-    .map((component) => Object.assign({},
-      component,
-      { Component: resolveComponentDependencies(component.Component, suites) }
-    ))
-    .reduce((obj, component) => Object.assign({},
-      obj,
-      { [component.name]: component }
-    ), {})
-}
+const resolveDependencies = (components) => components.map(
+  ({path, component}) => resolveComponentDependencies({path, component}, components)
+)
 
-export default (...suites) => {
-  suites = suites.map((suite) => Object.assign({},
-    suite,
-    { components: resolveSuiteComponentsDependencies(suite.components, suites) }
-  ))
+const definePreviews = (components) => components
+  .map(({path, component}) => {
+    return Object.keys(component.features)
+      .map((key) => component.features[key])
+      .map((feature) => ({
+        path: [...path, feature.name],
+        feature
+      }))
+  })
+  .reduce((acc, array) => [...acc, ...array], [])
+
+export default (indexCategory) => {
+  const previews = compose(
+    extractComponentsFromCategory([]),
+    resolveDependencies,
+    definePreviews
+  )(indexCategory)
 
   ReactDOM.render(
-    <App suites={suites} />,
+    <App indexCategory={indexCategory} previews={previews} />,
     document.getElementById('tests')
   )
 }

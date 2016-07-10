@@ -1,5 +1,4 @@
 import path from 'path'
-import {Observable} from 'rx'
 import {Readable} from 'stream'
 import {renderBundle} from './renderBundle'
 import browserify from 'browserify'

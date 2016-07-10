@@ -4,11 +4,11 @@ import {compose, withProps} from 'recompose'
 import {Link} from 'react-router'
 
 import {Item} from '../util/View/SidebarMenu'
-import {featureNameToPath} from '../router'
+import {makePath} from '../router'
 
 export default compose(
   withProps(({pathPrefix, name}) => ({
-    path: `${pathPrefix}/${featureNameToPath(name)}`
+    path: makePath(pathPrefix, name)
   })),
   withProps(({isActive, path}) => ({
     active: isActive(path)

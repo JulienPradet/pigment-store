@@ -1,45 +1,64 @@
 import path from 'path'
-import { Observable } from 'rx'
-import {getRecursiveFiles} from '../../util/fs'
+import {Observable, Subject} from 'rx'
+import {readdir, stat} from '../../util/fs'
+import Suite from './Suite'
+import Category from './Category'
 
-class Suites {
-  constructor () {
-    this.imports = []
-    this.varsToRender = []
-  }
+const renderSuitesFile = (category) => {
+  return `
+    import PigmentStore from 'pigment-store'
+    const category = ${category.render()}
+    PigmentStore.React.render(category)
+  `
+}
 
-  addSuite ({file, name}) {
-    this.imports.push(`import ${name} from './${file}'`)
-    this.varsToRender.push(name)
-  }
+const readCategory = (testDir, categoryDir) => {
+  const itemsInDir$ = Observable.just(categoryDir)
+    .flatMap((dirpath) => readdir(dirpath))
+    .flatMap((files) => files) // flatten all files
+    .flatMap((filepath) => stat(filepath))
+    .map(({filepath, stats}) => ({ filepath, stats, isDirectory: stats.isDirectory() }))
+    .publish()
+  itemsInDir$.connect()
 
-  render () {
-    return `
-      import PigmentStore from 'pigment-store'
-      ${this.imports.join('\n')}
+  const subCategories$ = itemsInDir$
+    .filter(({isDirectory}) => isDirectory)
+    .flatMap(({filepath}) => readCategory(testDir, filepath)
+      .map((category) => (parent) => parent.addCategory({
+        name: path.relative(categoryDir, filepath),
+        category: category
+      }))
+    )
 
-      PigmentStore.React.render(${this.varsToRender.join(', ')})
-    `
-  }
+  const suites$ = itemsInDir$
+    .filter(({isDirectory}) => !isDirectory)
+    .map(({filepath}) => filepath)
+    .map((filepath) => (parent) => parent.addSuite({
+      name: path.relative(categoryDir, filepath),
+      suite: new Suite(path.relative(testDir, filepath))
+    }))
+
+  let categoryToReturn
+  const category$ = new Subject()
+
+  Observable
+    .merge(subCategories$, suites$)
+    .scan((category, reducer) => reducer(category), new Category())
+    .subscribe(
+      (category) => {
+        categoryToReturn = category
+      },
+      () => {},
+      () => {
+        category$.onNext(categoryToReturn)
+        category$.onCompleted()
+      }
+    )
+
+  return category$
 }
 
 export default (testDir) => {
-  return Observable.create((observer) => {
-    const suites = new Suites()
-
-    getRecursiveFiles(Observable.just(testDir))
-    .map(({filepath}) => path.relative(testDir, filepath))
-    .map((filepath) => ({
-      file: filepath,
-      name: filepath.replace(/\./g, '_').replace(/\//g, '_')
-    }))
-    .subscribe(
-      (suite) => suites.addSuite(suite),
-      () => {},
-      () => {
-        observer.onNext(suites.render())
-        observer.onCompleted()
-      }
-    )
-  })
+  return readCategory(testDir, testDir)
+    .map((category) => renderSuitesFile(category))
 }

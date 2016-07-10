@@ -6,7 +6,7 @@ import {Link} from 'react-router'
 import {isMatching, featureContainsSearch} from './index'
 import FeatureNavigation from './FeatureNavigation'
 import {Container, Item} from '../util/View/SidebarMenu'
-import {componentNameToPath} from '../router'
+import {makePath} from '../router'
 
 const ComponentSubNavigation = ({component, pathPrefix, search, displayAll, isActive}) => <Container>
   {Object.keys(component.features)
@@ -24,7 +24,7 @@ const ComponentSubNavigation = ({component, pathPrefix, search, displayAll, isAc
 
 export default compose(
   withProps(({pathPrefix, name}) => ({
-    path: `${pathPrefix}/${componentNameToPath(name)}`
+    path: makePath(pathPrefix, name)
   })),
   withProps(({isActive, path}) => ({
     active: isActive(path)

@@ -1,6 +1,6 @@
 import PigmentStore from 'pigment-store'
-import TextField from '../src/components/form/TextField'
-import NumberField from '../src/components/form/NumberField'
+import TextField from '../../src/components/form/TextField'
+import NumberField from '../../src/components/form/NumberField'
 
 export default PigmentStore.React.describe('Inputs')
   .component('Text input', TextField, (component) => component

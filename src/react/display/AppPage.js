@@ -6,8 +6,8 @@ import DisplayOptions from './DisplayOptions'
 import {DisplayOptionsProvider} from './DisplayOptions/ContextProvider'
 import {pageWithModal, ChildrenInContext} from './util/View/Modal'
 
-const AppPage = ({location, suites, overview, children}) => {
-  const nav = <Navigation suites={suites} location={location} />
+const AppPage = ({location, indexCategory, children}) => {
+  const nav = <Navigation indexCategory={indexCategory} location={location} />
   const displayOptions = <DisplayOptions />
 
   return <DisplayOptionsProvider>
@@ -19,10 +19,7 @@ const AppPage = ({location, suites, overview, children}) => {
   </DisplayOptionsProvider>
 }
 
-export default (suites, overview) => compose(
-  withProps({
-    suites,
-    overview
-  }),
+export default (indexCategory) => compose(
+  withProps({indexCategory}),
   pageWithModal()
 )(AppPage)
