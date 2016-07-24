@@ -10,16 +10,9 @@ This project aims at creating a Living Documentation of React components. It is 
 
 ### Installation
 
-The project is not released under npm yet.
-
-You need to declare dependency using Git URLs as Dependencies
-
-Add the following line to your package.json in `devDependencies`
 ```
-"pigment-store": "git://github.com/julienpradet/pigment-store.git"
+npm install --save-dev pigment-store
 ```
-
-I'll try to make it available on npm soon.
 
 #### Compute components dependencies inside your Pigment Store
 
