@@ -1,6 +1,8 @@
 {
   "plugins": [
-    ["../../src/core/babel-meta-plugin/index.js", { "rootDir": "/home/julien/code/perso/pigment-store/examples/basic" }]
+    ["../../src/core/babel-meta-plugin/index.js", {
+      "rootDir": "/home/julien/code/perso/pigment-store/examples/basic"
+    }]
   ],
   "presets": ["es2015", "react"]
 }

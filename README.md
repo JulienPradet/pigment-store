@@ -1,6 +1,8 @@
-# Usage
+# Pigment Store
 
-## Installation
+## Usage
+
+### Installation
 
 The project is not released under npm yet.
 
@@ -11,9 +13,38 @@ Add the following line to your package.json in `devDependencies`
 "pigment-store": "git://github.com/julienpradet/pigment-store.git"
 ```
 
-## With a custom script file
+#### Compute components dependencies inside your Pigment Store
 
+Configure babel by adding the following plugin (`.babelrc` example):
+```
+["pigment-store/dist/core/babel-meta-plugin/index.js", {
+  "rootDir": "."
+}]
+```
+
+### Generate the styleguide
+
+#### With CLI
+
+> Nota Bene: If pigment store is installed locally, either use the npm scripts or use directly ./node_modules/.bin/pigment-store
+
+```
+pigment-store -s tests -o styleguide
+```
+
+##### Options :
+
+```
+--source, -s   <string> relative path to your tests directory
+--output, -o   <string> relative path to your styleguide directory
+--dev          [<bool>] watch file changes
+```
+
+#### With a custom script file
+
+Create the following file :
 ```js
+// file: scripts/generateStyleguide.js
 import path from 'path'
 import browserifyBundler from 'pigment-store/dist/core/generator/js/bundler/browserify'
 
@@ -23,46 +54,40 @@ const testDir = path.join(__dirname, 'tests')
 const styleguideDir = path.join(__dirname, 'styleguide')
 
 generator(testDir, styleguideDir, {
-  bundler: browserifyBundler, // See `doc/Bundlers.md`
-  dev: true // default to false
+  bundler: browserifyBundler, // See `Configure the rendering pipeline` in `doc/README.md`
 })
 ```
 
-## With CLI
-
-> Nota Bene: If pigment store is installed locally, either use the npm scripts or use directly ./node_modules/.bin/pigment-store
-
+Add it to your task runner pipeline or directly use it :
 ```
-pigment-store -s tests -o styleguide
+node scripts/generateStyleguide
 ```
 
-### Options :
+## Development
 
-```
---source, -s   <string> relative path to your tests directory
---output, -o   <string> relative path to your styleguide directory
---dev          [<bool>] watch file changes
-```
+### Clone repository
 
-# Development
+* `git clone https://github.com/JulienPradet/pigment-store.git`
 
-## Test example on your machine
+### Test example on your machine
 
+* `cd pigment-store`
 * `npm run build`
 * `npm run serve`
 * `node examples/basic/styleguide/server.js`
 
-## Run development env on your machine
+### Run development env on your machine
 
+* `cd pigment-store`
 * `npm run dev`
 * `npm run serve:watch`
 * `node examples/basic/styleguide/server.js`
 
-# Roadmap
+## Roadmap
 
-## 0.1.0
+### 0.1.0
 
-### Styleguide
+#### Styleguide
 
 * [x] Finish card design : icon + bigger toggle button area
 * [x] Make feature links an anchor rather than a popin
@@ -70,20 +95,20 @@ pigment-store -s tests -o styleguide
 * [x] Style horizontal menu
 * [x] Add button to reset search menu
 
-### API
+#### API
 
 * [x] Improve the pigment-store cli
 * [x] Improve fluent API for tests
 
-### Documentation
+#### Documentation
 
 * [x] Describe how to use the CLI
-* [ ] Descrbie how to write a test file
+* [x] Descrbie how to write a test file
 * [ ] Make screens to show how awesome the styleguide is
 
-## 0.2.0
+### 0.2.0
 
-### Styleguide
+#### Styleguide
 
 * [ ] Add proptypes to component description
 * [ ] Use a index.js or README.md file on test root dir in order to populate the home page
@@ -91,32 +116,32 @@ pigment-store -s tests -o styleguide
 * [ ] Use an iframe to display elements
 * [ ] Disco mode
 
-### API
+#### API
 
 * [ ] Enable CSS inline and relative
 
-### Testing
+#### Testing
 
 * [ ] Add visual testing tooling
 
-### Toolchain ~ need contribution help
+#### Toolchain ~ need contribution help
 
 * [ ] HMR in dev mode
 * [ ] Move toward webpack (since it's becoming a more serious thing)
 
-### Documentation
+#### Documentation
 
 * [ ] Add full example for the styleguide itself for view elements
 * [ ] Add architecture documentation so that one can add any kind of renderer
 
-## 0.3.0
+### 0.3.0
 
-### Styleguide
+#### Styleguide
 
 * [ ] Styleguide display should be in core, and react/display should only have the renderers (component details, etc.)
 * [ ] Enable tags that select a specific renderer
 * [ ] Add animation on load
 
-### Testing
+#### Testing
 
 * [ ] Add proper testing

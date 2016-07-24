@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import path from 'path'
 import parseArgs from 'minimist'
 import generator from '../core/generator'
 import browserifyBundler from '../core/generator/js/bundler/browserify'
