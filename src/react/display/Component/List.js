@@ -2,13 +2,13 @@ import React from 'react'
 
 import ComponentPreview from './Preview'
 
-export default ({suite, prefix}) => <div>
-  {Object.keys(suite.components)
-    .map((name) => ({name, component: suite.components[name]}))
+export default ({category, prefix}) => <div>
+  {Object.keys(category.components)
+    .map((name) => ({name, component: category.components[name]}))
     .map(({name, component}) => <ComponentPreview
       key={name}
       prefix={prefix}
-      suite={suite}
+      category={category}
       component={component}
       name={name}
     />)}
