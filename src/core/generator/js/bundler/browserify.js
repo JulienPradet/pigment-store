@@ -26,7 +26,7 @@ export const render = (testDir, styleguideDir, {dev}) => (bundler) => {
       bundler.bundle((e, file) => {
         if (e) return observer.onError(e)
 
-        observer.onNext({file: file, filepath: path.join(styleguideDir, 'js/app.js')})
+        observer.onNext(file)
       })
     }
 

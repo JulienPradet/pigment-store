@@ -25,8 +25,11 @@ export function buildApp (testDir, styleguideDir, options) {
     })
     .map(options.bundler.config(testDir, styleguideDir, options))
     .map(options.bundler.render(testDir, styleguideDir, options))
-    .flatMap((bundle) => {
-      return saveFiles(bundle)
+    .flatMap((file$) => {
+      return saveFiles(file$.map((file) => ({
+        file,
+        filepath: path.join(styleguideDir, 'js/app.js')
+      })))
     })
 
   build$.subscribe(
