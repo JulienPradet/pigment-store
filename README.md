@@ -38,9 +38,11 @@ pigment-store -s tests -o styleguide
 
 ### Options :
 
-  --source, -s   <string> relative path to your tests directory
-  --output, -o   <string> relative path to your styleguide directory
-  --dev          [<bool>] watch file changes
+```
+--source, -s   <string> relative path to your tests directory
+--output, -o   <string> relative path to your styleguide directory
+--dev          [<bool>] watch file changes
+```
 
 # Development
 
@@ -61,54 +63,60 @@ pigment-store -s tests -o styleguide
 ## 0.1.0
 
 ### Styleguide
-[~] Finish card design : icon + bigger toggle button area
-[~] Make feature links an anchor rather than a popin
-[~] Add categories based on folders architecture
-[~] Style horizontal menu
-[~] Add button to reset search menu
+
+* [x] Finish card design : icon + bigger toggle button area
+* [x] Make feature links an anchor rather than a popin
+* [x] Add categories based on folders architecture
+* [x] Style horizontal menu
+* [x] Add button to reset search menu
 
 ### API
-[~] Improve the pigment-store cli
-[~] Improve fluent API for tests
+
+* [x] Improve the pigment-store cli
+* [x] Improve fluent API for tests
 
 ### Documentation
-[~] Describe how to use the CLI
-[ ] Descrbie how to write a test file
-[ ] Make screens to show how awesome the styleguide is
+
+* [x] Describe how to use the CLI
+* [ ] Descrbie how to write a test file
+* [ ] Make screens to show how awesome the styleguide is
 
 ## 0.2.0
 
 ### Styleguide
-[ ] Add proptypes to component description
-[ ] Use a index.js or README.md file on test root dir in order to populate the home page
-[ ] Use a index.js or README.md file to add a description for each category
-[ ] Use an iframe to display elements
-[ ] Disco mode
+
+* [ ] Add proptypes to component description
+* [ ] Use a index.js or README.md file on test root dir in order to populate the home page
+* [ ] Use a index.js or README.md file to add a description for each category
+* [ ] Use an iframe to display elements
+* [ ] Disco mode
 
 ### API
-[ ] Enable CSS inline and relative
+
+* [ ] Enable CSS inline and relative
 
 ### Testing
-[ ] Add visual testing tooling
+
+* [ ] Add visual testing tooling
 
 ### Toolchain ~ need contribution help
-[ ] HMR in dev mode
-[ ] Move toward webpack (since it's becoming a more serious thing)
+
+* [ ] HMR in dev mode
+* [ ] Move toward webpack (since it's becoming a more serious thing)
 
 ### Documentation
-[ ] Add full example for the styleguide itself for view elements
-[ ] Add architecture documentation so that one can add any kind of renderer
+
+* [ ] Add full example for the styleguide itself for view elements
+* [ ] Add architecture documentation so that one can add any kind of renderer
 
 ## 0.3.0
 
 ### Styleguide
-[ ] Styleguide display should be in core, and react/display should only have the renderers (component details, etc.)
-[ ] Enable tags that select a specific renderer
-[ ] Add animation on load
+
+* [ ] Styleguide display should be in core, and react/display should only have the renderers (component details, etc.)
+* [ ] Enable tags that select a specific renderer
+* [ ] Add animation on load
 
 ### Testing
-[ ] Add proper testing
 
-# Discussions
-
-[ ] Render actions directly in html -> not a big fan of this
+* [ ] Add proper testing
