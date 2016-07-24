@@ -1,5 +1,11 @@
 # Pigment Store
 
+Welcome to Pigment Store repository!
+
+This project aims at creating a Living Documentation of React components. It is still in early stages of development, however if you are interested, feel free to open an issue or to contact me however you want.
+
+![Preview of Pigment Store basic example](https://github.com/JulienPradet/pigment-store/raw/master/doc/images/global-preview.png)
+
 ## Usage
 
 ### Installation
@@ -12,6 +18,8 @@ Add the following line to your package.json in `devDependencies`
 ```
 "pigment-store": "git://github.com/julienpradet/pigment-store.git"
 ```
+
+I'll try to make it available on npm soon.
 
 #### Compute components dependencies inside your Pigment Store
 
@@ -145,3 +153,8 @@ node scripts/generateStyleguide
 #### Testing
 
 * [ ] Add proper testing
+
+## Inpirations
+
+* [react-storybook](https://github.com/kadirahq/react-storybook) : I enjoyed the testing approach for declaring new components. However its aim is to provide a good developping experience for UI Components. It doesn't really suite Styleguide approachs.
+* [http://patternlab.io/](Pattern Lab) : It is more suited as a Styleguide. The resizing feature and the patterns dependencies are awesome. However, the needed directory structure felt overcomplicated compared to the testing approach.
