@@ -18,8 +18,8 @@
     "build:watch:html": "npm run build:html && nodemon --watch src/core/generator/html/index.html --delay 500ms --exec \"npm run build:html\"",
     "build:watch:css": "npm run build:css && nodemon --watch src -e css --exec \"npm run build:css\"",
     "build:watch": "npm run build:watch:js & build:watch:html & npm run build:watch:css",
-    "serve": "node dist/cli/index.js",
-    "serve:watch": "node dist/cli/index.js --dev",
+    "serve": "node dist/cli/index.js -s examples/basic/tests -o examples/basic/styleguide",
+    "serve:watch": "node dist/cli/index.js --dev -s examples/basic/tests -o examples/basic/styleguide",
     "dev": "npm run build:watch",
     "test:babel": "babel-tape-runner test/core/babel-meta-plugin/**/*.test.js",
     "test:dev:babel": "nodemon --watch test/core/babel-meta-plugin --watch src/core/babel-meta-plugin --exec \"npm run test:babel\""

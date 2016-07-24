@@ -6,14 +6,32 @@ import generator from '../core/generator'
 import browserifyBundler from '../core/generator/js/bundler/browserify'
 
 const argsOptions = parseArgs(process.argv.slice(2), {
-  boolean: ['dev']
+  boolean: ['dev', 'help'],
+  strings: ['source', 'output']
 })
 
-const options = Object.assign({
-  bundler: browserifyBundler
-}, argsOptions)
+const source = argsOptions.source || argsOptions.s
+const output = argsOptions.output || argsOptions.o
 
-const testDir = path.join(__dirname, '../../examples/basic/tests')
-const styleguideDir = path.join(__dirname, '../../examples/basic/styleguide')
+if (argsOptions.help || !source || !output) {
+  console.log(`
+    Welcome to PigmentStore!
 
-generator(testDir, styleguideDir, options)
+    Usage : pigment-store -s=tests -s=styleguide
+
+    Arguments :
+      --source, -s   <string> relative path to your tests directory
+      --output, -o   <string> relative path to your styleguide directory
+      --dev          [<bool>] watch file changes
+  `)
+} else {
+  const options = Object.assign({
+    bundler: browserifyBundler,
+    dev: argsOptions.dev || false
+  })
+
+  const testDir = source
+  const styleguideDir = output
+
+  generator(testDir, styleguideDir, options)
+}

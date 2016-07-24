@@ -1,14 +1,60 @@
 # Usage
 
-## Production
+## Installation
 
-* Broken
+The project is not released under npm yet.
 
-## Dev mode
+You need to declare dependency using Git URLs as Dependencies
 
-* npm run dev
-* npm run serve:watch
-* node examples/basic/styleguide/server.js
+Add the following line to your package.json in `devDependencies`
+```
+"pigment-store": "git://github.com/julienpradet/pigment-store.git"
+```
+
+## With a custom script file
+
+```js
+import path from 'path'
+import browserifyBundler from 'pigment-store/dist/core/generator/js/bundler/browserify'
+
+// Define where are your tests (here it is {YOUR_PROJECT}/tests)
+const testDir = path.join(__dirname, 'tests')
+// Define where will your styleguide is built (here it is {YOUR_PROJECT}/tests)
+const styleguideDir = path.join(__dirname, 'styleguide')
+
+generator(testDir, styleguideDir, {
+  bundler: browserifyBundler, // See `doc/Bundlers.md`
+  dev: true // default to false
+})
+```
+
+## With CLI
+
+> Nota Bene: If pigment store is installed locally, either use the npm scripts or use directly ./node_modules/.bin/pigment-store
+
+```
+pigment-store -s tests -o styleguide
+```
+
+### Options :
+
+  --source, -s   <string> relative path to your tests directory
+  --output, -o   <string> relative path to your styleguide directory
+  --dev          [<bool>] watch file changes
+
+# Development
+
+## Test example on your machine
+
+* `npm run build`
+* `npm run serve`
+* `node examples/basic/styleguide/server.js`
+
+## Run development env on your machine
+
+* `npm run dev`
+* `npm run serve:watch`
+* `node examples/basic/styleguide/server.js`
 
 # Roadmap
 
@@ -22,14 +68,11 @@
 [~] Add button to reset search menu
 
 ### API
-[ ] Finish the pigment-store cli
-[ ] Improve fluent API for tests
-
-### Toolchain
-[ ] Move toward webpack (since it's becoming a more serious thing)
+[~] Improve the pigment-store cli
+[~] Improve fluent API for tests
 
 ### Documentation
-[ ] Describe how to use the CLI
+[~] Describe how to use the CLI
 [ ] Descrbie how to write a test file
 [ ] Make screens to show how awesome the styleguide is
 
@@ -48,8 +91,9 @@
 ### Testing
 [ ] Add visual testing tooling
 
-### Toolchain
+### Toolchain ~ need contribution help
 [ ] HMR in dev mode
+[ ] Move toward webpack (since it's becoming a more serious thing)
 
 ### Documentation
 [ ] Add full example for the styleguide itself for view elements
