@@ -17,7 +17,6 @@ export function watchfile (filePath) {
   return Rx.Observable.create((observer) => {
     chokidar.watch(filePath, {persistent: true})
       .on('change', () => {
-        console.log('change')
         observer.onNext()
       })
   })
