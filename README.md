@@ -25,7 +25,7 @@ I'll try to make it available on npm soon.
 
 Configure babel by adding the following plugin (`.babelrc` example):
 ```
-["pigment-store/dist/core/babel-meta-plugin/index.js", {
+["./node_modules/pigment-store/dist/core/babel-meta-plugin/index.js", {
   "rootDir": "."
 }]
 ```

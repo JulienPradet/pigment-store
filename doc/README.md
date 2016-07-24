@@ -70,7 +70,7 @@ components. You've got this situation when you click on a Category.
 
 If you have Babel running in your project, you need to add the following plugin to your .babelrc or equivalent :
 ```
-["pigment-store/dist/core/babel-meta-plugin/index.js", {
+["./node_modules/pigment-store/dist/core/babel-meta-plugin/index.js", {
   "rootDir": "."
 }]
 ```
