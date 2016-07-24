@@ -1,4 +1,4 @@
-export default class Suite {
+export default class Component {
   constructor (file) {
     this.file = file
   }

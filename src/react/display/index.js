@@ -3,26 +3,16 @@ import ReactDOM from 'react-dom'
 import compose from 'lodash/function/flow'
 import App from './App'
 
-const extractComponentsFromSuite = (prefix) => (suite) => {
-  const components = Object
-    .keys(suite.components)
-    .map((key) => suite.components[key])
-
-  return components
-    .map((component) => ({
-      path: [...prefix, component.name],
-      component
-    }))
-}
-
-const extractComponentsFromCategory = (prefix) => (category) => {
+const extractComponentsFromCategory = (prefix = []) => (category) => {
   return [
     ...category.categories
       .map(({name, category}) => extractComponentsFromCategory([...prefix, name])(category))
       .reduce((acc, array) => [...acc, ...array], []),
-    ...category.suites
-      .map((suite) => extractComponentsFromSuite([...prefix, suite.name])(suite))
-      .reduce((acc, array) => [...acc, ...array], [])
+    ...category.components
+      .map((component) => ({
+        path: [...prefix, component.name],
+        component
+      }))
   ]
 }
 
@@ -65,7 +55,7 @@ const definePreviews = (components) => components
 
 export default (indexCategory) => {
   const previews = compose(
-    extractComponentsFromCategory([]),
+    extractComponentsFromCategory(),
     resolveDependencies,
     definePreviews
   )(indexCategory)

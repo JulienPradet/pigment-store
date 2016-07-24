@@ -3,8 +3,8 @@ import {compose, withProps} from 'recompose'
 import {Link} from 'react-router'
 import Highlighter from 'react-highlight-words'
 
-import {isMatching, suiteContainsSearch, categoryContainsSearch} from './index'
-import SuiteNavigation from './SuiteNavigation'
+import {isMatching, componentContainsSearch, categoryContainsSearch} from './index'
+import ComponentNavigation from './ComponentNavigation'
 import {Container, Item} from '../util/View/SidebarMenu'
 import {makePath} from '../router'
 
@@ -20,12 +20,12 @@ export const CategorySubNavigation = ({category, pathPrefix, search, displayAll,
       isActive={isActive}
       displayAll={displayAll}
     />)}
-  {category.suites
-    .filter((suite) => displayAll || suiteContainsSearch(search)(suite))
-    .map((suite) => <SuiteNavigation
-      key={suite.name}
+  {category.components
+    .filter((component) => displayAll || componentContainsSearch(search)(component))
+    .map((component) => <ComponentNavigation
+      key={component.name}
       pathPrefix={pathPrefix}
-      suite={suite}
+      component={component}
       search={search}
       isActive={isActive}
       displayAll={displayAll}

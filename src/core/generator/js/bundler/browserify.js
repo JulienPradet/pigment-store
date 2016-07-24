@@ -9,7 +9,7 @@ export const config = (testDir, styleguideDir, {dev}) => (stream) => {
     debug: true,
     cache: {},
     packageCache: {}
-  }).add(stream, {file: path.join(testDir, 'suites.js')})
+  }).add(stream, {file: path.join(testDir, 'index.js')})
     .plugin(cssModulesify, {
       output: path.join(styleguideDir, 'app.css'),
       jsonOutput: path.join(styleguideDir, 'app.css.json'),

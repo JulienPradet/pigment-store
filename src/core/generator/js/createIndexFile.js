@@ -1,10 +1,10 @@
 import path from 'path'
 import {Observable, Subject} from 'rx'
 import {readdir, stat} from '../../util/fs'
-import Suite from './Suite'
+import Component from './Component'
 import Category from './Category'
 
-const renderSuitesFile = (category) => {
+const renderIndexFile = (category) => {
   return `
     import PigmentStore from 'pigment-store'
     const category = ${category.render()}
@@ -30,20 +30,20 @@ const readCategory = (testDir, categoryDir) => {
       }))
     )
 
-  const suites$ = itemsInDir$
+  const components$ = itemsInDir$
     .filter(({isDirectory}) => !isDirectory)
     .map(({filepath}) => filepath)
-    .map((filepath) => (parent) => parent.addSuite({
+    .map((filepath) => (parent) => parent.addComponent({
       name: path.relative(categoryDir, filepath),
-      suite: new Suite(path.relative(testDir, filepath))
+      component: new Component(path.relative(testDir, filepath))
     }))
 
   let categoryToReturn
   const category$ = new Subject()
 
   Observable
-    .merge(subCategories$, suites$)
-    .scan((category, reducer) => reducer(category), new Category())
+    .merge(subCategories$, components$)
+    .scan((category, reducer) => reducer(category), new Category(path.basename(categoryDir)))
     .subscribe(
       (category) => {
         categoryToReturn = category
@@ -60,5 +60,5 @@ const readCategory = (testDir, categoryDir) => {
 
 export default (testDir) => {
   return readCategory(testDir, testDir)
-    .map((category) => renderSuitesFile(category))
+    .map((category) => renderIndexFile(category))
 }

@@ -9,7 +9,7 @@ const typeToColor = {
   success: chalk.green
 }
 const typeToTitleColor = {
-  error: chalk.black.bgRed.bold,
+  error: chalk.white.bgRed.bold,
   warn: chalk.black.bgYellow.bold,
   log: chalk.black.bgWhite.bold,
   info: chalk.white.bgBlack.bold,

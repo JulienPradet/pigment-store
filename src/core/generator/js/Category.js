@@ -1,9 +1,10 @@
-import Suite from './Suite'
+import Component from './Component'
 
 export default class Category {
-  constructor () {
+  constructor (name) {
+    this.name = name
     this.subCategories = []
-    this.suites = []
+    this.components = []
   }
 
   addCategory ({name, category}) {
@@ -18,13 +19,13 @@ export default class Category {
     return this
   }
 
-  addSuite ({name, suite}) {
-    if (!(suite instanceof Suite)) {
-      console.warn(`The suite should be an instance of Suite. ${typeof suite} given.`)
+  addComponent ({name, component}) {
+    if (!(component instanceof Component)) {
+      console.warn(`The component should be an instance of Component. ${typeof component} given.`)
     } else {
-      this.suites.push({
+      this.components.push({
         name,
-        suite
+        component
       })
     }
     return this
@@ -33,6 +34,7 @@ export default class Category {
   render () {
     return `
       {
+        name: '${this.name}',
         categories: [
           ${this.subCategories
             .map(({name, category}) => `{
@@ -41,9 +43,9 @@ export default class Category {
             }`)
             .join(',')}
         ],
-        suites: [
-          ${this.suites
-            .map(({name, suite}) => `${suite.render()}`)
+        components: [
+          ${this.components
+            .map(({name, component}) => `${component.render()}`)
             .join(',')}
         ]
       }

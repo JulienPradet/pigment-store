@@ -17,16 +17,9 @@ export const componentContainsSearch = (search) => (component) => {
       .some(featureContainsSearch(search))
 }
 
-export const suiteContainsSearch = (search) => (suite) => {
-  return isMatching(search, suite.name) ||
-    Object.keys(suite.components)
-      .map((key) => suite.components[key])
-      .some(componentContainsSearch(search))
-}
-
 export const categoryContainsSearch = (search) => ({name, category}) => {
   return isMatching(search, name) ||
-    category.suites.some(suiteContainsSearch(search)) ||
+    category.components.some(componentContainsSearch(search)) ||
     category.categories.some(categoryContainsSearch(search))
 }
 

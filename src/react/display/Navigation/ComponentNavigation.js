@@ -23,18 +23,18 @@ const ComponentSubNavigation = ({component, pathPrefix, search, displayAll, isAc
 </Container>
 
 export default compose(
-  withProps(({pathPrefix, name}) => ({
-    path: makePath(pathPrefix, name)
+  withProps(({pathPrefix, component}) => ({
+    path: makePath(pathPrefix, component.name)
   })),
   withProps(({isActive, path}) => ({
     active: isActive(path)
   }))
-)(({name, component, search, path, active, isActive, displayAll}) => {
+)(({component, search, path, active, isActive, displayAll}) => {
   return <Item isActive={active}>
     <Link to={path}>
       <Highlighter
         searchWords={[search]}
-        textToHighlight={name}
+        textToHighlight={component.name}
       />
     </Link>
     {active
@@ -42,7 +42,7 @@ export default compose(
         component={component}
         pathPrefix={path}
         search={search}
-        displayAll={displayAll || isMatching(search, name)}
+        displayAll={displayAll || isMatching(search, component.name)}
         isActive={isActive}
       />
       : null}

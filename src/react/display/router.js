@@ -3,7 +3,6 @@ import slug from 'slug'
 import AppPage from './AppPage'
 import Home from './Home'
 import CategoryGlobal from './Category/Global'
-import SuiteGlobal from './Suite/Global'
 import ComponentGlobal from './Component/Global'
 import FeatureDisplay from './Feature/Display'
 
@@ -12,38 +11,29 @@ export const makePath = (prefix, ...names) => {
   return prefix + '/' + names.map(nameToPath).join('/')
 }
 
-export const makeFeatureView = (...names) => {
-  return makePath('/preview', ...names)
+export const makeFeatureView = (prefix, ...names) => {
+  return makePath('/preview' + prefix, ...names)
 }
 
-const makeSuiteRoute = (prefix) => (suite) => ({
-  path: makePath(prefix, suite.name),
+const makeComponentRoute = (prefix) => (component) => ({
+  path: makePath(prefix, component.name),
   indexRoute: {
-    component: SuiteGlobal({
-      suite,
+    component: ComponentGlobal({
+      component,
       prefix: prefix
     })
-  },
-  childRoutes: Object.keys(suite.components)
-    .map((componentName) => suite.components[componentName])
-    .map((component) => ({
-      path: makePath(prefix, suite.name, component.name) + '(/:featureName)',
-      component: ComponentGlobal({
-        component,
-        prefix: makePath(prefix, suite.name)
-      })
-    }))
+  }
 })
 
 const makeCategoryChildRoutes = (prefix, category) => [
   ...category.categories.map(makeCategoryRoute(prefix)),
-  ...category.suites.map(makeSuiteRoute(prefix))
+  ...category.components.map(makeComponentRoute(prefix))
 ]
 
 const makeCategoryRoute = (prefix) => ({name, category}) => ({
   path: makePath(prefix, name),
   indexRoute: {
-    component: CategoryGlobal(name, category)
+    component: CategoryGlobal({category, prefix})
   },
   childRoutes: makeCategoryChildRoutes(makePath(prefix, name), category)
 })

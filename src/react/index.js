@@ -1,4 +1,4 @@
-import describe from './definition/Suite'
+import describe from './definition/Component'
 import render from './display'
 
 export default {
