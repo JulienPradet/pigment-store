@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import compose from 'lodash/function/flow'
+import compose from 'lodash/flow'
 import App from './App'
 
 const extractComponentsFromCategory = (prefix = []) => (category) => {

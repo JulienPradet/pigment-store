@@ -35,7 +35,7 @@ if (!(/\d+\.\d+\.\d+(-.+)?/.test(version))) {
         }
 
         // Create git tag
-        exec(path.join(__dirname, './git-release.sh'), function (error) {
+        exec(`sh ${path.join(__dirname, './git-release.sh')} ${version}`, function (error) {
           if (error) {
             console.error(`Impossible to create new git tag ${version}`)
             throw error
