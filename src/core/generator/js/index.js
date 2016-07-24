@@ -1,13 +1,9 @@
 import path from 'path'
 import {Readable} from 'stream'
-import {renderBundle} from './renderBundle'
-import browserify from 'browserify'
-import watchify from 'watchify'
-import cssModulesify from 'css-modulesify'
 import {exists, readfile, saveFiles} from '../../util/fs'
 import createSuitesFile from './createSuitesFile'
 
-export function buildApp (testDir, styleguideDir, {dev, babelify}) {
+export function buildApp (testDir, styleguideDir, options) {
   console.log('=== STYLEGUIDE :: BUILD :: START')
 
   const build$ = exists(path.join(testDir, 'suites.js'))
@@ -24,26 +20,10 @@ export function buildApp (testDir, styleguideDir, {dev, babelify}) {
       stream.push(null)
       return stream
     })
-    .map((stream) => {
-      return browserify({
-        debug: true,
-        cache: {},
-        packageCache: {}
-      }).add(stream, {file: path.join(testDir, 'suites.js')})
-        .plugin(cssModulesify, {
-          output: path.join(styleguideDir, 'app.css'),
-          jsonOutput: path.join(styleguideDir, 'app.css.json'),
-          global: true
-        })
-        .transform('babelify')
-    })
-    .flatMap((b) => {
-      return saveFiles(
-        renderBundle({
-          destPath: path.join(styleguideDir, 'js/app.js'),
-          b: dev ? watchify(b) : b
-        })
-      )
+    .map(options.bundler.config(testDir, styleguideDir, options))
+    .map(options.bundler.render(testDir, styleguideDir, options))
+    .flatMap((bundle) => {
+      return saveFiles(bundle)
     })
 
   build$.subscribe(
