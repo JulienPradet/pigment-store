@@ -157,4 +157,4 @@ node scripts/generateStyleguide
 ## Inpirations
 
 * [react-storybook](https://github.com/kadirahq/react-storybook) : I enjoyed the testing approach for declaring new components. However its aim is to provide a good developping experience for UI Components. It doesn't really suite Styleguide approachs.
-* [http://patternlab.io/](Pattern Lab) : It is more suited as a Styleguide. The resizing feature and the patterns dependencies are awesome. However, the needed directory structure felt overcomplicated compared to the testing approach.
+* [Pattern Lab](http://patternlab.io/) : It is more suited as a Styleguide. The resizing feature and the patterns dependencies are awesome. However, the needed directory structure felt overcomplicated compared to the testing approach.
