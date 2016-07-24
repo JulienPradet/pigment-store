@@ -1,3 +1,1 @@
-import Component from'./componentWithoutDependency'
-
-console.log(Component)
+import Component from './componentWithoutDependency'

@@ -10,7 +10,9 @@ function makeFixtureFilePath (filePath) {
 function makeSUT (fixtureFile, opts) {
   opts = opts || {}
   const presets = opts.presets || ['es2015', 'react']
-  const plugins = opts.plugins || [[metaPlugin]]
+  const plugins = opts.plugins || [[metaPlugin, {
+    'rootDir': '.'
+  }]]
   const babelOpts = {
     presets: presets,
     plugins: plugins
@@ -22,11 +24,13 @@ function makeSUT (fixtureFile, opts) {
 test('Simple ES6 default import', (t) => {
   const SUT = makeSUT('simpleES6')
 
+  console.log(SUT.code)
+
   t.true(SUT.code.match(/__PIGMENT_META/))
   t.end()
 })
 
-test.only('Simple ES6 named import', (t) => {
+test('Simple ES6 named import', (t) => {
   const SUT = makeSUT('importNamedEs6')
 
   t.true(SUT.code.match(/__PIGMENT_META/))

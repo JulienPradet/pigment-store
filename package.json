@@ -21,8 +21,8 @@
     "serve": "node dist/cli/index.js -s examples/basic/tests -o examples/basic/styleguide",
     "serve:watch": "node dist/cli/index.js --dev -s examples/basic/tests -o examples/basic/styleguide",
     "dev": "npm run build:watch",
-    "test:babel": "babel-tape-runner test/core/babel-meta-plugin/**/*.test.js",
-    "test:dev:babel": "nodemon --watch test/core/babel-meta-plugin --watch src/core/babel-meta-plugin --exec \"npm run test:babel\""
+    "test": "babel-tape-runner test/core/babel-meta-plugin/**/*.test.js | faucet",
+    "test:dev:babel": "nodemon --watch test/core/babel-meta-plugin --watch src/core/babel-meta-plugin --exec \"npm run test\""
   },
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",
