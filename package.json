@@ -7,7 +7,7 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && mkdir -p dist/core/generator/html/index.html",
     "build:js": "babel src -d dist",
     "build:html": "cp src/core/generator/html/index.html dist/core/generator/html/index.html",
     "build:css": "cd src && find . -name '*.css' | cpio --quiet -updm ../dist",
@@ -22,7 +22,8 @@
     "serve:watch": "node dist/cli/index.js --dev -s examples/basic/tests -o examples/basic/styleguide",
     "dev": "npm run build:watch",
     "test": "babel-tape-runner test/core/babel-meta-plugin/**/*.test.js | faucet",
-    "test:dev:babel": "nodemon --watch test/core/babel-meta-plugin --watch src/core/babel-meta-plugin --exec \"npm run test\""
+    "test:dev:babel": "nodemon --watch test/core/babel-meta-plugin --watch src/core/babel-meta-plugin --exec \"npm run test\"",
+    "postinstall": "npm run clean && npm run build"
   },
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",
