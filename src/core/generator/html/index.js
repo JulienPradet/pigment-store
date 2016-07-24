@@ -1,8 +1,11 @@
 import path from 'path'
 import {copyfile, watchfile} from '../../util/fs'
+import logger from '../util/log'
+
+const log = logger('HTML')
 
 export function buildHtml (destPath, {dev}) {
-  console.log('=== STYLEGUIDE :: HTML :: START')
+  log.message('info', 'START')
 
   const copyHtml = () => copyfile(path.join(__dirname, 'index.html'), path.join(destPath, 'index.html'))
   const savedHtml$ = dev
@@ -10,13 +13,14 @@ export function buildHtml (destPath, {dev}) {
     : copyHtml()
 
   savedHtml$.subscribe(
-    (filepath) => console.log('=== STYLEGUIDE :: HTML :: DONE :: ' + filepath),
-    (e) => {
-      console.error('=== STYLEGUIDE :: HTML :: ERROR')
-      console.error(e)
+    (filepath) => {
+      log.message('debug', filepath)
+      log.message('success', 'BUILD SUCCESSFUL')
     },
-    () => {
-      console.log('=== STYLEGUIDE :: HTML :: END')
-    }
+    (e) => {
+      log.message('error', 'ERROR')
+      log.message('error', e.message)
+    },
+    () => {}
   )
 }

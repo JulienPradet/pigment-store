@@ -1,17 +1,20 @@
 import path from 'path'
 import {Readable} from 'stream'
 import {exists, readfile, saveFiles} from '../../util/fs'
-import createSuitesFile from './createSuitesFile'
+import createIndexFile from './createIndexFile'
+import logger from '../util/log'
+
+const log = logger('BUILD')
 
 export function buildApp (testDir, styleguideDir, options) {
-  console.log('=== STYLEGUIDE :: BUILD :: START')
+  log.message('info', 'START')
 
-  const build$ = exists(path.join(testDir, 'suites.js'))
+  const build$ = exists(path.join(testDir, 'index.js'))
     .flatMap((exists) => {
       if (exists) {
-        return readfile(path.join(testDir, 'suites.js')).map(({file}) => file)
+        return readfile(path.join(testDir, 'index.js')).map(({file}) => file)
       } else {
-        return createSuitesFile(testDir)
+        return createIndexFile(testDir)
       }
     })
     .map((file) => {
@@ -27,13 +30,14 @@ export function buildApp (testDir, styleguideDir, options) {
     })
 
   build$.subscribe(
-    (filepath) => console.log('=== STYLEGUIDE :: BUILD :: ' + filepath),
-    (e) => {
-      console.error('=== STYLEGUIDE :: BUILD :: ERROR')
-      console.error(e)
+    (filepath) => {
+      log.message('debug', filepath)
+      log.message('success', 'BUILD SUCCESSFUL')
     },
-    () => {
-      console.log('=== STYLEGUIDE :: BUILD :: END')
-    }
+    (e) => {
+      log.message('error', 'ERROR')
+      log.message('error', e.message)
+    },
+    () => {}
   )
 }
