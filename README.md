@@ -105,7 +105,7 @@ node scripts/generateStyleguide
 
 * [x] Describe how to use the CLI
 * [x] Descrbie how to write a test file
-* [ ] Make screens to show how awesome the styleguide is
+* [x] Make screens to show how awesome the styleguide is
 
 ### 0.2.0
 
@@ -114,12 +114,12 @@ node scripts/generateStyleguide
 * [ ] Add proptypes to component description
 * [ ] Use a index.js or README.md file on test root dir in order to populate the home page
 * [ ] Use a index.js or README.md file to add a description for each category
-* [ ] Use an iframe to display elements
+* [x] Use an iframe to display elements
 * [ ] Disco mode
 
 #### API
 
-* [ ] Enable CSS inline and relative
+* [x] Enable CSS inline and relative
 
 #### Testing
 

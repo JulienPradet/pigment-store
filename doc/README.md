@@ -134,6 +134,74 @@ const category = {
 PigmentStore.React.render(category)
 ```
 
+## How to add your own CSS files
+
+Let's say your CSS file is in the directory `public` of your project and is named
+`style.css`. In order to have access to it in your styleguide, you must add the
+following files in your test directory :
+
+```js
+// file: {TEST_DIR}/.config.server.js
+var path = require('path')
+
+module.exports = {
+  // Define a public repository that will be available on your Styleguide Server
+  // at /public. Your CSS file should be in it.
+  public: path.join(__dirname, '../public')
+}
+```
+
+```js
+// file: {TEST_DIR}/.config.client.js
+export default {
+  // Define the HTML where the previewed component will be rendered
+  // There must be an id="preview" in order to succeed.
+  initialHtml: `
+    <!doctype html>
+    <head>
+      <!-- The CSS file you want to import -->
+      <link rel="stylesheet" href="/public/style.css" />
+    </head>
+    <html>
+      <body>
+        <!--
+          There must be an id="preview" in order to succeed.
+          The component will be rendered in it
+        -->
+        <div id="preview"></div>
+      </body>
+    </html>
+  `
+}
+```
+
+## How to add some custom JS action upon preview rendering
+
+Add `onFrameLoaded` to your client configuration.
+
+This function must return a promise in order to work. The actions of your test
+will be triggered after the promise is resolved.
+
+Here is an example which add a Copyright at the end of the preview.
+
+```js
+// file: {TEST_DIR}/.config.client.js
+export default {
+  onFrameLoaded: (document) => {
+    return new Promise((resolve, reject) => {
+      const copyright = document.createElement('div')
+      copyright.innerHTML = 'fake © Pigment Store'
+      copyright.classList.add('copyright')
+      console.log(document.body.appendChild(copyright))
+      resolve()
+    })
+  }
+}
+```
+
+This feature could allow you to initialize some javascript libraries if you need
+some.
+
 ## Configure the rendering pipeline
 
 For now there is only a basic pipeline that uses browserify, babel and
