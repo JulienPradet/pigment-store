@@ -23,7 +23,9 @@ export default class Markdown extends React.Component {
   constructor (props) {
     super()
     this.state = {
-      content: md.render(props.children.join('\n'))
+      content: props.children
+        ? md.render(typeof props.children === 'string' ? props.children : props.children.join('\n'))
+        : ''
     }
   }
 

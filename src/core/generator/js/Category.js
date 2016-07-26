@@ -1,10 +1,15 @@
 import Component from './Component'
 
+const renderString = (string) => {
+  return string && `'${string.replace(/'/g, '\\\'').replace(/\n/g, '\\n')}'`
+}
+
 export default class Category {
   constructor (name) {
     this.name = name
     this.subCategories = []
     this.components = []
+    this.description = null
   }
 
   addCategory ({name, category}) {
@@ -31,24 +36,26 @@ export default class Category {
     return this
   }
 
+  setDescription (description) {
+    this.description = description
+    return this
+  }
+
   render () {
-    return `
-      {
-        name: '${this.name}',
-        categories: [
-          ${this.subCategories
-            .map(({name, category}) => `{
-              name: '${name}',
-              category: ${category.render()}
-            }`)
-            .join(',')}
-        ],
-        components: [
-          ${this.components
-            .map(({name, component}) => `${component.render()}`)
-            .join(',')}
-        ]
-      }
-    `
+    const render = `{
+      name: ${renderString(this.name)},
+      description: ${renderString(this.description)},
+      categories: [${this.subCategories.map(
+        ({name, category}) => `{
+          name: ${renderString(name)},
+          category: ${category.render()}
+        }`
+      ).join(',')}],
+      components: [${this.components.map(
+        ({name, component}) => component.render()
+      ).join(',')}]
+    }`
+
+    return render
   }
 }

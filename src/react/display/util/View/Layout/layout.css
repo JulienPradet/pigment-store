@@ -25,6 +25,13 @@ button, input {
   font-size: inherit;
 }
 
+p:first-child {
+  margin-top: 0;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+
 :global .material-icons {
   font-size: inherit !important;
   vertical-align: middle;

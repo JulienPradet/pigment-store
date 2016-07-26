@@ -112,8 +112,8 @@ node scripts/generateStyleguide
 #### Styleguide
 
 * [ ] Add proptypes to component description
-* [ ] Use a index.js or README.md file on test root dir in order to populate the home page
-* [ ] Use a index.js or README.md file to add a description for each category
+* [x] Use a index.js or README.md file on test root dir in order to populate the home page
+* [x] Use a index.js or README.md file to add a description for each category
 * [x] Use an iframe to display elements
 * [ ] Disco mode
 

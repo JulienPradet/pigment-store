@@ -1,6 +1,6 @@
 import path from 'path'
 import {Observable, Subject} from 'rx'
-import {readdir, stat} from '../../util/fs'
+import {exists, readdir, readfile, stat} from '../../util/fs'
 import Component from './Component'
 import Category from './Category'
 import Config from './Config'
@@ -39,17 +39,29 @@ const readCategory = (testDir, categoryDir) => {
   const components$ = itemsInDir$
     .filter(({isDirectory}) => !isDirectory)
     .map(({filepath}) => filepath)
+    .filter((filepath) => {
+      return !filepath.endsWith('.md')
+    })
     .map((filepath) => (parent) => parent.addComponent({
       name: path.relative(categoryDir, filepath),
       component: new Component(path.relative(testDir, filepath))
     }))
 
+  const descriptionPath = path.join(categoryDir, 'index.md')
+  const description$ = exists(descriptionPath)
+    .filter((exists) => exists)
+    .flatMap(() => readfile(descriptionPath))
+    .map(({file}) => (parent) => parent.setDescription(file))
+
   let categoryToReturn
   const category$ = new Subject()
 
   Observable
-    .merge(subCategories$, components$)
-    .scan((category, reducer) => reducer(category), new Category(path.basename(categoryDir)))
+    .merge(subCategories$, components$, description$)
+    .scan(
+      (category, reducer) => reducer(category),
+      new Category(path.basename(categoryDir))
+    )
     .subscribe(
       (category) => {
         categoryToReturn = category

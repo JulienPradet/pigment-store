@@ -9,7 +9,7 @@ export default ({category, prefix}) => {
     <LinkList.Title>Subcategories</LinkList.Title>
     <LinkList.Content>
       <ul>
-        {category.categories.map(({name}) => <li>
+        {category.categories.map(({name}) => <li key={name}>
           <Link to={makePath(prefix, category.name, name)}>{name}</Link>
         </li>)}
       </ul>

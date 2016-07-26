@@ -19,11 +19,17 @@ const Title = ({closed, onClick, children}) => <div className={styles.title}>
 const Content = ({children}) => <div className={styles.content}>{children}</div>
 
 const Card = ({id, closed, title, subTitle, children, toggle}) => {
+  if (children && typeof children === 'object' && children.length) {
+    children = children.filter((child) => child).length > 0 ? children : null
+  }
+
   return <div className={styles.container} id={id}>
-    <div className={styles.titleContainer} onClick={toggle}>
-      <Title closed={closed} onClick={toggle}>{title}</Title>
-      {subTitle ? <Content>{subTitle}</Content> : null}
-    </div>
+    {title || subTitle
+      ? <div className={styles.titleContainer} onClick={toggle}>
+        <Title closed={closed} onClick={toggle}>{title}</Title>
+        {subTitle ? <Content>{subTitle}</Content> : null}
+      </div>
+      : null}
     {children
       ? <Collapse
         isOpened={!closed}

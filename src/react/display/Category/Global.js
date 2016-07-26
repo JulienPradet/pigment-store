@@ -4,6 +4,7 @@ import {PageTitle} from '../util/View/Title'
 import CategoryList from './List'
 import ComponentList from '../Component/List'
 import Card from '../util/View/Card'
+import Markdown from '../util/View/Markdown'
 
 const Category = ({category, prefix}) => {
   const title = <PageTitle>
@@ -12,6 +13,7 @@ const Category = ({category, prefix}) => {
 
   return <div>
     <Card title={title}>
+      {category.description ? <Markdown>{category.description}</Markdown> : null}
       {category.categories.length > 0 ? <CategoryList category={category} prefix={prefix} /> : null}
     </Card>
 

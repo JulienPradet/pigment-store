@@ -104,12 +104,14 @@ import Link from './Link'
 
 // Index category that can contain components and sub categories
 const category = {
+  description: 'Styleguide introduction',
   // First level categories that have the exact same structure as the index
   // category. The only difference is that each subcategories must have a `name`
   // property
   categories: [
     {
       name: 'Atom',
+      description: 'Category description',
       // Second level categories which behave the exact same way as first level
       // categories
       categories: [],
@@ -133,6 +135,16 @@ const category = {
 // code in `pigment-store/src/react/display/index.js`
 PigmentStore.React.render(category)
 ```
+
+## How to add descriptions
+
+### For a Category
+
+Create an `index.md` file in your category. It will automatically be added as a
+description below the title on the category's page in the Styleguide.
+
+The `index.md` file also work in the root directory of your tests. It'll be used
+on the landing page of the Styleguide.
 
 ## How to add your own CSS files
 
