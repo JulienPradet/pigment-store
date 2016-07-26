@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {compose} from 'recompose'
+import {getConfig} from '../util/ConfigProvider'
 import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
 const makeWrapperStyle = ({size, zoom}) => ({
@@ -15,14 +17,10 @@ const makeStyle = ({size, zoom}) => ({
   border: 0
 })
 
-const setInitialHtml = (document) => {
+const setInitialHtml = (document, html) => {
   document.open('text/htmlreplace')
-  document.write(`
+  document.write(html || `
     <!doctype html>
-    <head>
-      <style>
-      </style>
-    </head>
     <html>
       <body>
         <div id="preview"></div>
@@ -46,7 +44,7 @@ class IframeContainer extends React.Component {
 
   componentDidMount () {
     const iframeDocument = this.iframe.contentWindow.document
-    setInitialHtml(iframeDocument)
+    setInitialHtml(iframeDocument, this.props.config.initialHtml)
 
     const [renderComponent, applyActions] = this.props.children
 
@@ -55,13 +53,19 @@ class IframeContainer extends React.Component {
       iframeDocument.getElementById('preview')
     )
 
-    this.setState({
-      height: iframeDocument.documentElement.offsetHeight
-    })
+    const onFrameLoaded = this.props.config.onFrameLoaded
+      ? this.props.config.onFrameLoaded(iframeDocument)
+      : Promise.resolve()
 
-    if (applyActions) {
-      applyActions(component)
-    }
+    onFrameLoaded.then(() => {
+      this.setState({
+        height: iframeDocument.documentElement.offsetHeight
+      })
+
+      if (applyActions) {
+        applyActions(component)
+      }
+    })
   }
 
   render () {
@@ -77,6 +81,7 @@ class IframeContainer extends React.Component {
   }
 }
 
-export default (
-  getDisplayOptions()
+export default compose(
+  getDisplayOptions(),
+  getConfig()
 )(IframeContainer)

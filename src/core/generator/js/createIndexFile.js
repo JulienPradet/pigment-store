@@ -3,12 +3,14 @@ import {Observable, Subject} from 'rx'
 import {readdir, stat} from '../../util/fs'
 import Component from './Component'
 import Category from './Category'
+import Config from './Config'
 
-const renderIndexFile = (category) => {
+const renderIndexFile = (category, config) => {
   return `
     import PigmentStore from 'pigment-store'
     const category = ${category.render()}
-    PigmentStore.React.render(category)
+    const config = ${config.render()}
+    PigmentStore.React.render(category, config)
   `
 }
 
@@ -16,6 +18,10 @@ const readCategory = (testDir, categoryDir) => {
   const itemsInDir$ = Observable.just(categoryDir)
     .flatMap((dirpath) => readdir(dirpath))
     .flatMap((files) => files) // flatten all files
+    .filter((filepath) => {
+      const basename = path.basename(filepath)
+      return !basename.startsWith('.')
+    })
     .flatMap((filepath) => stat(filepath))
     .map(({filepath, stats}) => ({ filepath, stats, isDirectory: stats.isDirectory() }))
     .publish()
@@ -58,7 +64,14 @@ const readCategory = (testDir, categoryDir) => {
   return category$
 }
 
+const readConfig = (testDir) => {
+  return Observable.just(new Config('.config.client.js'))
+}
+
 export default (testDir) => {
-  return readCategory(testDir, testDir)
-    .map((category) => renderIndexFile(category))
+  const indexCategory$ = readCategory(testDir, testDir)
+  const config$ = readConfig(testDir)
+  return indexCategory$
+    .combineLatest(config$, (category, config) => ({category, config}))
+    .map(({category, config}) => renderIndexFile(category, config))
 }
