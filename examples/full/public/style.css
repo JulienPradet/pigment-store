@@ -1,0 +1,10 @@
+body {
+  border: 1px solid #eeeeee;
+  margin: 0;
+}
+
+.copyright {
+  text-align: right;
+  font-size: 0.8em;
+  color: #aaa;
+}
