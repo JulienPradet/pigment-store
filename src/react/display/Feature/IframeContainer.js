@@ -5,12 +5,12 @@ import {getConfig} from '../util/ConfigProvider'
 import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
 const makeWrapperStyle = ({size, zoom}) => ({
-  width: size.width === 'auto' ? 'auto' : `${size.width * zoom / 100}px`,
+  width: size.width === 'auto' ? '100%' : `${size.width * zoom / 100}px`,
   height: size.height === 'auto' ? 'auto' : `${size.height * zoom / 100}px`
 })
 
 const makeStyle = ({size, zoom}) => ({
-  width: size.width === 'auto' ? 'auto' : `${size.width}px`,
+  width: size.width === 'auto' ? `${100 / zoom * 100}%` : `${size.width}px`,
   height: size.height === 'auto' ? 'auto' : `${size.height}px`,
   transform: `scale(${zoom / 100})`,
   transformOrigin: 'top left',
@@ -36,9 +36,12 @@ class IframeContainer extends React.Component {
   constructor (props) {
     super()
     this.state = {
+      width: props.displayOptions.size.width === 'auto'
+        ? 'auto'
+        : props.displayOptions.size.width,
       height: props.displayOptions.size.height === 'auto'
         ? 100
-        : this.props.displayOptions.size.height
+        : props.displayOptions.size.height
     }
   }
 
@@ -70,7 +73,7 @@ class IframeContainer extends React.Component {
 
   render () {
     const size = {
-      width: this.props.displayOptions.size.width,
+      width: this.props.displayOptions.size.width === 'auto' ? this.state.width : this.props.displayOptions.size.width,
       height: this.props.displayOptions.size.height === 'auto' ? this.state.height : this.props.displayOptions.size.height
     }
     const zoom = this.props.displayOptions.zoom

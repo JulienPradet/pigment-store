@@ -8,7 +8,13 @@ const displayOptionsContextType = {
 }
 
 export const DisplayOptionsProvider = compose(
-  withState('displayOptions', 'setDisplayOptions', presets[1].preset),
+  withState('displayOptions', 'setDisplayOptions', {
+    size: {
+      width: 'auto',
+      height: 'auto'
+    },
+    zoom: 100
+  }),
   withContext(
     displayOptionsContextType,
     ({displayOptions, setDisplayOptions}) => ({
