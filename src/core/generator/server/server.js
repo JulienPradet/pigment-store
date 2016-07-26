@@ -1,9 +1,14 @@
 import express from 'express'
 import path from 'path'
+import config from './.config.server'
 
 const app = express()
 
 app.get('/favicon.ico', function (req, res) {})
+
+if (config.public) {
+  app.use('/public', express.static(config.public))
+}
 
 app.use('/', express.static(__dirname))
 

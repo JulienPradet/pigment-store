@@ -101,8 +101,19 @@ export function saveFiles (filesToSave$) {
     .flatMap(({file, filepath}) => writefile(filepath, file))
 }
 
-export function copyfile (sourcePath, destPath) {
-  const file$ = readfile(sourcePath)
-    .map(({file}) => ({file, filepath: destPath}))
-  return saveFiles(file$)
+export function copyfile (sourcePath, destPath, recursive = false) {
+  let file$
+  if (recursive) {
+    file$ = getRecursiveFiles(Rx.Observable.just(sourcePath))
+      .flatMap(({filepath}) => readfile(filepath))
+  } else {
+    file$ = readfile(sourcePath)
+  }
+
+  return saveFiles(
+    file$.map(({file, filepath}) => ({
+      file,
+      filepath: path.join(destPath, path.relative(sourcePath, filepath))
+    }))
+  )
 }

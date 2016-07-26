@@ -1,16 +1,25 @@
+import Rx from 'rx'
 import path from 'path'
 import {copyfile, watchfile} from '../../util/fs'
 import logger from '../util/log'
 
 const log = logger('SERVER')
 
-export function buildServer (destPath, {dev}) {
+function buildServerFile (source, dest, {dev}) {
+  const copyServer = () => copyfile(source, dest)
+
+  return dev
+    ? watchfile(source).startWith({}).flatMap(copyServer)
+    : copyServer()
+}
+
+export function buildServer (testDir, styleguideDir, {dev}) {
   log.message('info', 'START')
 
-  const copyServer = () => copyfile(path.join(__dirname, 'server.js'), path.join(destPath, 'server.js'))
-  const savedServer$ = dev
-    ? watchfile(path.join(__dirname, 'server.js')).startWith({}).flatMap(copyServer)
-    : copyServer()
+  const savedServer$ = Rx.Observable.merge(
+    buildServerFile(path.join(__dirname, 'server.js'), path.join(styleguideDir, 'server.js'), {dev}),
+    buildServerFile(path.join(testDir, '.config.server.js'), path.join(styleguideDir, '.config.server.js'), {dev})
+  )
 
   savedServer$.subscribe(
     (filepath) => {
