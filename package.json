@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "prebuild": "npm run clean && mkdir -p dist/core/generator/html",
     "build:js": "babel src -d dist",
-    "build:html": "cp src/core/generator/html/index.html dist/core/generator/html/index.html",
+    "build:html": "cp src/core/generator/html/*.html dist/core/generator/html/",
     "build:css": "cd src && find . -name '*.css' | cpio --quiet -updm ../dist",
     "build": "npm run build:js && npm run build:html && npm run build:css",
     "prestart": "npm run build",

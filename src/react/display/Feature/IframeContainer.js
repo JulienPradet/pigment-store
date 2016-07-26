@@ -4,6 +4,8 @@ import {compose} from 'recompose'
 import {getConfig} from '../util/ConfigProvider'
 import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
+const makePreviewDoneEvent = () => new window.Event('previewDone')
+
 const makeWrapperStyle = ({size, zoom}) => ({
   width: size.width === 'auto' ? '100%' : `${size.width * zoom / 100}px`,
   height: size.height === 'auto' ? 'auto' : `${size.height * zoom / 100}px`
@@ -46,10 +48,10 @@ class IframeContainer extends React.Component {
   }
 
   componentDidMount () {
+    const [renderComponent, applyActions] = this.props.children
+
     const iframeDocument = this.iframe.contentWindow.document
     setInitialHtml(iframeDocument, this.props.config.initialHtml)
-
-    const [renderComponent, applyActions] = this.props.children
 
     const component = ReactDOM.render(
       renderComponent(),
@@ -60,15 +62,28 @@ class IframeContainer extends React.Component {
       ? this.props.config.onFrameLoaded(iframeDocument)
       : Promise.resolve()
 
-    onFrameLoaded.then(() => {
-      this.setState({
-        height: iframeDocument.documentElement.offsetHeight
+    onFrameLoaded
+      .then(() => {
+        return new Promise((resolve, reject) => {
+          this.setState(
+            { height: iframeDocument.documentElement.offsetHeight },
+            () => resolve()
+          )
+        })
       })
+      .then(() => {
+        if (applyActions) {
+          const actionsApplied = applyActions(component)
+          if (actionsApplied instanceof Promise) {
+            return actionsApplied
+          }
+        }
 
-      if (applyActions) {
-        applyActions(component)
-      }
-    })
+        return Promise.resolve()
+      })
+      .then(() => {
+        document.dispatchEvent(makePreviewDoneEvent())
+      })
   }
 
   render () {

@@ -4,6 +4,6 @@ import {buildServer} from './server'
 
 export default function generate (testDir, styleguideDir, opts) {
   buildApp(testDir, styleguideDir, opts)
-  buildHtml(styleguideDir, opts)
+  buildHtml(testDir, styleguideDir, opts)
   buildServer(testDir, styleguideDir, opts)
 }

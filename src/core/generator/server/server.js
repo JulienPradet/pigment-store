@@ -12,6 +12,10 @@ if (config.public) {
 
 app.use('/', express.static(__dirname))
 
+app.get('/test/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'testIndex.html'))
+})
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'))
 })
