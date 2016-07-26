@@ -146,6 +146,12 @@ description below the title on the category's page in the Styleguide.
 The `index.md` file also work in the root directory of your tests. It'll be used
 on the landing page of the Styleguide.
 
+### For a Component
+
+Create a `{component_file_name}.md` file next to your component. It will
+automatically be added as a description below the title on the component's page
+in the Styleguide.
+
 ## How to add your own CSS files
 
 Let's say your CSS file is in the directory `public` of your project and is named

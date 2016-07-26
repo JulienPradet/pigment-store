@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../util/View/Card'
+import Markdown from '../util/View/Markdown'
 import {PageTitle} from '../util/View/Title'
 import {Meta} from '../util/View/Meta'
 import FeatureList from '../Feature/List'
@@ -13,8 +14,12 @@ const Component = ({prefix, component}) => {
     <Meta>{component.Component.__PIGMENT_META.file}</Meta>
   </div>
 
+  const subTitle = component.description
+    ? <Markdown>{component.description}</Markdown>
+    : null
+
   return <div>
-    <Card id='component' title={title} closable defaultClosed>
+    <Card id='component' title={title} subTitle={subTitle} closable defaultClosed>
       <ComponentDetails component={component} />
     </Card>
 
