@@ -5,9 +5,10 @@ import Component from './Component'
 import Category from './Category'
 import Config from './Config'
 
-const renderIndexFile = (category, config) => {
+const renderIndexFile = (category, config, testDir) => {
+  const pathToPigmentStore = path.relative(testDir, path.join(__dirname, '../../../index.js'))
   return `
-    import PigmentStore from 'pigment-store'
+    import PigmentStore from '${pathToPigmentStore}'
     const category = ${category.render()}
     const config = ${config.render()}
     PigmentStore.React.render(category, config)
@@ -85,5 +86,5 @@ export default (testDir) => {
   const config$ = readConfig(testDir)
   return indexCategory$
     .combineLatest(config$, (category, config) => ({category, config}))
-    .map(({category, config}) => renderIndexFile(category, config))
+    .map(({category, config}) => renderIndexFile(category, config, testDir))
 }
