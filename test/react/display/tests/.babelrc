@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    ["../../../../src/core/babel-meta-plugin/index.js", {
+      "rootDir": "."
+    }]
+  ],
+  "presets": ["es2015", "react"]
+}
