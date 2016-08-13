@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var parseArgs = require('minimist')
+var path = require('path')
 var generator = require('../dist/core/generator').default
 var browserifyBundler = require('../dist/core/generator/js/bundler/browserify').default
 
@@ -32,5 +33,14 @@ if (argsOptions.help || !source || !output) {
   var testDir = source
   var styleguideDir = output
 
-  generator(testDir, styleguideDir, options)
+  var generator$ = generator(testDir, styleguideDir, options)
+
+  var styleguideRelativeDir = path.relative(process.cwd(), styleguideDir)
+  var runStyleguideCmd = 'node ' + path.join(styleguideRelativeDir, 'server.js')
+
+  generator$.subscribe(
+    function () {},
+    function () {},
+    function () { console.log('\nYou can now open your styleguide by running:\n$ ' + runStyleguideCmd) }
+  )
 }

@@ -93,10 +93,7 @@ export function getRecursiveFiles (inputDir$) {
 export function saveFiles (filesToSave$) {
   return filesToSave$
     .flatMap(({file, filepath}) => mkdirp(path.dirname(filepath))
-      .withLatestFrom(
-        Rx.Observable.just({file, filepath}),
-        (_, value) => value
-      )
+      .map(() => ({file, filepath}))
     )
     .flatMap(({file, filepath}) => writefile(filepath, file))
 }

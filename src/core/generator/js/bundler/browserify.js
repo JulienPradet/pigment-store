@@ -27,6 +27,7 @@ export const render = (testDir, styleguideDir, {dev}) => (bundler) => {
         if (e) return observer.onError(e)
 
         observer.onNext(file)
+        if (!dev) observer.onCompleted()
       })
     }
 

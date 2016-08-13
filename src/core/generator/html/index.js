@@ -12,7 +12,7 @@ export function buildHtml (destPath, {dev}) {
     ? watchfile(path.join(__dirname, 'index.html')).startWith({}).flatMap(copyHtml)
     : copyHtml()
 
-  savedHtml$.subscribe(
+  return savedHtml$.tap(
     (filepath) => {
       log.message('debug', filepath)
       log.message('success', 'BUILD SUCCESSFUL')
@@ -20,7 +20,6 @@ export function buildHtml (destPath, {dev}) {
     (e) => {
       log.message('error', 'ERROR')
       log.message('error', e.message)
-    },
-    () => {}
+    }
   )
 }

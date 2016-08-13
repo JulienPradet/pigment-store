@@ -9,7 +9,7 @@ const log = logger('BUILD')
 export function buildApp (testDir, styleguideDir, options) {
   log.message('info', 'START')
 
-  const build$ = exists(path.join(testDir, 'index.js'))
+  return exists(path.join(testDir, 'index.js'))
     .flatMap((exists) => {
       if (exists) {
         return readfile(path.join(testDir, 'index.js')).map(({file}) => file)
@@ -31,16 +31,14 @@ export function buildApp (testDir, styleguideDir, options) {
         filepath: path.join(styleguideDir, 'app.js')
       })))
     })
-
-  build$.subscribe(
-    (filepath) => {
-      log.message('debug', filepath)
-      log.message('success', 'BUILD SUCCESSFUL')
-    },
-    (e) => {
-      log.message('error', 'ERROR')
-      log.message('error', e.message)
-    },
-    () => {}
-  )
+    .tap(
+      (filepath) => {
+        log.message('debug', filepath)
+        log.message('success', 'BUILD SUCCESSFUL')
+      },
+      (e) => {
+        log.message('error', 'ERROR')
+        log.message('error', e.message)
+      }
+    )
 }
