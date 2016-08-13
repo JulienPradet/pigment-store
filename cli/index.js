@@ -40,7 +40,10 @@ if (argsOptions.help || !source || !output) {
 
   generator$.subscribe(
     function () {},
-    function () {},
+    function () {
+      console.log('\nAn error occured. Feel free to leave an issue at https://github.com/JulienPradet/pigment-store if you think it\'s a bug.')
+      process.exit(1)
+    },
     function () { console.log('\nYou can now open your styleguide by running:\n$ ' + runStyleguideCmd) }
   )
 }

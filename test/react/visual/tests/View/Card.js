@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import PigmentStore from '../../../../../dist/index'
 import Card from '../../../../../src/react/display/util/View/Card/index'
 
 const cardContent = {
