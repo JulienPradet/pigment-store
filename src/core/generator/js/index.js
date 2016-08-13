@@ -28,7 +28,7 @@ export function buildApp (testDir, styleguideDir, options) {
     .flatMap((file$) => {
       return saveFiles(file$.map((file) => ({
         file,
-        filepath: path.join(styleguideDir, 'js/app.js')
+        filepath: path.join(styleguideDir, 'app.js')
       })))
     })
 
