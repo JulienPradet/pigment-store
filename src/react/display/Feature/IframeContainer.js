@@ -6,7 +6,8 @@ import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
 const makeWrapperStyle = ({size, zoom}) => ({
   width: size.width === 'auto' ? '100%' : `${size.width * zoom / 100}px`,
-  height: size.height === 'auto' ? 'auto' : `${size.height * zoom / 100}px`
+  height: size.height === 'auto' ? 'auto' : `${size.height * zoom / 100}px`,
+  margin: '0 auto'
 })
 
 const makeStyle = ({size, zoom}) => ({
@@ -56,19 +57,24 @@ class IframeContainer extends React.Component {
       iframeDocument.getElementById('preview')
     )
 
-    const onFrameLoaded = this.props.config.onFrameLoaded
-      ? this.props.config.onFrameLoaded(iframeDocument)
-      : Promise.resolve()
-
-    onFrameLoaded.then(() => {
-      this.setState({
-        height: iframeDocument.documentElement.offsetHeight
+    Promise.resolve()
+      .then(() => {
+        if (typeof this.props.config.onFrameLoaded === 'function') {
+          return this.props.config.onFrameLoaded(iframeDocument)
+        }
       })
+      .then(() => {
+        setTimeout(() => {
+          iframeDocument.body.style.padding = '1em'
+          this.setState({
+            height: iframeDocument.body.scrollHeight
+          })
 
-      if (applyActions) {
-        applyActions(component)
-      }
-    })
+          if (applyActions) {
+            applyActions(component)
+          }
+        }, 100)
+      })
   }
 
   render () {
