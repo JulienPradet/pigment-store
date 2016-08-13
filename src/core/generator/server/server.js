@@ -1,6 +1,12 @@
 import express from 'express'
 import path from 'path'
-import config from './.config.server'
+
+let config
+try {
+  config = require('./.config.server')
+} catch (ex) {
+  config = {}
+}
 
 const app = express()
 
