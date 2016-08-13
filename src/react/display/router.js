@@ -5,6 +5,8 @@ import Home from './Home'
 import CategoryGlobal from './Category/Global'
 import ComponentGlobal from './Component/Global'
 import FeatureDisplay from './Feature/Display'
+import {DisplayOptionsProvider} from './DisplayOptions/ContextProvider'
+import DisplayOptions from './DisplayOptions'
 
 export const nameToPath = (name) => slug(name, {lower: true})
 export const makePath = (prefix, ...names) => {
@@ -41,7 +43,12 @@ const makeCategoryRoute = (prefix) => ({name, category}) => ({
 const makePreviewRoutes = (previews) => {
   return previews.map(({path, feature}) => ({
     path: makePath('/preview', ...path),
-    component: (props) => <FeatureDisplay feature={feature} />
+    component: (props) => <DisplayOptionsProvider>
+      <div>
+        <DisplayOptions />
+        <FeatureDisplay feature={feature} />
+      </div>
+    </DisplayOptionsProvider>
   }))
 }
 
