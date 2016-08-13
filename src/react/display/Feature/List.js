@@ -11,6 +11,7 @@ const FeatureList = ({component, prefix}) => <div>
       prefix={makePath(prefix, component.name)}
       name={name}
       feature={feature}
+      component={component}
     />)}
 </div>
 

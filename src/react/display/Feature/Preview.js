@@ -6,7 +6,7 @@ import { makePath, nameToPath } from '../router'
 import Card from '../util/View/Card'
 import { SectionTitle } from '../util/View/Title'
 
-export default ({prefix, name, feature}) => {
+export default ({prefix, name, feature, component}) => {
   const title = <SectionTitle>
     <ModalLink to={makePath('/preview' + prefix, name)}>
       {name}
@@ -16,6 +16,6 @@ export default ({prefix, name, feature}) => {
   const subTitle = <FeatureDisplay feature={feature} />
 
   return <Card id={nameToPath(name)} title={title} subTitle={subTitle} closable defaultClosed>
-    <FeatureUsage feature={feature} />
+    <FeatureUsage feature={feature} component={component} />
   </Card>
 }

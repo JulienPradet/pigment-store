@@ -22,6 +22,6 @@ export default ({category, component, prefix}) => {
   const subTitle = <FeatureDisplay feature={featureToDisplay} />
 
   return <Card title={title} subTitle={subTitle} closable defaultClosed>
-    <FeatureUsage feature={featureToDisplay} />
+    <FeatureUsage feature={featureToDisplay} component={component} />
   </Card>
 }
