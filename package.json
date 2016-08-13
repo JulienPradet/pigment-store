@@ -21,8 +21,8 @@
     "serve": "node cli/index.js -s test/react/display/tests -o test/react/display/styleguide",
     "serve:watch": "node cli/index.js --dev -s test/react/display/tests -o test/react/display/styleguide",
     "dev": "npm run build:watch",
-    "test": "babel-tape-runner test/core/babel-meta-plugin/**/*.test.js | faucet",
-    "test:dev:babel": "nodemon --watch test/core/babel-meta-plugin --watch src/core/babel-meta-plugin --exec \"npm run test\"",
+    "test": "babel-tape-runner test/react/unit/**/*.test.js test/core/babel-meta-plugin/**/*.test.js | faucet",
+    "test:dev": "babel-tape-runner test/react/unit/**/*.test.js test/core/babel-meta-plugin/**/*.test.js",
     "postinstall": "npm run clean && npm run build"
   },
   "author": "Julien Pradet <julien@pradet.me>",

@@ -42,7 +42,7 @@ const Card = ({id, closed, title, subTitle, children, toggle}) => {
   </div>
 }
 
-export default compose(
+const SmartCard = compose(
   branch(
     (props) => props.closable,
     (BaseComponent) => BaseComponent,
@@ -53,3 +53,7 @@ export default compose(
     toggle: (props) => () => props.setClosed(!props.closed)
   })
 )(Card)
+
+SmartCard.displayName = 'SmartCard'
+
+export default SmartCard

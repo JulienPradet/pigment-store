@@ -1,21 +1,11 @@
 import React from 'react'
 import Markdown from '../util/View/Markdown'
+import getUsage from './definitionToJsx'
 
 const getUsageFromFeature = (feature, component) => {
-  const ComponentName = component.name
   const ComponentProps = feature.props || {}
 
-  const propTypes = Object.keys(ComponentProps)
-    .filter((key) => key !== 'children')
-    .map((key) => `${key}="${ComponentProps[key]}"`)
-
-  if (ComponentProps.hasOwnProperty('children')) {
-    return `<${ComponentName} ${propTypes.join(' ')}>
-  ${ComponentProps.children}
-</${ComponentName}>`
-  } else {
-    return `<${ComponentName} ${propTypes.join(' ')} />`
-  }
+  return getUsage(component.Component, ComponentProps)
 }
 
 const FeatureUsage = ({feature, component, displayActions = true}) => {
