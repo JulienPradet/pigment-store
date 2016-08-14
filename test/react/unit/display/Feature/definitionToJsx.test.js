@@ -177,3 +177,33 @@ test('When multiple React node children are passed, they should be transformed i
   t.equals(actual, expected)
   t.end()
 })
+
+test('When a function is passed, it should be extracted in a variable', (t) => {
+  const expected = `function onChangeHandler(event) {
+      console.log(event);
+    }
+
+<input onChange={onChangeHandler} />`
+
+  const actual = definitionToJsx('input', {onChange: function onChangeHandler (event) {
+    console.log(event)
+  }})
+
+  t.equals(actual, expected)
+  t.end()
+})
+
+test('When a function is passed as a children, it should be extracted in a variable', (t) => {
+  const expected = `<Component>
+  {function () {
+        // render some children here
+      }}
+</Component>`
+
+  const actual = definitionToJsx('Component', {children: [function () {
+    // render some children here
+  }]})
+
+  t.equals(actual, expected)
+  t.end()
+})

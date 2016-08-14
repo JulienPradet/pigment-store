@@ -32,6 +32,8 @@ const getStandaloneValue = (value) => {
     const subComponent = definitionToJsx(value.type, value.props)
     preparation = subComponent.preparation
     jsx = subComponent.jsx
+  } else if (typeof value === 'function') {
+    jsx = `{${value.toString()}}`
   } else {
     jsx = `{${JSON.stringify(value)}}`
   }
@@ -65,6 +67,14 @@ const getProperty = (key, value) => {
   } else if (typeof value === 'object' && Object.keys(value).length > 2) {
     preparation = `const ${key} = ${JSON.stringify(value, null, 2)}`
     inline = `${key}={${key}}`
+  } else if (typeof value === 'function') {
+    if (value.name) {
+      preparation = value.toString()
+      inline = `${key}={${value.name}}`
+    } else {
+      preparation = `const ${key} = ${value.toString()}`
+      inline = `${key}={${key}}`
+    }
   } else {
     inline = `${key}={${JSON.stringify(value)}}`
   }
