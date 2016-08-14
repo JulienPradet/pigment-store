@@ -2,10 +2,10 @@ import React from 'react'
 import Markdown from '../util/View/Markdown'
 import getUsage from './definitionToJsx'
 
-const getUsageFromFeature = (feature, component) => {
+const getUsageFromFeature = (feature) => {
   const ComponentProps = feature.props || {}
 
-  return getUsage(component.Component, ComponentProps)
+  return getUsage(feature.Component, ComponentProps)
 }
 
 const FeatureUsage = ({feature, component, displayActions = true}) => {
@@ -18,7 +18,7 @@ const FeatureUsage = ({feature, component, displayActions = true}) => {
         ```jsx
         {importLine}
 
-        {getUsageFromFeature(feature, component)}
+        {getUsageFromFeature(feature)}
         ```
       </Markdown>
     </div>
