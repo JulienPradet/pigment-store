@@ -16,6 +16,10 @@ const renderIndexFile = (category, config, testDir) => {
 }
 
 const readCategory = (testDir, categoryDir) => {
+  if (/fixtures/.test(categoryDir)) {
+    return Observable.empty()
+  }
+
   const itemsInDir$ = Observable.just(categoryDir)
     .flatMap((dirpath) => readdir(dirpath))
     .flatMap((files) => files) // flatten all files
@@ -63,6 +67,7 @@ const readCategory = (testDir, categoryDir) => {
       (category, reducer) => reducer(category),
       new Category(path.basename(categoryDir))
     )
+    .filter((category) => category.subCategories.length > 0 || category.components.length > 0)
     .subscribe(
       (category) => {
         categoryToReturn = category
