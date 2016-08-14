@@ -2,15 +2,21 @@ import React from 'react'
 import classnames from 'classnames'
 import styles from './sidebar.css'
 
+export const SidebarMenu = ({children}) => <div>{children}</div>
+SidebarMenu.displayName = 'SidebarMenu.SidebarMenu'
+
 export const MenuTitle = ({children}) => <h2 className={styles.title}>{children}</h2>
+MenuTitle.displayName = 'SidebarMenu.MenuTitle'
 
 export const Container = ({children}) => <ul className={styles.list}>
   {children}
 </ul>
+Container.displayName = 'SidebarMenu.Container'
 
 export const Item = ({isActive, children}) => <li className={classnames(styles.item, {[styles.activeItem]: isActive})}>
   {children}
 </li>
+Item.displayName = 'SidebarMenu.Item'
 
 export const Search = ({search, onChange}) => {
   return <div className={styles.search}>
@@ -22,3 +28,4 @@ export const Search = ({search, onChange}) => {
     </button>
   </div>
 }
+Search.displayName = 'SidebarMenu.Search'

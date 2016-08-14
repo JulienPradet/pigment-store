@@ -64,7 +64,7 @@ class IframeContainer extends React.Component {
         }
       })
       .then(() => {
-        if (typeof this.props.config.onFrameLoaded === 'function') {
+        if (typeof this.props.config.getHeight === 'function') {
           return this.props.config.getHeight(iframeDocument)
         } else {
           return new Promise((resolve, reject) => {

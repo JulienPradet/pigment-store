@@ -25,6 +25,7 @@
 
 .presetList {
   display: flex;
+  justify-content: center;
 }
 
 .preset {

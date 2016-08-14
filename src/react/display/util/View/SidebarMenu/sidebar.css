@@ -22,6 +22,7 @@
 .item {
   display: block;
   list-style: none;
+  background: #fff;
 }
 
 .item a {

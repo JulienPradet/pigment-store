@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../util/View/Card'
 import Markdown from '../util/View/Markdown'
 import {PageTitle} from '../util/View/Title'
-import {Meta} from '../util/View/Meta'
+import Meta from '../util/View/Meta'
 import FeatureList from '../Feature/List'
 import Dependencies from './Dependencies'
 

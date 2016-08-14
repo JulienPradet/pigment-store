@@ -15,7 +15,7 @@ export default (name, Component) => {
       return this
     },
     featureJsx (featureName, jsx, actions) {
-      this.features[featureName] = Feature(Component, featureName, jsx.props, actions)
+      this.features[featureName] = Feature(jsx.type, featureName, jsx.props, actions)
       return this
     }
   }
