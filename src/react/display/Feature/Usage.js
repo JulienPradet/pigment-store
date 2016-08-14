@@ -1,6 +1,6 @@
 import React from 'react'
 import Markdown from '../util/View/Markdown'
-import getUsage, {getComponentName} from './definitionToJsx'
+import getUsage from './definitionToJsx'
 
 const getUsageFromFeature = (feature, component) => {
   const ComponentProps = feature.props || {}
@@ -9,7 +9,7 @@ const getUsageFromFeature = (feature, component) => {
 }
 
 const FeatureUsage = ({feature, component, displayActions = true}) => {
-  const importLine = `import ${getComponentName(component.name)} from '${component.Component.__PIGMENT_META.file}'\n`
+  const importLine = `import ${component.name} from '${component.Component.__PIGMENT_META.file}'\n`
 
   return <div>
     <div>

@@ -47,4 +47,6 @@ const Size = (
   <SizeInput label='Height' name='height' value={size.height} onChange={onChange} />
 </div>)
 
+Size.displayName = 'Size'
+
 export default Size

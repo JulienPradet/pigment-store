@@ -54,6 +54,6 @@ const SmartCard = compose(
   })
 )(Card)
 
-SmartCard.displayName = 'SmartCard'
+SmartCard.displayName = 'Card'
 
 export default SmartCard
