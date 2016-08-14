@@ -27,29 +27,35 @@ const Component = ({prefix, component}) => {
   </div>
 }
 
-export default ({prefix, component}) => class extends React.Component {
-  constructor () {
-    super()
-    document.title = `${component.name}`
-  }
+export default ({prefix, component}) => {
+  const result = class extends React.Component {
+    constructor () {
+      super()
+      document.title = `${component.name}`
+    }
 
-  scrollIfNeeded () {
-    const featureName = this.props.params.featureName
-    if (featureName && this.featureName !== featureName) {
-      document.getElementById(featureName).scrollIntoView()
-      this.featureName = featureName
+    scrollIfNeeded () {
+      const featureName = this.props.params && this.props.params.featureName
+      if (featureName && this.featureName !== featureName) {
+        document.getElementById(featureName).scrollIntoView()
+        this.featureName = featureName
+      }
+    }
+
+    componentDidMount () {
+      this.scrollIfNeeded()
+    }
+
+    componentDidUpdate () {
+      this.scrollIfNeeded()
+    }
+
+    render () {
+      return <Component {...this.props} prefix={prefix} component={component} />
     }
   }
 
-  componentDidMount () {
-    this.scrollIfNeeded()
-  }
+  result.displayName = 'Component'
 
-  componentDidUpdate () {
-    this.scrollIfNeeded()
-  }
-
-  render () {
-    return <Component {...this.props} prefix={prefix} component={component} />
-  }
+  return result
 }

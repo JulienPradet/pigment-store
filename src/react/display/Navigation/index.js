@@ -28,13 +28,19 @@ const Navigation = ({search, onSearchChange, indexCategory, isActive}) => <div>
   <Item>
     <Search search={search} onChange={onSearchChange} />
   </Item>
-  <CategorySubNavigation category={indexCategory} pathPrefix='' search={search} isActive={isActive} />
+  <Item>
+    <CategorySubNavigation category={indexCategory} pathPrefix='' search={search} isActive={isActive} />
+  </Item>
 </div>
 
-export default compose(
+const SmartNavigation = compose(
   withState('search', 'setSearch', ''),
   withHandlers({
     onSearchChange: ({setSearch}) => (search) => setSearch(search),
     isActive: ({location}) => (path) => location.pathname.startsWith(path) || location.pathname.startsWith('/preview' + path)
   })
 )(Navigation)
+
+SmartNavigation.displayName = 'Navigation'
+
+export default SmartNavigation

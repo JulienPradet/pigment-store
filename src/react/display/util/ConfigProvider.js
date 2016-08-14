@@ -10,4 +10,6 @@ export const ConfigProvider = withContext(
   ({config}) => ({ config })
 )(({children}) => React.Children.only(children))
 
+ConfigProvider.displayName = 'ConfigProvider'
+
 export const getConfig = () => getContext(configType)

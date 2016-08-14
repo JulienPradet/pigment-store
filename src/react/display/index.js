@@ -22,7 +22,9 @@ const resolveComponentDependencies = ({path, component}, components) => {
   const currentDependencies = component.Component.__PIGMENT_META.dependencies
 
   const reliesOn = currentDependencies
-    .map((file) => components.find(({component}) => component.Component.__PIGMENT_META.file === file))
+    .map((file) => components.find(({component}) => {
+      return component.Component.__PIGMENT_META.file === file
+    }))
     .filter((dependency) => dependency)
 
   const isReliedOnBy = components

@@ -19,15 +19,10 @@ const DisplayOptions = ({displayOptions, updateOptions, setOptions}) => <Contain
   </Group>
 </Container>
 
-export default compose(
+const SmartDisplayOptions = compose(
   getDisplayOptions(),
   withHandlers({
     updateOptions: ({setDisplayOptions, displayOptions}) => (options) => {
-      console.log(Object.assign(
-        {},
-        displayOptions,
-        options
-      ))
       setDisplayOptions(Object.assign(
         {},
         displayOptions,
@@ -39,3 +34,7 @@ export default compose(
     }
   })
 )(DisplayOptions)
+
+SmartDisplayOptions.displayName = 'DisplayOptions'
+
+export default SmartDisplayOptions

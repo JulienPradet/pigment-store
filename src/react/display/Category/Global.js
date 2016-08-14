@@ -21,13 +21,19 @@ const Category = ({category, prefix}) => {
   </div>
 }
 
-export default ({category, prefix}) => class extends React.Component {
-  constructor () {
-    super()
-    document.title = category.name
+export default ({category, prefix}) => {
+  const result = class extends React.Component {
+    constructor () {
+      super()
+      document.title = category.name
+    }
+
+    render () {
+      return <Category {...this.props} category={category} prefix={prefix} />
+    }
   }
 
-  render () {
-    return <Category {...this.props} category={category} prefix={prefix} />
-  }
+  result.displayName = 'Category'
+
+  return result
 }

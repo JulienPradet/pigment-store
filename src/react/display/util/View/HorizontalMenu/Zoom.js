@@ -26,4 +26,6 @@ const Zoom = (
   </div>
 </div>)
 
+Zoom.displayName = 'Zoom'
+
 export default Zoom

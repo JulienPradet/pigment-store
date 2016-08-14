@@ -1,6 +1,5 @@
 import React from 'react'
 import {compose, withState, withContext, getContext} from 'recompose'
-import presets from './presets'
 
 const displayOptionsContextType = {
   displayOptions: React.PropTypes.object.isRequired,
@@ -23,5 +22,6 @@ export const DisplayOptionsProvider = compose(
     })
   )
 )(({children}) => React.Children.only(children))
+DisplayOptionsProvider.displayName = 'DisplayOptionsProvider'
 
 export const getDisplayOptions = () => getContext(displayOptionsContextType)
