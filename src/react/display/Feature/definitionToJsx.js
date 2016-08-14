@@ -11,7 +11,20 @@ const getComponentName = (component) => {
 const getStandaloneValue = (value) => {
   let preparation, jsx
 
-  if (typeof value === 'string') {
+  if (value instanceof Array) {
+    const {preparation: childrenPreparation, jsx: childrenJsx} = value.map(getStandaloneValue)
+      .reduce(({preparation, jsx}, {preparation: itemPreparation, jsx: itemJsx}) => {
+        if (itemPreparation) {
+          preparation = [...preparation, itemPreparation]
+        }
+        jsx = [...jsx, itemJsx]
+
+        return {preparation, jsx}
+      }, {preparation: [], jsx: []})
+
+    jsx = childrenJsx.join('\n')
+    preparation = childrenPreparation.join('\n\n')
+  } else if (typeof value === 'string') {
     jsx = value
   } else if (typeof value === 'boolean') {
     jsx = `{${value ? 'true' : 'false'}}`
@@ -104,7 +117,7 @@ const definitionToJsx = (component, props = {}) => {
       propsPreparation.push(preparation)
     }
 
-    result.push(`${isMultiLine ? indent : ''}${jsx}`)
+    result.push(isMultiLine ? indent + jsx.replace(/\n/g, `\n${indent}`) : jsx)
     result.push(`</${name}>`)
   }
 

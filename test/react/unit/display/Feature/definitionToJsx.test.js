@@ -157,3 +157,23 @@ test('When a custom React node children is passed, its variables should bubble u
   t.equals(actual, expected)
   t.end()
 })
+
+test('When multiple React node children are passed, they should be transformed into JSX', (t) => {
+  const expected = `<List>
+  <Item>Item</Item>
+  <Item>Item</Item>
+  <Item>Item</Item>
+</List>`
+
+  const List = (props) => <ul>{props.children}</ul>
+  const Item = (props) => <li>{props.children}</li>
+
+  const actual = definitionToJsx(List, {children: [
+    <Item>Item</Item>,
+    <Item>Item</Item>,
+    <Item>Item</Item>
+  ]})
+
+  t.equals(actual, expected)
+  t.end()
+})
