@@ -1,6 +1,6 @@
 import React from 'react'
 
-const getComponentName = (component) => {
+export const getComponentName = (component) => {
   if (typeof component === 'string') {
     return component
   } else {

@@ -13,6 +13,10 @@ export default (name, Component) => {
     feature (featureName, props, actions) {
       this.features[featureName] = Feature(Component, featureName, props, actions)
       return this
+    },
+    featureJsx (featureName, jsx, actions) {
+      this.features[featureName] = Feature(Component, featureName, jsx.props, actions)
+      return this
     }
   }
 }
