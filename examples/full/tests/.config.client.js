@@ -11,12 +11,9 @@ export default {
     </html>
   `,
   onFrameLoaded: (document) => {
-    return new Promise((resolve, reject) => {
-      const copyright = document.createElement('div')
-      copyright.innerHTML = 'fake © Pigment Store'
-      copyright.classList.add('copyright')
-      document.body.appendChild(copyright)
-      resolve()
-    })
+    const copyright = document.createElement('div')
+    copyright.innerHTML = 'fake © Pigment Store'
+    copyright.classList.add('copyright')
+    document.body.appendChild(copyright)
   }
 }

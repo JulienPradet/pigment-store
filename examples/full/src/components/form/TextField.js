@@ -1,5 +1,5 @@
 import React from 'react'
 
-const Text = (props) => <input {...props} />
+const TextField = (props) => <input {...props} />
 
-export default Text
+export default TextField
