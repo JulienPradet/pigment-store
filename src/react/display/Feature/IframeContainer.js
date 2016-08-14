@@ -64,16 +64,24 @@ class IframeContainer extends React.Component {
         }
       })
       .then(() => {
-        setTimeout(() => {
-          iframeDocument.body.style.padding = '1em'
-          this.setState({
-            height: iframeDocument.body.scrollHeight
+        if (typeof this.props.config.onFrameLoaded === 'function') {
+          return this.props.config.getHeight(iframeDocument)
+        } else {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(iframeDocument.body.scrollHeight)
+            }, 100)
           })
+        }
+      })
+      .then((height) => {
+        this.setState({
+          height: height
+        })
 
-          if (applyActions) {
-            applyActions(component)
-          }
-        }, 100)
+        if (applyActions) {
+          applyActions(component)
+        }
       })
   }
 

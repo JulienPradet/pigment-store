@@ -9,8 +9,17 @@ export default {
     </head>
     <html>
       <body>
-        <div id="preview"></div>
+        <div id="container">
+          <div id="preview"></div>
+        </div>
       </body>
     </html>
-  `
+  `,
+  getHeight (document) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(document.getElementById('container').scrollHeight + 14)
+      }, 100)
+    })
+  }
 }
