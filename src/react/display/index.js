@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import compose from 'lodash/flow'
 import App from './App'
 import {ConfigProvider} from './util/ConfigProvider'
 
@@ -55,15 +54,9 @@ const definePreviews = (components) => components
   .reduce((acc, array) => [...acc, ...array], [])
 
 export default (indexCategory, config) => {
-  const previews = compose(
-    extractComponentsFromCategory(),
-    resolveDependencies,
-    definePreviews
-  )(indexCategory)
-
   ReactDOM.render(
     <ConfigProvider config={config}>
-      <App indexCategory={indexCategory} previews={previews} />
+      <App indexCategory={indexCategory} />
     </ConfigProvider>,
     document.getElementById('tests')
   )

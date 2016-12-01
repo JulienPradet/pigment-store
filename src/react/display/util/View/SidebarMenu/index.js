@@ -8,7 +8,7 @@ export const Container = ({children}) => <ul className={styles.list}>
   {children}
 </ul>
 
-export const Item = ({isActive, children}) => <li className={classnames(styles.item, {[styles.activeItem]: isActive})}>
+export const Item = ({isActive, fade, children}) => <li className={classnames(styles.item, {[styles.activeItem]: isActive, [styles.fade]: fade})}>
   {children}
 </li>
 

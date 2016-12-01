@@ -46,10 +46,7 @@ export default class Category {
       name: ${renderString(this.name)},
       description: ${renderString(this.description)},
       categories: [${this.subCategories.map(
-        ({name, category}) => `{
-          name: ${renderString(name)},
-          category: ${category.render()}
-        }`
+        ({name, category}) => category.render()
       ).join(',')}],
       components: [${this.components.map(
         ({name, component}) => component.render()

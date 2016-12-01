@@ -2,11 +2,10 @@ import React from 'react'
 import {Link} from 'react-router'
 import FeatureDisplay from '../Feature/Display.js'
 import FeatureUsage from '../Feature/Usage.js'
-import {makePath} from '../router'
 import Card from '../util/View/Card'
 import {SectionTitle} from '../util/View/Title'
 
-export default ({category, component, prefix}) => {
+export default ({component, pathname}) => {
   let featureToDisplay = component.features.Default
   if (!featureToDisplay) {
     const firstKey = Object.keys(component.features)[0]
@@ -14,7 +13,7 @@ export default ({category, component, prefix}) => {
   }
 
   const title = <SectionTitle>
-    <Link to={makePath(prefix, category.name, component.name)}>
+    <Link to={`${pathname}/component-${component.name}`}>
       {component.name}
     </Link>
   </SectionTitle>

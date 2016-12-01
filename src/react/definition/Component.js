@@ -9,9 +9,9 @@ export default (name, Component) => {
       this.description = description
       return this
     },
-    features: {},
+    features: [],
     feature (featureName, props, actions) {
-      this.features[featureName] = Feature(Component, featureName, props, actions)
+      this.features.push(Feature(Component, featureName, props, actions))
       return this
     }
   }
