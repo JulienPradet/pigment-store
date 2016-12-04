@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import {ConfigProvider} from './util/ConfigProvider'
 
-const extractComponentsFromCategory = (prefix = []) => (category) => {
+const extractComponentsFromCategory = (path = []) => (category) => {
   return [
     ...category.categories
-      .map((category) => extractComponentsFromCategory([...prefix, category.name])(category))
+      .map((category) => extractComponentsFromCategory([...path, category.name])(category))
       .reduce((acc, array) => [...acc, ...array], []),
     ...category.components
       .map((component) => ({
-        path: [...prefix, component.name],
+        path: [...path, component.name],
         component
       }))
   ]
@@ -29,7 +29,8 @@ const resolveComponentDependencies = ({path, component}, components) => {
   const isReliedOnBy = components
     .filter(({component}) => component.Component.__PIGMENT_META.dependencies.some((file) => file === currentFile))
 
-  component.Component.__PIGMENT_META = Object.assign({},
+  component.Component.__PIGMENT_META = Object.assign(
+    {},
     component.Component.__PIGMENT_META,
     { reliesOn, isReliedOnBy }
   )
@@ -44,18 +45,10 @@ const resolveDependencies = (components) => components.map(
   ({path, component}) => resolveComponentDependencies({path, component}, components)
 )
 
-const definePreviews = (components) => components
-  .map(({path, component}) => {
-    return Object.keys(component.features)
-      .map((key) => component.features[key])
-      .map((feature) => ({
-        path: [...path, feature.name],
-        feature
-      }))
-  })
-  .reduce((acc, array) => [...acc, ...array], [])
-
 export default (indexCategory, config) => {
+  const components = extractComponentsFromCategory()(indexCategory)
+  resolveDependencies(components)
+
   ReactDOM.render(
     <ConfigProvider config={config}>
       <App indexCategory={indexCategory} />

@@ -3,7 +3,9 @@ import {Link} from 'react-router'
 import * as StackedList from '../util/View/StackedList'
 import * as LinkList from '../util/View/LinkList'
 
-const makePath = () => { throw new Error('TODO') }
+const makePath = (prefix, type, path) => {
+  return `${prefix}/${type}-${path}`
+}
 
 const stackDependencies = (dependencies = []) => {
   const firstLevelStackObject = dependencies
@@ -13,9 +15,11 @@ const stackDependencies = (dependencies = []) => {
       children: path.slice(1).filter((path) => path.length > 0)
     }))
     .reduce((stacks, {path, children}) => {
-      const pathStack = stacks.hasOwnProperty(path)
-        ? [...stacks[path], children]
-        : [children]
+      const pathStack = children.length > 0
+        ? stacks.hasOwnProperty(path)
+          ? [...stacks[path], children]
+          : [children]
+        : []
 
       return Object.assign(
         {},
@@ -26,12 +30,14 @@ const stackDependencies = (dependencies = []) => {
 
   const stackedDependencies = Object
     .keys(firstLevelStackObject)
-    .map((key) => ({
+    .map((key) => console.log(key, firstLevelStackObject[key]) || ({
       path: key,
+      type: firstLevelStackObject[key].length > 0 ? 'category' : 'component',
       children: firstLevelStackObject[key]
     }))
-    .map(({path, children}) => ({
+    .map(({path, type, children}) => ({
       path,
+      type,
       children: stackDependencies(children)
     }))
 
@@ -40,13 +46,13 @@ const stackDependencies = (dependencies = []) => {
 
 const StackedDependencyList = ({prefix = '', stackedDependencies}) => <StackedList.Container>
   {stackedDependencies
-    .map(({path, children}, index) => <StackedList.Row key={index}>
+    .map(({path, type, children}, index) => <StackedList.Row key={index}>
       <StackedList.Item>
-        <Link to={makePath(prefix, path)}>{path}</Link>
+        <Link to={makePath(prefix, type, path)}>{path}</Link>
       </StackedList.Item>
       {children && children.length > 0
         ? <StackedList.Item>
-          <StackedDependencyList prefix={makePath(prefix, path)} stackedDependencies={children} />
+          <StackedDependencyList prefix={makePath(prefix, type, path)} stackedDependencies={children} />
         </StackedList.Item>
         : null}
     </StackedList.Row>)}
