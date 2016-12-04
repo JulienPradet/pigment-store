@@ -1,25 +1,20 @@
 import React from 'react'
-import {compose, withProps} from 'recompose'
+import {Match} from 'react-router'
 import Layout from './util/View/Layout'
 import Navigation from './Navigation'
 import DisplayOptions from './DisplayOptions'
 import {DisplayOptionsProvider} from './DisplayOptions/ContextProvider'
-import {pageWithModal, ChildrenInContext} from './util/View/Modal'
+import Category from './Category/Main'
 
-const AppPage = ({location, indexCategory, children}) => {
-  const nav = <Navigation indexCategory={indexCategory} location={location} />
+const AppPage = ({indexCategory}) => {
+  const nav = <Navigation indexCategory={indexCategory} />
   const displayOptions = <DisplayOptions />
 
   return <DisplayOptionsProvider>
     <Layout nav={nav} horizontalNav={displayOptions}>
-      <ChildrenInContext>
-        {children}
-      </ChildrenInContext>
+      <Match pattern='/' render={() => <Category pathname='' category={indexCategory} />} />
     </Layout>
   </DisplayOptionsProvider>
 }
 
-export default (indexCategory) => compose(
-  withProps({indexCategory}),
-  pageWithModal()
-)(AppPage)
+export default AppPage

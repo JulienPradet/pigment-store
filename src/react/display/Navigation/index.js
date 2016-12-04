@@ -4,7 +4,7 @@ import {compose, withState, withHandlers} from 'recompose'
 import {MenuTitle, Item, Search} from '../util/View/SidebarMenu'
 import {CategorySubNavigation} from './CategoryNavigation'
 
-export const isMatching = (search, name) => name.match(new RegExp(search, 'i'))
+export const isMatching = (search, name) => search !== '' && name.match(new RegExp(search, 'i'))
 
 export const featureContainsSearch = (search) => feature => {
   return isMatching(search, feature.name)
@@ -12,15 +12,13 @@ export const featureContainsSearch = (search) => feature => {
 
 export const componentContainsSearch = (search) => (component) => {
   return isMatching(search, component.name) ||
-    Object.keys(component.features)
-      .map((key) => component.features[key])
-      .some(featureContainsSearch(search))
+    component.features.some(featureContainsSearch(search))
 }
 
-export const categoryContainsSearch = (search) => ({name, category}) => {
-  return isMatching(search, name) ||
-    category.components.some(componentContainsSearch(search)) ||
-    category.categories.some(categoryContainsSearch(search))
+export const categoryContainsSearch = (search) => (category) => {
+  return isMatching(search, category.name) ||
+      category.components.some(componentContainsSearch(search)) ||
+      category.categories.some(categoryContainsSearch(search))
 }
 
 const Navigation = ({search, onSearchChange, indexCategory, isActive}) => <div>
@@ -29,15 +27,14 @@ const Navigation = ({search, onSearchChange, indexCategory, isActive}) => <div>
     <Search search={search} onChange={onSearchChange} />
   </Item>
   <Item>
-    <CategorySubNavigation category={indexCategory} pathPrefix='' search={search} isActive={isActive} />
+    <CategorySubNavigation category={indexCategory} pathname='' search={search} />
   </Item>
 </div>
 
 const SmartNavigation = compose(
   withState('search', 'setSearch', ''),
   withHandlers({
-    onSearchChange: ({setSearch}) => (search) => setSearch(search),
-    isActive: ({location}) => (path) => location.pathname.startsWith(path) || location.pathname.startsWith('/preview' + path)
+    onSearchChange: ({setSearch}) => (search) => setSearch(search)
   })
 )(Navigation)
 

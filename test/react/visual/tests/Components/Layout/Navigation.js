@@ -9,13 +9,19 @@ The left navigation that allows to explore the styleguide
   `)
   .featureJsx(
     'Default',
-    <Navigation indexCategory={indexCategory} location={{pathname: '/'}} />
+    (
+        <Navigation indexCategory={indexCategory} />
+    )
   )
   .featureJsx(
     'With an active category',
-    <Navigation indexCategory={indexCategory} location={{pathname: '/atom'}} />
+    (
+        <Navigation indexCategory={indexCategory} />
+    )
   )
   .featureJsx(
     'With an active component',
-    <Navigation indexCategory={indexCategory} location={{pathname: '/atom/avatar'}} />
+    (
+        <Navigation indexCategory={indexCategory} />
+    )
   )

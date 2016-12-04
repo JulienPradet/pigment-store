@@ -13,7 +13,7 @@ export const Container = ({children}) => <ul className={styles.list}>
 </ul>
 Container.displayName = 'SidebarMenu.Container'
 
-export const Item = ({isActive, children}) => <li className={classnames(styles.item, {[styles.activeItem]: isActive})}>
+export const Item = ({isActive, fade, children}) => <li className={classnames(styles.item, {[styles.activeItem]: isActive, [styles.fade]: fade})}>
   {children}
 </li>
 Item.displayName = 'SidebarMenu.Item'

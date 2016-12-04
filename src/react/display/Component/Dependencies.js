@@ -2,7 +2,8 @@ import React from 'react'
 import {Link} from 'react-router'
 import * as StackedList from '../util/View/StackedList'
 import * as LinkList from '../util/View/LinkList'
-import {makePath} from '../router'
+
+const makePath = () => { throw new Error('TODO') }
 
 const stackDependencies = (dependencies = []) => {
   const firstLevelStackObject = dependencies

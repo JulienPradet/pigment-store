@@ -9,13 +9,13 @@ export default (name, Component) => {
       this.description = description
       return this
     },
-    features: {},
+    features: [],
     feature (featureName, props, actions) {
-      this.features[featureName] = Feature(Component, featureName, props, actions)
+      this.features.push(Feature(Component, featureName, props, actions))
       return this
     },
     featureJsx (featureName, jsx, actions) {
-      this.features[featureName] = Feature(jsx.type, featureName, jsx.props, actions)
+      this.features.push(Feature(jsx.type, featureName, jsx.props, actions))
       return this
     }
   }

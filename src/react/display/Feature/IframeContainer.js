@@ -77,11 +77,11 @@ class IframeContainer extends React.Component {
       .then((height) => {
         this.setState({
           height: height
+        }, () => {
+          if (applyActions) {
+            applyActions(component)
+          }
         })
-
-        if (applyActions) {
-          applyActions(component)
-        }
       })
   }
 

@@ -65,6 +65,10 @@
   color: #a6cf39;
 }
 
+.fade {
+  opacity: 0.5;
+}
+
 .list {
   padding-left: 1em;
 }
