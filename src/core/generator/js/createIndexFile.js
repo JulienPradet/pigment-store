@@ -7,6 +7,7 @@ import Config from './Config'
 
 const renderIndexFile = (category, config, testDir) => {
   const pathToPigmentStore = path.relative(testDir, path.join(__dirname, '../../../index.js'))
+  category.name = config.name || 'Pigment Store 🎨'
   return `
     import PigmentStore from '${pathToPigmentStore}'
     const category = ${category.render()}
