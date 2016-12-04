@@ -1,6 +1,5 @@
 import path from 'path'
 import browserify from 'browserify'
-import envify from 'envify/custom'
 import watchify from 'watchify'
 import cssModulesify from 'css-modulesify'
 import Rx from 'rx'
@@ -16,9 +15,6 @@ export const config = (testDir, styleguideDir, {dev}) => (stream) => {
       jsonOutput: path.join(styleguideDir, 'app.css.json'),
       global: true
     })
-    .transform(envify({
-      NODE_ENV: 'development'
-    }))
     .transform('babelify')
 
   return dev ? watchify(b) : b
