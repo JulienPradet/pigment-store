@@ -9,6 +9,7 @@ const renderIndexFile = (category, config, testDir) => {
   const pathToPigmentStore = path.relative(testDir, path.join(__dirname, '../../../index.js'))
   category.name = config.name || 'Pigment Store 🎨'
   return `
+    /* This is a generated file ! Do not override or your changes will be lost on next compilation */
     import PigmentStore from '${pathToPigmentStore}'
     const category = ${category.render()}
     const config = ${config.render()}
@@ -16,7 +17,7 @@ const renderIndexFile = (category, config, testDir) => {
   `
 }
 
-const readCategory = (testDir, categoryDir) => {
+const readCategory = (testDir, categoryDir, indexDir) => {
   if (/fixtures/.test(categoryDir)) {
     return Observable.empty()
   }
@@ -35,7 +36,7 @@ const readCategory = (testDir, categoryDir) => {
 
   const subCategories$ = itemsInDir$
     .filter(({isDirectory}) => isDirectory)
-    .flatMap(({filepath}) => readCategory(testDir, filepath)
+    .flatMap(({filepath}) => readCategory(testDir, filepath, indexDir)
       .map((category) => (parent) => parent.addCategory({
         name: path.relative(categoryDir, filepath),
         category: category
@@ -50,7 +51,9 @@ const readCategory = (testDir, categoryDir) => {
     })
     .map((filepath) => (parent) => parent.addComponent({
       name: path.relative(categoryDir, filepath),
-      component: new Component(path.relative(testDir, filepath))
+      component: new Component(
+        path.relative(indexDir, filepath)
+      )
     }))
 
   const descriptionPath = path.join(categoryDir, 'index.md')
@@ -83,13 +86,13 @@ const readCategory = (testDir, categoryDir) => {
   return category$
 }
 
-const readConfig = (testDir) => {
-  return Observable.just(new Config('.config.client.js'))
+const readConfig = (testDir, indexDir) => {
+  return Observable.just(new Config(path.relative(indexDir, path.join(testDir, '.config.client.js'))))
 }
 
-export default (testDir) => {
-  const indexCategory$ = readCategory(testDir, testDir)
-  const config$ = readConfig(testDir)
+export default (testDir, indexDir) => {
+  const indexCategory$ = readCategory(testDir, testDir, indexDir)
+  const config$ = readConfig(testDir, indexDir)
   return indexCategory$
     .combineLatest(config$, (category, config) => ({category, config}))
     .map(({category, config}) => renderIndexFile(category, config, testDir))

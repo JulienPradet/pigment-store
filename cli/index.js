@@ -4,10 +4,11 @@ var parseArgs = require('minimist')
 var path = require('path')
 var generator = require('../dist/core/generator').default
 var browserifyBundler = require('../dist/core/generator/js/bundler/browserify').default
+var webpackBundler = require('../dist/core/generator/js/bundler/webpack').default
 
 var argsOptions = parseArgs(process.argv.slice(2), {
   boolean: ['dev', 'help'],
-  strings: ['source', 'output']
+  strings: ['source', 'output', 'bundler']
 })
 
 var source = argsOptions.source || argsOptions.s
@@ -20,13 +21,21 @@ if (argsOptions.help || !source || !output) {
     Usage : pigment-store -s=tests -s=styleguide\n\
 \n\
     Arguments :\n\
-      --source, -s   <string> relative path to your tests directory\n\
-      --output, -o   <string> relative path to your styleguide directory\n\
-      --dev          [<bool>] watch file changes\n\
+      --source, -s    <string> relative path to your tests directory\n\
+      --output, -o    <string> relative path to your styleguide directory\n\
+      --dev           [<bool>] watch file changes\n\
+      --bundler, -b   <string> choose your bundler (webpack|browserify)\n\
   ')
 } else {
+  var bundler = argsOptions.bundler || argsOptions.b
+  var bundlers = {
+    webpack: webpackBundler,
+    browserify: browserifyBundler
+  }
   var options = Object.assign({
-    bundler: browserifyBundler,
+    bundler: bundler && bundlers.hasOwnProperty(bundler)
+      ? bundlers[bundler]
+      : browserifyBundler,
     dev: argsOptions.dev || false
   })
 

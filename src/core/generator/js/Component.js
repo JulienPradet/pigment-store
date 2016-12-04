@@ -4,6 +4,6 @@ export default class Component {
   }
 
   render () {
-    return `require('./${this.file}').default`
+    return `require('${this.file}').default`
   }
 }

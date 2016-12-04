@@ -21,8 +21,8 @@ let longestTitle = 10
 
 export const message = (subject) => (type, string) => {
   if (!typeToColor.hasOwnProperty(type)) {
-    type = 'info'
     console.log(typeToColor.warn(`Type ${type} is not defined as logging type`))
+    type = 'info'
   }
 
   if (subject.length < longestTitle) {
