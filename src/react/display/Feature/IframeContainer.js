@@ -50,7 +50,8 @@ class IframeContainer extends React.Component {
     const iframeDocument = this.iframe.contentWindow.document
     setInitialHtml(iframeDocument, this.props.config.initialHtml)
 
-    const [renderComponent, applyActions] = this.props.children
+    const renderComponent = this.props.render
+    const applyActions = this.props.afterRender
 
     const component = ReactDOM.render(
       renderComponent(),

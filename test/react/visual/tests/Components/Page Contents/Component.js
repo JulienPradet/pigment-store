@@ -1,29 +1,24 @@
 import React from 'react'
 import PigmentStore from '../../../../../../dist/index'
 import Component from '../../../../../../src/react/display/Component/Current'
-import {DisplayOptionsProvider} from '../../../../../../src/react/display/DisplayOptions/ContextProvider'
-import {ConfigProvider} from '../../../../../../src/react/display/util/ConfigProvider'
-
+import routerDecorator from '../../.router.decorator'
+import configDecorator from '../../.config.decorator'
+import displayOptionsDecorator from '../../.displayOptions.decorator'
 import fixtures from '../fixtures/index'
 
 export default PigmentStore.React.describe('Component', Component)
+  .addDecorator(routerDecorator)
+  .addDecorator(configDecorator)
+  .addDecorator(displayOptionsDecorator)
   .featureJsx(
     'Default',
     (
-      <ConfigProvider config={{}}>
-        <DisplayOptionsProvider>
-          <Component pathname='' component={fixtures.categories[0].components[0]} />
-        </DisplayOptionsProvider>
-      </ConfigProvider>
+      <Component pathname='' component={fixtures.categories[0].components[0]} />
     )
   )
   .featureJsx(
     'With multiple features',
     (
-      <ConfigProvider config={{}}>
-        <DisplayOptionsProvider>
-          <Component pathname='' component={fixtures.categories[0].components[1]} />
-        </DisplayOptionsProvider>
-      </ConfigProvider>
+      <Component pathname='' component={fixtures.categories[0].components[1]} />
     )
   )

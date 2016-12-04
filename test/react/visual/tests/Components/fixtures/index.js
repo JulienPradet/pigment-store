@@ -13,6 +13,7 @@ export default {
         {
           Component: Title,
           name: 'Title',
+          decorators: [],
           features: [{
             Component: Title,
             name: 'Default',
@@ -21,6 +22,7 @@ export default {
         },
         {
           Component: Avatar,
+          decorators: [],
           name: 'Avatar',
           features: [
             {
@@ -44,6 +46,7 @@ export default {
         {
           Component: Profile,
           name: 'Profile',
+          decorators: [],
           features: [
             {
               Component: Profile,
