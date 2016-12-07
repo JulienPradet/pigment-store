@@ -1,6 +1,7 @@
 import path from 'path'
 import Rx from 'rx'
 import webpack from 'webpack'
+import WebpackDevServer from 'webpack-dev-server'
 import webpackConfig from './webpack.config.dev.js'
 import paths from './paths'
 import {saveFiles} from '../../../util/fs'
@@ -10,7 +11,7 @@ const log = logger('BUILD')
 
 const appIndexJs = (styleguideDir) => path.join(styleguideDir, '/.index.js')
 
-const bundler = (testDir, styleguideDir, {dev}) => (stream) => {
+const bundler = (testDir, styleguideDir, {dev, host = 'localhost', port = 3000}) => (stream) => {
   const createCompiler = () => {
     const config = webpackConfig({
       env: {NODE_ENV: dev ? 'development' : 'production'},
@@ -43,15 +44,26 @@ const bundler = (testDir, styleguideDir, {dev}) => (stream) => {
 
         if (messages.warnings.length === 0 && messages.errors.length === 0) {
           log.message('success', 'You app was compiled successfully. Hooray!')
-          messages.assets.map(({name, size}) => {
-            log.message('info', `${name}: ${parseInt(size / 1000, 10)}M`)
-          })
         }
       })
 
       if (dev) {
-        compiler.watch({}, function (err, stats) {
-          if (err) return observer.onNext({type: 'error', value: err})
+        const server = new WebpackDevServer(compiler, {
+          compress: true,
+          hot: true,
+          contentBase: path.join(process.cwd(), styleguideDir),
+          quiet: true,
+          host: host
+        })
+
+        server.listen(port, (err, result) => {
+          if (err) {
+            log.message('error', err)
+            observer.onNext({type: 'error', value: err})
+            observer.onCompleted()
+          }
+
+          log.message('debug', `Starting dev server at http://${host}:${port}`)
         })
       } else {
         compiler.run(function (err, stats) {

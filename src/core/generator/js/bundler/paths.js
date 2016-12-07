@@ -14,9 +14,9 @@ module.exports = (testDir, styleguideDir) => {
     .map(resolveApp)
 
   return {
-    appBuild: styleguideDir,
+    appBuild: resolveApp(styleguideDir),
     appIndexJs: path.resolve(styleguideDir, '.index.js'),
-    appSrc: testDir,
+    appSrc: resolveApp(testDir),
     nodePaths: nodePaths
   }
 }

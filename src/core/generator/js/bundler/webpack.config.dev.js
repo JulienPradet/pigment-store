@@ -4,14 +4,15 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = ({paths, env}) => ({
   devtool: 'cheap-module-source-map',
   entry: [
-    // require.resolve('webpack-dev-server/client') + '?/',
-    // require.resolve('webpack/hot/dev-server'),
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/dev-server',
     paths.appIndexJs
   ],
   output: {
     path: paths.appBuild,
     pathinfo: true,
-    filename: '/app.js'
+    filename: 'app.js',
+    publicPath: '/'
   },
   resolve: {
     fallback: paths.nodePaths,
@@ -49,7 +50,7 @@ module.exports = ({paths, env}) => ({
   },
   plugins: [
     new ExtractTextPlugin('app.css', { allChunks: true }),
-    new webpack.DefinePlugin(env)
-    // new webpack.HotModuleReplacementPlugin()
+    new webpack.DefinePlugin(env),
+    new webpack.HotModuleReplacementPlugin()
   ]
 })
