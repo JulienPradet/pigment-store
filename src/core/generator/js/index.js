@@ -8,7 +8,7 @@ const log = logger('BUILD')
 export function buildApp (testDir, styleguideDir, options) {
   log.message('info', 'START')
 
-  return exists(path.join(testDir, 'index.js'))
+  const indexFile$ = exists(path.join(testDir, 'index.js'))
     .flatMap((exists) => {
       if (exists) {
         return readfile(path.join(testDir, 'index.js')).map(({file}) => file)
@@ -16,7 +16,10 @@ export function buildApp (testDir, styleguideDir, options) {
         return createIndexFile(testDir, styleguideDir)
       }
     })
-    .flatMap(options.bundler(testDir, styleguideDir, options))
+
+  const bundler = options.bundler(testDir, styleguideDir, options)
+
+  return bundler(indexFile$)
     .tap(
       ({type, value}) => {
         if (type === 'error') {

@@ -11,7 +11,7 @@ const log = logger('BUILD')
 
 const appIndexJs = (styleguideDir) => path.join(styleguideDir, '/.index.js')
 
-const bundler = (testDir, styleguideDir, {dev, host = 'localhost', port = 3000}) => (stream) => {
+const bundler = (testDir, styleguideDir, {dev, host = 'localhost', port = 3000}) => (baseIndexFile$) => {
   const createCompiler = () => {
     const config = webpackConfig({
       env: {NODE_ENV: dev ? 'development' : 'production'},
@@ -43,7 +43,7 @@ const bundler = (testDir, styleguideDir, {dev, host = 'localhost', port = 3000})
         }
 
         if (messages.warnings.length === 0 && messages.errors.length === 0) {
-          log.message('success', 'You app was compiled successfully. Hooray!')
+          log.message('success', 'Your app was compiled successfully. Hooray!')
         }
       })
 
@@ -66,20 +66,24 @@ const bundler = (testDir, styleguideDir, {dev, host = 'localhost', port = 3000})
           log.message('debug', `Starting dev server at http://${host}:${port}`)
         })
       } else {
+        log.message('info', 'Compiling...')
         compiler.run(function (err, stats) {
-          if (err) return observer.onNext({type: 'error', value: err})
-          return observer.onNext({type: 'success'})
+          if (err) {
+            observer.onNext({type: 'error', value: err})
+          } else {
+            observer.onNext({type: 'success'})
+          }
+          observer.onCompleted()
         })
       }
     })
   }
 
   const indexFile$ = saveFiles(
-    Rx.Observable.just(stream.toString())
-      .map((file) => ({
-        file,
-        filepath: path.join(styleguideDir, '.index.js')
-      }))
+    baseIndexFile$.map((file) => ({
+      file: file.toString(),
+      filepath: path.join(styleguideDir, '.index.js')
+    }))
   )
 
   return indexFile$
