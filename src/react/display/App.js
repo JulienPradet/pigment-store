@@ -1,11 +1,11 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router'
+import { HashRouter } from 'react-router'
 import AppPage from './AppPage'
 
 const App = ({indexCategory}) => {
-  return <BrowserRouter>
+  return <HashRouter>
     <AppPage indexCategory={indexCategory} />
-  </BrowserRouter>
+  </HashRouter>
 }
 
 export default App

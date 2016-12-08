@@ -45,7 +45,7 @@ if (argsOptions.help || !source || !output) {
   var generator$ = generator(testDir, styleguideDir, options)
 
   var styleguideRelativeDir = path.relative(process.cwd(), styleguideDir)
-  var runStyleguideCmd = 'node ' + path.join(styleguideRelativeDir, 'server.js')
+  var runStyleguideCmd = path.resolve(styleguideRelativeDir, 'index.html')
 
   generator$.subscribe(
     function () {},
@@ -53,6 +53,6 @@ if (argsOptions.help || !source || !output) {
       console.log('\nAn error occured. Feel free to leave an issue at https://github.com/JulienPradet/pigment-store if you think it\'s a bug.')
       process.exit(1)
     },
-    function () { console.log('\nYou can now open your styleguide by running:\n$ ' + runStyleguideCmd) }
+    function () { console.log('\nYou can now open your styleguide by opening the index.html in your browser:\n' + runStyleguideCmd) }
   )
 }
