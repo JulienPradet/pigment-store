@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {compose, withState, withHandlers} from 'recompose'
-import {MenuTitle, Item, Search} from '../util/View/SidebarMenu'
+import {MenuTitle, Item, Search} from '../../util/View/SidebarMenu'
 import {CategorySubNavigation} from './CategoryNavigation'
 
 export const isMatching = (search, name) => search !== '' && name.match(new RegExp(search, 'i'))
@@ -21,13 +21,13 @@ export const categoryContainsSearch = (search) => (category) => {
       category.categories.some(categoryContainsSearch(search))
 }
 
-const Navigation = ({search, onSearchChange, indexCategory, isActive}) => <div>
+const Navigation = ({search, onSearchChange, indexCategory, isActive, prefix = ''}) => <div>
   <MenuTitle><Link to='/'>Pigment Store</Link></MenuTitle>
   <Item>
     <Search search={search} onChange={onSearchChange} />
   </Item>
   <Item>
-    <CategorySubNavigation category={indexCategory} pathname='' search={search} />
+    <CategorySubNavigation category={indexCategory} pathname={prefix} search={search} />
   </Item>
 </div>
 

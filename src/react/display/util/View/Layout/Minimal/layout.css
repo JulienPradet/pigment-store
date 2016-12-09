@@ -1,0 +1,20 @@
+.container {
+
+}
+
+.navContainer {
+  padding: 1em;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+}
+
+.backButton a {
+  background: none;
+  border: none;
+  font-size: 2em;
+  padding: 0;
+  line-height: 0.85;
+  color: #a6cf39;
+  text-decoration: none;
+}

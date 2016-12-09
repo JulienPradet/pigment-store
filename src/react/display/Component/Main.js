@@ -8,7 +8,7 @@ const Component = ({component, pathname}) => {
     <Match
       exactly
       pattern={`${pathname}`}
-      render={(matchProps) => <CurrentComponent component={component} />}
+      render={({pathname}) => <CurrentComponent component={component} pathname={pathname} />}
     />
     <Match
       pattern={`${pathname}/:featureName`}

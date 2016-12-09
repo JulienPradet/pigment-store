@@ -29,7 +29,7 @@ export default class Component extends React.Component {
         <Dependencies component={component} />
       </Card>
 
-      <FeatureList component={component} />
+      <FeatureList component={component} pathname={this.props.pathname} />
     </div>
   }
 }

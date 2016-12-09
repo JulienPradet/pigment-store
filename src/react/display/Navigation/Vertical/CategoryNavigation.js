@@ -2,7 +2,7 @@ import React from 'react'
 import {Match, Link} from 'react-router'
 import Highlighter from 'react-highlight-words'
 import {featureContainsSearch, componentContainsSearch, categoryContainsSearch} from './index'
-import {Container, Item} from '../util/View/SidebarMenu'
+import {Container, Item} from '../../util/View/SidebarMenu'
 
 const FeatureNavigation = ({feature, pathname, search}) => (
   <Item fade>

@@ -29,7 +29,7 @@ The main feature of a Card is that the content can be collapsed.
     Object.assign({}, cardContent, {closable: true, defaultClosed: true})
   )
   .feature(
-    'Closable card initialized as closed',
+    'Card with a component as a title',
     Object.assign({}, cardContent, {
       closable: true,
       defaultClosed: true,
