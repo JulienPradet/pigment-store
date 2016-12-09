@@ -8,19 +8,19 @@ const extractCategoryChildren = (prefix, category) => [
   ...category.categories.map((category) => ({
     pattern: `${prefix}/category-${category.name}`,
     name: category.name,
-    render: ({pattern}) => <CategoryNavigation prefix={pattern} parentPattern={prefix} category={category} />
+    render: ({pathname}) => <CategoryNavigation prefix={pathname} parentPathname={prefix} category={category} />
   })),
   ...category.components.map((component) => ({
     pattern: `${prefix}/component-${component.name}`,
     name: component.name,
-    render: ({pattern}) => <ComponentNavigation prefix={pattern} parentPattern={prefix} component={component} />
+    render: ({pathname}) => <ComponentNavigation prefix={pathname} parentPathname={prefix} component={component} />
   }))
 ]
 
-const CategoryNavigation = ({category, prefix, parentPattern}) => (
+const CategoryNavigation = ({category, prefix, parentPathname}) => (
   <Container>
     <Item>
-      <Link to={parentPattern}>{category.name}</Link>
+      <Link to={parentPathname}>{category.name}</Link>
     </Item>
     {extractCategoryChildren(prefix, category).map(({pattern, render}) => (
       <Match key={pattern} pattern={pattern} render={(...args) => <Item>{render(...args)}</Item>} />

@@ -8,14 +8,14 @@ const extractComponentChildren = (prefix, component) => (
   component.features.map((feature) => ({
     pattern: `${prefix}/feature-${feature.name}`,
     name: feature.name,
-    render: ({pattern}) => <FeatureNavigation parentPattern={prefix} feature={feature} />
+    render: () => <FeatureNavigation parentPathname={prefix} feature={feature} />
   }))
 )
 
-const ComponentNavigation = ({component, prefix, parentPattern}) => (
+const ComponentNavigation = ({component, prefix, parentPathname}) => (
   <Container>
     <Item>
-      <Link to={parentPattern}>{component.name}</Link>
+      <Link to={parentPathname}>{component.name}</Link>
     </Item>
     {extractComponentChildren(prefix, component).map(({pattern, render}) => (
       <Match key={pattern} pattern={pattern} render={(...args) => <Item>{render(...args)}</Item>} />
