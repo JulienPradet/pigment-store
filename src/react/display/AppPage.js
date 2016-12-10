@@ -22,7 +22,7 @@ const renderDocs = (indexCategory) => () => {
 
 const renderPreview = (indexCategory) => ({location}) => {
   const nav = <HorizontalNavigation indexCategory={indexCategory} prefix='/full' />
-  const displayOptions = <div></div>//<DisplayOptions />
+  const displayOptions = <DisplayOptions />
   const goBackToDocs = <Link
     to={location.pathname.replace(/^\/full/, '/docs').replace(/\/feature-.*$/, '')}
     title='Go back to documentation'

@@ -1,5 +1,7 @@
-.container {
-
+.layoutContainer {
+  height: calc(100vh - 1em);
+  display: flex;
+  flex-direction: column;
 }
 
 .navContainer {
@@ -14,7 +16,18 @@
   border: none;
   font-size: 2em;
   padding: 0;
-  line-height: 0.85;
   color: #a6cf39;
   text-decoration: none;
+}
+
+.mainNav {
+  flex: 1
+}
+
+.contentContainer {
+  flex: 1;
+}
+
+.contentContainer div {
+  height: 100%;
 }
