@@ -11,7 +11,7 @@ class Display extends React.Component {
 
     const afterRender = (component) => actions && actions(component)
 
-    return <IframeContainer render={finalRender} afterRender={afterRender} />
+    return <IframeContainer render={finalRender} afterRender={afterRender} fullHeight={this.props.fullHeight} />
   }
 }
 

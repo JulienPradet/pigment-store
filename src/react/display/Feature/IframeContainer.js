@@ -6,13 +6,14 @@ import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
 
 const makeWrapperStyle = ({size, zoom}) => ({
   width: size.width === 'auto' ? '100%' : `${size.width * zoom / 100}px`,
-  height: size.height === 'auto' ? 'auto' : `${size.height * zoom / 100}px`,
-  margin: '0 auto'
+  height: size.height === 'auto' ? '100%' : `100%`,
+  margin: '0 auto',
+  ...size.height === 'auto' ? { display: 'flex', alignItems: 'center' } : {}
 })
 
 const makeStyle = ({size, zoom}) => ({
   width: size.width === 'auto' ? `${100 / zoom * 100}%` : `${size.width}px`,
-  height: size.height === 'auto' ? 'auto' : `${size.height}px`,
+  height: size.height === 'auto' ? '100%' : `${size.height}px`,
   transform: `scale(${zoom / 100})`,
   transformOrigin: 'top left',
   border: 0
@@ -65,8 +66,8 @@ class IframeContainer extends React.Component {
         }
       })
       .then(() => {
-        if (typeof this.props.config.getHeight === 'function') {
-          return this.props.config.getHeight(iframeDocument)
+        if (this.props.fullHeight) {
+          return 'auto'
         } else {
           return new Promise((resolve, reject) => {
             setTimeout(() => {

@@ -3,7 +3,7 @@ import {Match} from 'react-router'
 import FeatureDisplay from '../Feature/Display'
 
 const FullPreviewFeature = ({component, feature}) => (
-  <FeatureDisplay component={component} feature={feature} />
+  <FeatureDisplay component={component} feature={feature} fullHeight />
 )
 
 const FullPreviewComponent = ({component, prefix}) => (
