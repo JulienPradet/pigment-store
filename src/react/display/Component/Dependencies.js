@@ -44,7 +44,7 @@ const stackDependencies = (dependencies = []) => {
   return stackedDependencies
 }
 
-const StackedDependencyList = ({prefix = '', stackedDependencies}) => <StackedList.Container>
+const StackedDependencyList = ({prefix = '/docs', stackedDependencies}) => <StackedList.Container>
   {stackedDependencies
     .map(({path, type, children}, index) => <StackedList.Row key={index}>
       <StackedList.Item>
