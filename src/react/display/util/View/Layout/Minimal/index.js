@@ -25,7 +25,9 @@ const Layout = class Layout extends React.Component {
             <div className={styles.backButton}>{returnNav}</div>
             <div className={styles.mainNav}>{nav}</div>
             <div className={styles.hiddenNavButton}>
-              <button onClick={this.toggleHiddenNav}>Parameters</button>
+              <button onClick={this.toggleHiddenNav}>
+                <i className='material-icons'>settings</i>
+              </button>
             </div>
           </div>
           {this.state.showHiddenNav && hiddenNav}
