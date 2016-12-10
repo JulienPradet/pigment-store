@@ -17,8 +17,8 @@ const Zoom = (
   </div>
   <div className={classnames(styles.zoomItem, styles.zoomSlider)}>
     <Slider
-      min={10}
-      max={200}
+      min={25}
+      max={400}
       value={parseInt(zoom)}
       onChange={onChange}
       tipFormatter={null}

@@ -14,12 +14,5 @@ export default {
         </div>
       </body>
     </html>
-  `,
-  getHeight (document) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(document.getElementById('container').scrollHeight + 14)
-      }, 100)
-    })
-  }
+  `
 }
