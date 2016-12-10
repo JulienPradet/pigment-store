@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {compose} from 'recompose'
 import {getConfig} from '../util/ConfigProvider'
 import {getDisplayOptions} from '../DisplayOptions/ContextProvider'
@@ -19,22 +18,7 @@ const makeStyle = ({size, zoom}) => ({
   border: 0
 })
 
-const setInitialHtml = (document, html) => {
-  document.open('text/htmlreplace')
-  document.write(html || `
-    <!doctype html>
-    <html>
-      <body>
-        <div id="preview"></div>
-      </body>
-    </html>
-  `)
-  document.close()
-
-  return document
-}
-
-class IframeContainer extends React.Component {
+class Display extends React.Component {
   constructor (props) {
     super()
     this.state = {
@@ -48,43 +32,21 @@ class IframeContainer extends React.Component {
   }
 
   componentDidMount () {
-    const iframeDocument = this.iframe.contentWindow.document
-    setInitialHtml(iframeDocument, this.props.config.initialHtml)
-
-    const renderComponent = this.props.render
-    const applyActions = this.props.afterRender
-
-    const component = ReactDOM.render(
-      renderComponent(),
-      iframeDocument.getElementById('preview')
-    )
-
-    Promise.resolve()
-      .then(() => {
-        if (typeof this.props.config.onFrameLoaded === 'function') {
-          return this.props.config.onFrameLoaded(iframeDocument)
-        }
-      })
-      .then(() => {
-        if (this.props.fullHeight) {
-          return 'auto'
-        } else {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve(iframeDocument.body.scrollHeight)
-            }, 100)
-          })
-        }
-      })
-      .then((height) => {
-        this.setState({
-          height: height
-        }, () => {
-          if (applyActions) {
-            applyActions(component)
+    this.iframe.contentWindow.renderCallback = () => {
+      Promise.resolve()
+        .then(() => {
+          if (this.props.fullHeight) {
+            return 'auto'
+          } else {
+            return this.iframe.contentDocument.body.scrollHeight
           }
         })
-      })
+        .then((height) => {
+          this.setState({
+            height: height
+          })
+        })
+    }
   }
 
   render () {
@@ -95,7 +57,11 @@ class IframeContainer extends React.Component {
     const zoom = this.props.displayOptions.zoom
 
     return <div style={makeWrapperStyle({size, zoom})}>
-      <iframe ref={(ref) => { this.iframe = ref }} src='about:blank' style={makeStyle({size, zoom})} />
+      <iframe
+        ref={(ref) => { this.iframe = ref }}
+        src={`iframe.html#${this.props.pathname}`}
+        style={makeStyle({size, zoom})}
+      />
     </div>
   }
 }
@@ -103,4 +69,4 @@ class IframeContainer extends React.Component {
 export default compose(
   getDisplayOptions(),
   getConfig()
-)(IframeContainer)
+)(Display)

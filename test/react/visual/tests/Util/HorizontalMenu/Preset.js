@@ -1,6 +1,6 @@
 import React from 'react'
 import PigmentStore from '../../../../../../dist/index'
-import PresetList from '../../../../../../src/react/display/util/View/HorizontalMenu/Preset'
+import PresetList from '../../../../../../src/core/display/App/util/View/HorizontalMenu/Preset'
 
 const aPresetListConfig = {
   presets: [{

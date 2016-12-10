@@ -1,7 +1,7 @@
 import React from 'react'
 import {MemoryRouter} from 'react-router'
 import PigmentStore from '../../../../../../dist/index'
-import Navigation from '../../../../../../src/react/display/Navigation/Vertical/index'
+import Navigation from '../../../../../../src/core/display/App/Navigation/Vertical/index'
 import indexCategory from '../fixtures/index'
 
 export default PigmentStore.React.describe('Navigation', Navigation)

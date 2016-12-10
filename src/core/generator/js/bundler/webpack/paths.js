@@ -15,7 +15,8 @@ module.exports = (testDir, styleguideDir) => {
 
   return {
     appBuild: resolveApp(styleguideDir),
-    appIndexJs: path.resolve(styleguideDir, '.index.js'),
+    appIndexJs: path.resolve(styleguideDir, '.app.js'),
+    iframeIndexJs: path.resolve(styleguideDir, '.iframe.js'),
     appSrc: resolveApp(testDir),
     nodePaths: nodePaths
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {ConfigProvider} from '../../../../src/react/display/util/ConfigProvider'
+import {ConfigProvider} from '../../../../src/core/display/App/util/ConfigProvider'
 
 const configDecorator = (renderFn) => () => (
   <ConfigProvider config={{}}>

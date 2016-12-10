@@ -1,17 +1,23 @@
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-module.exports = ({paths, env}) => ({
+module.exports = ({paths}) => ({
   devtool: 'cheap-module-source-map',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/dev-server',
-    paths.appIndexJs
-  ],
+  entry: {
+    app: [
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/dev-server',
+      paths.appIndexJs
+    ],
+    iframe: [
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/dev-server',
+      paths.iframeIndexJs
+    ]
+  },
   output: {
     path: paths.appBuild,
     pathinfo: true,
-    filename: 'app.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   resolve: {
@@ -27,7 +33,7 @@ module.exports = ({paths, env}) => ({
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
       },
       {
         test: /\.json$/,
@@ -36,8 +42,11 @@ module.exports = ({paths, env}) => ({
     ]
   },
   plugins: [
-    new ExtractTextPlugin('app.css', { allChunks: true }),
-    new webpack.DefinePlugin(env),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
+      }
+    }),
     new webpack.HotModuleReplacementPlugin()
   ]
 })

@@ -1,4 +1,4 @@
-export default class Component {
+export default class Config {
   constructor (file) {
     this.file = file
   }

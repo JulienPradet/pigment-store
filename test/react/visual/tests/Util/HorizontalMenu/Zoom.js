@@ -1,6 +1,6 @@
 import React from 'react'
 import PigmentStore from '../../../../../../dist/index'
-import Zoom from '../../../../../../src/react/display/util/View/HorizontalMenu/Zoom'
+import Zoom from '../../../../../../src/core/display/App/util/View/HorizontalMenu/Zoom'
 
 const aZoomConfig = {
   zoom: 100,

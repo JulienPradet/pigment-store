@@ -1,6 +1,6 @@
 import React from 'react'
 import PigmentStore from '../../../../../dist/index'
-import Card from '../../../../../src/react/display/util/View/Card/index'
+import Card from '../../../../../src/core/display/App/util/View/Card/index'
 
 const cardContent = {
   title: 'Card Title',

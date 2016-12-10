@@ -2,15 +2,15 @@ import React from 'react'
 import {Match} from 'react-router'
 import FeatureDisplay from '../Feature/Display'
 
-const FullPreviewFeature = ({component, feature}) => (
-  <FeatureDisplay component={component} feature={feature} fullHeight />
+const FullPreviewFeature = ({pathname}) => (
+  <FeatureDisplay pathname={pathname.replace(/^\/full/, '')} fullHeight />
 )
 
 const FullPreviewComponent = ({component, prefix}) => (
   <div>
     {component.features.map((feature) => (
-      <Match key={feature.name} pattern={`${prefix}/feature-${feature.name}`} render={() => (
-        <FullPreviewFeature component={component} feature={feature} />
+      <Match key={feature.name} pattern={`${prefix}/feature-${feature.name}`} render={({pathname}) => (
+        <FullPreviewFeature pathname={`${pathname}`} />
       )} />
     ))}
   </div>

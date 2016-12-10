@@ -60,12 +60,12 @@ test('Sub dependencies on modules should not be added to metadata', (t) => {
   t.plan(1)
   const SUT = makeSUT('requireDependencyWithModule')
 
-  t.false(/dependencies: \[[^\]]+\]/.test(SUT.code))
+  t.false(/dependencies: \[[^\]]+]/.test(SUT.code))
 })
 
 test('Import with dependency', (t) => {
   t.plan(1)
   const SUT = makeSUT('withDependency')
 
-  t.true(/dependencies: \[[^\]]+\]/.test(SUT.code))
+  t.true(/dependencies: \[[^\]]+]/.test(SUT.code))
 })

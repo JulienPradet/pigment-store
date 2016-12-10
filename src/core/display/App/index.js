@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import {ConfigProvider} from './util/ConfigProvider'
+import {RendererProvider} from '../util/Renderer'
 
 const extractComponentsFromCategory = (path = []) => (category) => {
   return [
@@ -45,14 +46,16 @@ const resolveDependencies = (components) => components.map(
   ({path, component}) => resolveComponentDependencies({path, component}, components)
 )
 
-export default (indexCategory, config) => {
+export default (rendererOptions) => (indexCategory, config) => {
   const components = extractComponentsFromCategory()(indexCategory)
   resolveDependencies(components)
 
   ReactDOM.render(
-    <ConfigProvider config={config}>
-      <App indexCategory={indexCategory} />
-    </ConfigProvider>,
+    <RendererProvider {...rendererOptions}>
+      <ConfigProvider config={config}>
+        <App indexCategory={indexCategory} />
+      </ConfigProvider>
+    </RendererProvider>,
     document.getElementById('tests')
   )
 }

@@ -15,8 +15,9 @@ const getConfig = (testDir) => {
   return config
 }
 
-const serve = (testDir, styleguideDir, {host = 'localhost', port = 3000}) => (compiledFile$) => {
-  let compiledFile = null
+const serve = (testDir, styleguideDir, {host = 'localhost', port = 3000}) => (compiledAppFile$, compiledIframeFile$) => {
+  let compiledAppFile = null
+  let compiledIframeFile = null
   const config = getConfig(testDir)
   const app = express()
   app.get('/favicon.ico', function (req, res) {})
@@ -26,10 +27,18 @@ const serve = (testDir, styleguideDir, {host = 'localhost', port = 3000}) => (co
   }
 
   app.use('/app.js', (req, res) => {
-    if (compiledFile) {
-      res.send(compiledFile)
+    if (compiledAppFile) {
+      res.send(compiledAppFile)
     } else {
-      res.send(`console.log('Compiling...')`)
+      res.send(`console.log('Compiling the app...')`)
+    }
+  })
+
+  app.use('/iframe.js', (req, res) => {
+    if (compiledIframeFile) {
+      res.send(compiledIframeFile)
+    } else {
+      res.send(`console.log('Compiling the iframe...')`)
     }
   })
 
@@ -44,9 +53,20 @@ const serve = (testDir, styleguideDir, {host = 'localhost', port = 3000}) => (co
 
   const server$ = new Subject()
 
-  compiledFile$.subscribe(
+  compiledAppFile$.subscribe(
     (file) => {
-      compiledFile = file
+      compiledAppFile = file
+    },
+    () => {},
+    () => {
+      server$.onNext()
+      server$.onCompleted()
+    }
+  )
+
+  compiledIframeFile$.subscribe(
+    (file) => {
+      compiledIframeFile = file
     },
     () => {},
     () => {

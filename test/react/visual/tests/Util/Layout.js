@@ -1,6 +1,6 @@
 import React from 'react'
 import PigmentStore from '../../../../../dist/index'
-import Layout from '../../../../../src/react/display/util/View/Layout/Basic/index'
+import Layout from '../../../../../src/core/display/App/util/View/Layout/Basic/index'
 
 export default PigmentStore.React.describe('Layout', Layout)
   .featureJsx(

@@ -1,5 +1,5 @@
 import React from 'react'
-import Markdown from '../util/View/Markdown'
+import Markdown from '../../core/display/App/util/View/Markdown'
 import getUsage from './definitionToJsx'
 
 const getUsageFromFeature = (feature) => {

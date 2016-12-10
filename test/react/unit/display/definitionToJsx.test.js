@@ -1,6 +1,6 @@
 import test from 'tape'
 import React from 'react'
-import definitionToJsx from '../../../../../src/react/display/Feature/definitionToJsx'
+import definitionToJsx from '../../../../src/react/display/definitionToJsx'
 
 const loremIpsum = "Lorem ipsum dolor sit amet. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 
@@ -152,7 +152,6 @@ test('When a custom React node children is passed, its variables should bubble u
   Title.displayName = 'TitleDisplayName'
 
   const actual = definitionToJsx(Component, {children: <Title prop={{propA: 'a', propB: 'b', propC: 'c'}}>Title</Title>})
-  console.log(actual)
 
   t.equals(actual, expected)
   t.end()

@@ -1,6 +1,6 @@
 import React from 'react'
 import PigmentStore from '../../../../../../dist/index'
-import Component from '../../../../../../src/react/display/Component/Current'
+import Component from '../../../../../../src/core/display/App/Component/Current'
 import routerDecorator from '../../.router.decorator'
 import configDecorator from '../../.config.decorator'
 import displayOptionsDecorator from '../../.displayOptions.decorator'
