@@ -6,7 +6,6 @@ import Card from '../util/View/Card'
 import { SectionTitle } from '../util/View/Title'
 
 export default ({feature, component, pathname}) => {
-  console.log(pathname)
   const fullPreviewLink = `${pathname.replace(/^\/docs/, '/full')}/feature-${feature.name}`
   const title = <SectionTitle>
     <Link to={fullPreviewLink}>{feature.name}</Link>

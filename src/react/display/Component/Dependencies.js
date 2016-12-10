@@ -30,7 +30,7 @@ const stackDependencies = (dependencies = []) => {
 
   const stackedDependencies = Object
     .keys(firstLevelStackObject)
-    .map((key) => console.log(key, firstLevelStackObject[key]) || ({
+    .map((key) => ({
       path: key,
       type: firstLevelStackObject[key].length > 0 ? 'category' : 'component',
       children: firstLevelStackObject[key]
