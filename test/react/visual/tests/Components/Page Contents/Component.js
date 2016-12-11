@@ -4,7 +4,7 @@ import Component from '../../../../../../src/core/display/App/Component/Current'
 import routerDecorator from '../../__decorators__/.router.decorator'
 import configDecorator from '../../__decorators__/.config.decorator'
 import displayOptionsDecorator from '../../__decorators__/.displayOptions.decorator'
-import fixtures from '../fixtures/index'
+import fixtures from '../__fixtures__/index'
 
 export default PigmentStore.React.describe('Component', Component)
   .addDecorator(routerDecorator)
