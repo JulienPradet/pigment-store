@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../src/index'
+import PigmentStore from 'pigment-store'
 import {Container, Row, Item} from '../../../../../src/core/display/App/util/View/StackedList/index'
 
 export default PigmentStore.React.describe('StackedList', Container)

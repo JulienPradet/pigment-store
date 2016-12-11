@@ -14,7 +14,10 @@ module.exports = ({paths}) => ({
   },
   resolve: {
     fallback: paths.nodePaths,
-    extensions: ['.js', '.json', '.jsx', '']
+    extensions: ['.js', '.json', '.jsx', ''],
+    alias: {
+      'pigment-store': paths.pigmentStoreEntry
+    }
   },
   module: {
     loaders: [

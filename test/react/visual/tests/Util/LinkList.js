@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../src/index'
+import PigmentStore from 'pigment-store'
 import {Container, Title, Content} from '../../../../../src/core/display/App/util/View/LinkList/index'
 
 export default PigmentStore.React.describe('LinkList', Container)

@@ -14,6 +14,7 @@ module.exports = (testDir, styleguideDir) => {
     .map(resolveApp)
 
   return {
+    pigmentStoreEntry: path.resolve(__dirname, '../../../../../index.js'),
     appBuild: resolveApp(styleguideDir),
     appIndexJs: path.resolve(styleguideDir, '.app.js'),
     iframeIndexJs: path.resolve(styleguideDir, '.iframe.js'),
