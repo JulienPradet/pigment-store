@@ -9,12 +9,12 @@ const serve = require('./serve')
 const bundler = (testDir, styleguideDir, options) => (appIndexFile$, iframeIndexFile$) => {
   const compiledAppFile$ = appIndexFile$
     .map(fileToReadableStream)
-    .map(configCompiler(testDir, styleguideDir, options))
+    .map(configCompiler(testDir, styleguideDir, options, 'app'))
     .flatMap(render(testDir, styleguideDir, options))
 
   const compiledIframeFile$ = iframeIndexFile$
     .map(fileToReadableStream)
-    .map(configCompiler(testDir, styleguideDir, options))
+    .map(configCompiler(testDir, styleguideDir, options, 'iframe'))
     .flatMap(render(testDir, styleguideDir, options))
 
   if (options.dev) {

@@ -3,15 +3,15 @@ const browserify = require('browserify')
 const cssModulesify = require('css-modulesify')
 const watchify = require('watchify')
 
-const config = (testDir, styleguideDir, {dev}) => (stream) => {
+const config = (testDir, styleguideDir, {dev}, name = 'index') => (stream) => {
   const b = browserify({
     debug: true,
     cache: {},
     packageCache: {}
-  }).add(stream, {file: path.join(styleguideDir, '.index.js')})
+  }).add(stream, {file: path.join(styleguideDir, `.${name}.js`)})
     .plugin(cssModulesify, {
-      output: path.join(styleguideDir, 'app.css'),
-      jsonOutput: path.join(styleguideDir, 'app.css.json'),
+      output: path.join(styleguideDir, `${name}.css`),
+      jsonOutput: path.join(styleguideDir, `${name}.css.json`),
       global: true
     })
     .transform('babelify')
