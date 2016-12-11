@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = ({paths}) => ({
   devtool: 'cheap-module-source-map',
@@ -33,7 +34,7 @@ module.exports = ({paths}) => ({
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+        loader: ExtractTextPlugin.extract('style-loader', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       },
       {
         test: /\.json$/,
@@ -42,6 +43,7 @@ module.exports = ({paths}) => ({
     ]
   },
   plugins: [
+    new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')

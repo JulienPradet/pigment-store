@@ -7,7 +7,7 @@ module.exports = class Config {
     if (this.file) {
       return `(() => {
         const config = require('./${this.file}')
-        return config.default ? config.default : {}
+        return config && config.default ? config.default : {}
       })()`
     } else {
       return '{}'

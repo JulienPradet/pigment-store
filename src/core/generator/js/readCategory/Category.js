@@ -1,7 +1,7 @@
 const Component = require('./Component')
 
 const renderString = (string) => {
-  return string && `'${string.replace(/'/g, '\\\'').replace(/\n/g, '\\n').replace(/\\/g, '\\\\')}'`
+  return string && `'${string.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/\n/g, '\\n')}'`
 }
 
 module.exports = class Category {
