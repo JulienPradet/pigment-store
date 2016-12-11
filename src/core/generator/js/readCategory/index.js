@@ -8,7 +8,13 @@ const stat = require('../../../util/fs').stat
 const Component = require('./Component')
 const Category = require('./Category')
 
+const readCategories = {}
+
 const readCategory = (testDir, categoryDir, indexDir) => {
+  if (readCategories[categoryDir]) {
+    return readCategories[categoryDir]
+  }
+
   if (/fixtures/.test(categoryDir)) {
     return Observable.empty()
   }
@@ -55,6 +61,7 @@ const readCategory = (testDir, categoryDir, indexDir) => {
 
   let categoryToReturn
   const category$ = new Subject()
+  readCategories[categoryDir] = category$
 
   Observable
     .merge(subCategories$, components$, description$)
