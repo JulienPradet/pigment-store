@@ -20,14 +20,14 @@ import Link from '../src/Link'
 // Create your test suite for a component
 const component = PigmentStore.React.describe('Simple link', Link)
   // Add a feature
-  .feature(
+  .featurexJs(
     'Default',
-    { href: 'http://google.com', children: 'Google' }
+    <Link href='http://google.com'>'Google'</Link>
   )
   // Add another feature
-  .feature(
+  .featureJsx(
     'Hovered button',
-    { href: 'http://google.com', children: 'Google' },
+    <Link href='http://google.com'>'Google'</Link>,
     (component) => component.onHover()
   )
 
@@ -37,6 +37,8 @@ export default component
 ```
 
 ### Feature API
+
+#### .feature(name, properties[, actions])
 
 Arguments:
 
@@ -58,6 +60,27 @@ Arguments:
   function has a reference to the component as an argument, meaning that you can
   call whatever function that exists in your component if it's a class.
 
+#### .featureJsx(name, element[, actions])
+
+Arguments:
+
+* name: String
+
+  The name is the one that will be displayed in the application. It will also be
+  used in order create a slug that will be used in the URL that links to the
+  preview page. Thus make it unique if you don't want to have weird errors
+
+* element: ReactElement
+
+  The React Element you want to render in this feature. The base React Component of
+  your tested Component will thus be ignored.
+
+* actions (optional): function
+
+  The function that will be applied on the component when it is mounted. The
+  function has a reference to the component as an argument, meaning that you can
+  call whatever function that exists in your component if it's a class.
+
 ### How is the default feature chosen ?
 
 If there is a feature named `Default`, it will be the one displayed. If none is
@@ -69,6 +92,7 @@ components. You've got this situation when you click on a Category.
 ### How are dependecies computed ?
 
 If you have Babel running in your project, you need to add the following plugin to your .babelrc or equivalent :
+
 ```
 ["./node_modules/pigment-store/dist/core/babel-meta-plugin/index.js", {
   "rootDir": "."
@@ -118,10 +142,7 @@ const category = {
       // Second level components which behave the exact same way as first level
       // components
       components: [
-        {
-          name: 'Link',
-          component: Link
-        }
+        Link
       ]
     }
   ],
@@ -151,109 +172,3 @@ on the landing page of the Styleguide.
 Create a `{component_file_name}.md` file next to your component. It will
 automatically be added as a description below the title on the component's page
 in the Styleguide.
-
-## How to add your own CSS files
-
-Let's say your CSS file is in the directory `public` of your project and is named
-`style.css`. In order to have access to it in your styleguide, you must add the
-following files in your test directory :
-
-```js
-// file: {TEST_DIR}/.config.server.js
-var path = require('path')
-
-module.exports = {
-  // Define a public repository that will be available on your Styleguide Server
-  // at /public. Your CSS file should be in it.
-  public: path.join(__dirname, '../public')
-}
-```
-
-```js
-// file: {TEST_DIR}/.config.client.js
-export default {
-  // Define the HTML where the previewed component will be rendered
-  // There must be an id="preview" in order to succeed.
-  initialHtml: `
-    <!doctype html>
-    <head>
-      <!-- The CSS file you want to import -->
-      <link rel="stylesheet" href="/public/style.css" />
-    </head>
-    <html>
-      <body>
-        <!--
-          There must be an id="preview" in order to succeed.
-          The component will be rendered in it
-        -->
-        <div id="preview"></div>
-      </body>
-    </html>
-  `
-}
-```
-
-## How to add some custom JS action upon preview rendering
-
-Add `onFrameLoaded` to your client configuration.
-
-This function must return a promise in order to work. The actions of your test
-will be triggered after the promise is resolved.
-
-Here is an example which add a Copyright at the end of the preview.
-
-```js
-// file: {TEST_DIR}/.config.client.js
-export default {
-  onFrameLoaded: (document) => {
-    return new Promise((resolve, reject) => {
-      const copyright = document.createElement('div')
-      copyright.innerHTML = 'fake © Pigment Store'
-      copyright.classList.add('copyright')
-      console.log(document.body.appendChild(copyright))
-      resolve()
-    })
-  }
-}
-```
-
-This feature could allow you to initialize some javascript libraries if you need
-some.
-
-## Configure the rendering pipeline
-
-For now there is only a basic pipeline that uses browserify, babel and
-CSSmodules. If you are willing to use your own pipeline, you need to create your
-own bundler definition. It will still need to support babel and CSSmodules, but
-you could also add more plugins or add HMR.
-
-A bundler is an object that contains :
-
-* config: A configuration function that defines how the bundler should work.
-
-  The function's signature is : `(testDir: string, styleguideDir: string, options: object) => (stream: Readable) => Bundler`
-
-  The first set of arguments is the same that was passed down to the generator
-  (either by the CLI command or in your custom script).
-
-  The stream is a [https://nodejs.org/api/stream.html#stream_readable_streams](Readable Stream)
-  that contains the content of the file to be compiled.
-
-  The Bundler is the configured pipeline that will be used directly in the
-  render method.
-
-* render: A render function that outputs the file to compile
-
-  The function's signature is : `(testDir: string, styleguideDir: string, options: object) => (bundler: Bundler) => Rx.Observable`
-
-  The first set of arguments is the same that was passed down to the generator
-  (either by the CLI command or in your custom script).
-
-  The bundler is the one returned by the config function.
-
-  The result of this function should be an Rx.Observable. This stream must
-  output string(s) that represents the compiled file.
-
-The current API certainly is too much coupled to browserify. However, I am
-willing to make it as flexible as possible. Thus if you have knownledge in
-Webpack, Rollup, etc. feel free to contact me or submit a PR.
