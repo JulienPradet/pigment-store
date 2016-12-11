@@ -8,5 +8,5 @@ cache:
     - node_modules
 script:
   - yarn run test
-  - yarn run build
-  - yarn run serve
+  - yarn run serve:webpack
+  - yarn run serve:browserify

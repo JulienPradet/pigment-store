@@ -7,8 +7,12 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node cli/index.js",
-    "serve": "NODE_ENV=development node cli/index.js -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:watch": "NODE_ENV=development node cli/index.js --dev -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve": "npm run serve:webpack",
+    "serve:watch": "npm run serve:webpack:watch",
+    "serve:webpack": "NODE_ENV=production node cli/index.js --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:webpack:watch": "NODE_ENV=development node cli/index.js --dev --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:browserify": "NODE_ENV=production node cli/index.js --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:browserify:watch": "NODE_ENV=development node cli/index.js --dev --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
     "test": "NODE_ENV=test babel-tape-runner test/**/*.test.js | faucet",
     "test:dev": "NODE_ENV=test babel-tape-runner test/**/*.test.js"
   },
