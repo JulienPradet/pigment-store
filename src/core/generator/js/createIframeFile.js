@@ -1,5 +1,5 @@
-import path from 'path'
-import readCategory from './readCategory'
+const path = require('path')
+const readCategory = require('./readCategory')
 
 const renderIframeFile = (category, testDir) => {
   const pathToPigmentStore = path.relative(testDir, path.join(__dirname, '../../../index.js'))
@@ -11,7 +11,7 @@ const renderIframeFile = (category, testDir) => {
   `
 }
 
-export default (testDir, indexDir) => {
+module.exports = function createIframeFile (testDir, indexDir) {
   const indexCategory$ = readCategory(testDir, testDir, indexDir)
   return indexCategory$
     .map((category) => renderIframeFile(category, testDir))

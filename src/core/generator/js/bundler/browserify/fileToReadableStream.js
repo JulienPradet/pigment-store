@@ -1,4 +1,4 @@
-import {Readable} from 'stream'
+const Readable = require('stream').Readable
 
 const fileToReadableStream = (file) => {
   const fileStream = new Readable()
@@ -7,4 +7,4 @@ const fileToReadableStream = (file) => {
   return fileStream
 }
 
-export default fileToReadableStream
+module.exports = fileToReadableStream

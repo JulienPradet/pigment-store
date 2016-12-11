@@ -1,7 +1,7 @@
-var path = require('path')
-var babel = require('babel-core')
-var template = require('babel-template')
-var detective = require('babel-plugin-detective')
+const path = require('path')
+const babel = require('babel-core')
+const template = require('babel-template')
+const detective = require('babel-plugin-detective')
 
 var metaDataTemplate = template('COMPONENT.__PIGMENT_META = { file: FILEPATH, dependencies: DEPENDENCIES}')
 

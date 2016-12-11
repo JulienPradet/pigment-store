@@ -1,10 +1,10 @@
-import path from 'path'
-import {saveFiles} from '../../../../util/fs'
-import createCompiler from './createCompiler'
-import serve from './serve'
-import compile from './compile'
+const path = require('path')
+const saveFiles = require('../../../../util/fs').saveFiles
+const createCompiler = require('./createCompiler')
+const serve = require('./serve')
+const compile = require('./compile')
 
-const bundler = (testDir, styleguideDir, {dev, ...options}) => (baseAppIndexFile$, baseIframeIndexFile$) => {
+const bundler = (testDir, styleguideDir, options) => (baseAppIndexFile$, baseIframeIndexFile$) => {
   const appIndexFile$ = saveFiles(
     baseAppIndexFile$.map((file) => ({
       file: file.toString(),
@@ -19,12 +19,12 @@ const bundler = (testDir, styleguideDir, {dev, ...options}) => (baseAppIndexFile
     }))
   )
 
-  const compiler = createCompiler(testDir, styleguideDir, {dev})
+  const compiler = createCompiler(testDir, styleguideDir, options)
 
   return appIndexFile$.combineLatest(iframeIndexFile$, () => {})
-    .flatMap(() => dev
+    .flatMap(() => options.dev
       ? serve(testDir, styleguideDir, options)(compiler)
       : compile(testDir, styleguideDir, options)(compiler))
 }
 
-export default bundler
+module.exports = bundler

@@ -1,7 +1,7 @@
-import path from 'path'
-import {Observable} from 'rx'
-import WebpackDevServer from 'webpack-dev-server'
-import logger from '../../../util/log'
+const path = require('path')
+const Observable = require('rx').Observable
+const WebpackDevServer = require('webpack-dev-server')
+const logger = require('../../../util/log')
 
 const log = logger('BUILD')
 
@@ -27,4 +27,4 @@ const serve = (testDir, styleguideDir, { host = 'localhost', port = 3000 }) => (
   })
 }
 
-export default serve
+module.exports = serve

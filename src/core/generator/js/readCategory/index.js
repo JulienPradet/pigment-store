@@ -1,8 +1,12 @@
-import path from 'path'
-import {Observable, Subject} from 'rx'
-import {readdir, stat, exists, readfile} from '../../../util/fs'
-import Component from './Component'
-import Category from './Category'
+const path = require('path')
+const Observable = require('rx').Observable
+const Subject = require('rx').Subject
+const exists = require('../../../util/fs').exists
+const readdir = require('../../../util/fs').readdir
+const readfile = require('../../../util/fs').readfile
+const stat = require('../../../util/fs').stat
+const Component = require('./Component')
+const Category = require('./Category')
 
 const readCategory = (testDir, categoryDir, indexDir) => {
   if (/fixtures/.test(categoryDir)) {
@@ -73,4 +77,4 @@ const readCategory = (testDir, categoryDir, indexDir) => {
   return category$
 }
 
-export default readCategory
+module.exports = readCategory

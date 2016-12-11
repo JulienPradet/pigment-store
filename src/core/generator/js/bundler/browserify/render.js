@@ -1,9 +1,9 @@
-import {Observable} from 'rx'
-import logger from '../../../util/log'
+const Observable = require('rx').Observable
+const logger = require('../../../util/log')
 
 const log = logger('BUILD')
 
-export default (testDir, styleguideDir, {dev}) => (compiler) => {
+const render = (testDir, styleguideDir, {dev}) => (compiler) => {
   return Observable.create((observer) => {
     const bundle = () => {
       compiler.bundle((e, file) => {
@@ -27,3 +27,5 @@ export default (testDir, styleguideDir, {dev}) => (compiler) => {
     bundle()
   })
 }
+
+module.exports = render

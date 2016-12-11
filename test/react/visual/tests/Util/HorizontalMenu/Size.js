@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../../dist/index'
+import PigmentStore from '../../../../../../src/index'
 import Size from '../../../../../../src/core/display/App/util/View/HorizontalMenu/Size'
 
 const aSizeConfig = {

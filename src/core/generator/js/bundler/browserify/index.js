@@ -1,10 +1,10 @@
-import path from 'path'
-import {Observable} from 'rx'
-import {writefile} from '../../../../util/fs'
-import fileToReadableStream from './fileToReadableStream'
-import configCompiler from './configCompiler'
-import render from './render'
-import serve from './serve'
+const path = require('path')
+const Observable = require('rx').Observable
+const writefile = require('../../../../util/fs').writefile
+const fileToReadableStream = require('./fileToReadableStream')
+const configCompiler = require('./configCompiler')
+const render = require('./render')
+const serve = require('./serve')
 
 const bundler = (testDir, styleguideDir, options) => (appIndexFile$, iframeIndexFile$) => {
   const compiledAppFile$ = appIndexFile$
@@ -33,4 +33,4 @@ const bundler = (testDir, styleguideDir, options) => (appIndexFile$, iframeIndex
   }
 }
 
-export default bundler
+module.exports = bundler

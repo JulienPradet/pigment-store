@@ -1,7 +1,7 @@
-import express from 'express'
-import path from 'path'
-import {Subject} from 'rx'
-import logger from '../../../util/log'
+const express = require('express')
+const path = require('path')
+const Subject = require('rx').Subject
+const logger = require('../../../util/log')
 
 const log = logger('BUILD')
 
@@ -78,4 +78,4 @@ const serve = (testDir, styleguideDir, {host = 'localhost', port = 3000}) => (co
   return server$
 }
 
-export default serve
+module.exports = serve

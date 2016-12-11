@@ -1,6 +1,6 @@
-import paths from './paths'
-import webpack from 'webpack'
-import logger from '../../../util/log'
+const paths = require('./paths')
+const webpack = require('webpack')
+const logger = require('../../../util/log')
 
 const log = logger('BUILD')
 
@@ -43,4 +43,4 @@ const createCompiler = (testDir, styleguideDir, {dev}) => {
   return compiler
 }
 
-export default createCompiler
+module.exports = createCompiler

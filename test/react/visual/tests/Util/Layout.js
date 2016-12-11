@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../dist/index'
+import PigmentStore from '../../../../../src/index'
 import Layout from '../../../../../src/core/display/App/util/View/Layout/Basic/index'
 
 export default PigmentStore.React.describe('Layout', Layout)

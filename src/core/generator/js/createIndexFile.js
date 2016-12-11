@@ -1,6 +1,6 @@
-import path from 'path'
-import readConfig from './readConfig'
-import readCategory from './readCategory'
+const path = require('path')
+const readConfig = require('./readConfig')
+const readCategory = require('./readCategory')
 
 const renderIndexFile = (category, config, testDir) => {
   const pathToPigmentStore = path.relative(testDir, path.join(__dirname, '../../../index.js'))
@@ -14,7 +14,7 @@ const renderIndexFile = (category, config, testDir) => {
   `
 }
 
-export default (testDir, indexDir) => {
+module.exports = function createIndexFile (testDir, indexDir) {
   const indexCategory$ = readCategory(testDir, testDir, indexDir)
   const config$ = readConfig(testDir, indexDir)
   return indexCategory$

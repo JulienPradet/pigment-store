@@ -1,9 +1,13 @@
-import path from 'path'
-import {Observable} from 'rx'
-import Config from './Config'
+const path = require('path')
+const exists = require('../../../util/fs').exists
+const Config = require('./Config')
 
 const readConfig = (testDir, indexDir) => {
-  return Observable.just(new Config(path.relative(indexDir, path.join(testDir, '.config.client.js'))))
+  const configPath = path.relative(indexDir, path.join(testDir, '.config.client.js'))
+  return exists(configPath)
+    .map((exists) => (
+      exists ? new Config(configPath) : new Config()
+    ))
 }
 
-export default readConfig
+module.exports = readConfig

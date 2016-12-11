@@ -1,4 +1,4 @@
-var webpack = require('webpack')
+const webpack = require('webpack')
 
 module.exports = ({paths}) => ({
   devtool: 'cheap-module-source-map',

@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../../dist/index'
+import PigmentStore from '../../../../../../src/index'
 import Component from '../../../../../../src/core/display/App/Component/Current'
 import routerDecorator from '../../.router.decorator'
 import configDecorator from '../../.config.decorator'

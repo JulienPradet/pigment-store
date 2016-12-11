@@ -1,10 +1,10 @@
-import Rx from 'rx'
-import fs from 'fs'
-import path from 'path'
-import mkdirpLib from 'mkdirp'
-import chokidar from 'chokidar'
+const Rx = require('rx')
+const fs = require('fs')
+const path = require('path')
+const mkdirpLib = require('mkdirp')
+const chokidar = require('chokidar')
 
-export function exists (filePath) {
+function exists (filePath) {
   return Rx.Observable.create((observer) => {
     fs.exists(filePath, (exists) => {
       observer.onNext(exists)
@@ -13,7 +13,7 @@ export function exists (filePath) {
   })
 }
 
-export function watchfile (filePath) {
+function watchfile (filePath) {
   return Rx.Observable.create((observer) => {
     chokidar.watch(filePath, {persistent: true})
       .on('change', () => {
@@ -22,7 +22,7 @@ export function watchfile (filePath) {
   })
 }
 
-export function readdir (dirPath) {
+function readdir (dirPath) {
   return Rx.Observable.create((observer) => {
     fs.readdir(dirPath, (e, files) => {
       if (e) return observer.onError(e)
@@ -34,7 +34,7 @@ export function readdir (dirPath) {
   })
 }
 
-export function readfile (filepath) {
+function readfile (filepath) {
   return Rx.Observable.create((observer) => {
     fs.readFile(filepath, (e, file) => {
       if (e) return observer.onError(e)
@@ -46,7 +46,7 @@ export function readfile (filepath) {
   })
 }
 
-export function writefile (filePath, content, options = {}) {
+function writefile (filePath, content, options = {}) {
   return Rx.Observable.create((observer) => {
     fs.writeFile(filePath, content, options, (e) => {
       if (e) return observer.onError(e)
@@ -57,7 +57,7 @@ export function writefile (filePath, content, options = {}) {
   })
 }
 
-export function stat (filePath) {
+function stat (filePath) {
   return Rx.Observable.create((observer) => {
     fs.stat(filePath, (e, stats) => {
       if (e) return observer.onError(e)
@@ -68,7 +68,7 @@ export function stat (filePath) {
   })
 }
 
-export function mkdirp (path) {
+function mkdirp (path) {
   return Rx.Observable.create((observer) => {
     mkdirpLib(path, (e) => {
       if (e) return observer.onError(e)
@@ -79,7 +79,7 @@ export function mkdirp (path) {
   })
 }
 
-export function getRecursiveFiles (inputDir$) {
+function getRecursiveFiles (inputDir$) {
   return inputDir$
     .flatMap((dirpath) => readdir(dirpath))
     .flatMap((files) => files) // flatten all files
@@ -90,7 +90,7 @@ export function getRecursiveFiles (inputDir$) {
     .map(({isDirectory, filepath, stats}) => ({filepath, stats}))
 }
 
-export function saveFiles (filesToSave$) {
+function saveFiles (filesToSave$) {
   return filesToSave$
     .flatMap(({file, filepath}) => mkdirp(path.dirname(filepath))
       .map(() => ({file, filepath}))
@@ -98,7 +98,7 @@ export function saveFiles (filesToSave$) {
     .flatMap(({file, filepath}) => writefile(filepath, file))
 }
 
-export function copyfile (sourcePath, destPath, recursive = false) {
+function copyfile (sourcePath, destPath, recursive = false) {
   let file$
   if (recursive) {
     file$ = getRecursiveFiles(Rx.Observable.just(sourcePath))
@@ -113,4 +113,17 @@ export function copyfile (sourcePath, destPath, recursive = false) {
       filepath: path.join(destPath, path.relative(sourcePath, filepath))
     }))
   )
+}
+
+module.exports = {
+  exists,
+  watchfile,
+  readdir,
+  readfile,
+  writefile,
+  stat,
+  mkdirp,
+  getRecursiveFiles,
+  saveFiles,
+  copyfile
 }

@@ -1,9 +1,9 @@
-import Rx from 'rx'
-import {buildApp} from './js'
-import {buildHtml} from './html'
+const Observable = require('rx').Observable
+const buildApp = require('./js')
+const buildHtml = require('./html')
 
-export default function generate (testDir, styleguideDir, opts) {
-  return Rx.Observable.merge(
+module.exports = function generate (testDir, styleguideDir, opts) {
+  return Observable.merge(
     buildApp(testDir, styleguideDir, opts),
     buildHtml(styleguideDir, opts)
   )

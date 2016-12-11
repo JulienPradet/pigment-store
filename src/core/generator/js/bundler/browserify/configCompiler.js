@@ -1,7 +1,7 @@
-import path from 'path'
-import browserify from 'browserify'
-import cssModulesify from 'css-modulesify'
-import watchify from 'watchify'
+const path = require('path')
+const browserify = require('browserify')
+const cssModulesify = require('css-modulesify')
+const watchify = require('watchify')
 
 const config = (testDir, styleguideDir, {dev}) => (stream) => {
   const b = browserify({
@@ -19,4 +19,4 @@ const config = (testDir, styleguideDir, {dev}) => (stream) => {
   return dev ? watchify(b) : b
 }
 
-export default config
+module.exports = config

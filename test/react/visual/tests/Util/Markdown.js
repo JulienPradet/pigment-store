@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../dist/index'
+import PigmentStore from '../../../../../src/index'
 import Markdown from '../../../../../src/core/display/App/util/View/Markdown/index'
 
 export default PigmentStore.React.describe('Markdown', Markdown)

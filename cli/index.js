@@ -2,9 +2,9 @@
 
 var parseArgs = require('minimist')
 var path = require('path')
-var generator = require('../dist/core/generator').default
-var browserifyBundler = require('../dist/core/generator/js/bundler/browserify').default
-var webpackBundler = require('../dist/core/generator/js/bundler/webpack').default
+var generator = require('../src/core/generator')
+var browserifyBundler = require('../src/core/generator/js/bundler/browserify')
+var webpackBundler = require('../src/core/generator/js/bundler/webpack')
 
 var argsOptions = parseArgs(process.argv.slice(2), {
   boolean: ['dev', 'help'],
@@ -35,7 +35,7 @@ if (argsOptions.help || !source || !output) {
   var options = Object.assign({
     bundler: bundler && bundlers.hasOwnProperty(bundler)
       ? bundlers[bundler]
-      : browserifyBundler,
+      : webpackBundler,
     dev: argsOptions.dev || false
   })
 
@@ -50,7 +50,7 @@ if (argsOptions.help || !source || !output) {
   generator$.subscribe(
     function () {},
     function () {
-      console.log('\nAn error occured. Feel free to leave an issue at https://github.com/JulienPradet/pigment-store if you think it\'s a bug.')
+      console.log('\nAn error occured. Feel free to leave an issue at https://github.com/JulienPradet/pigment-store if you need help solving your issue.')
       process.exit(1)
     },
     function () { console.log('\nYou can now open your styleguide by opening the index.html in your browser:\n' + runStyleguideCmd) }

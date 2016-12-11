@@ -1,12 +1,13 @@
-import path from 'path'
-import {exists, readfile} from '../../util/fs'
-import createIndexFile from './createIndexFile'
-import createIframeFile from './createIframeFile'
-import logger from '../util/log'
+const path = require('path')
+const exists = require('../../util/fs').exists
+const readfile = require('../../util/fs').readfile
+const createIndexFile = require('./createIndexFile')
+const createIframeFile = require('./createIframeFile')
+const logger = require('../util/log')
 
 const log = logger('BUILD')
 
-export function buildApp (testDir, styleguideDir, options) {
+module.exports = function buildApp (testDir, styleguideDir, options) {
   log.message('info', 'START')
 
   const appIndexFile$ = exists(path.join(testDir, 'index.js'))

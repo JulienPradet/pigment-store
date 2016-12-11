@@ -1,11 +1,12 @@
-import path from 'path'
-import {Observable} from 'rx'
-import {copyfile, watchfile} from '../../util/fs'
-import logger from '../util/log'
+const path = require('path')
+const Observable = require('rx').Observable
+const copyfile = require('../../util/fs').copyfile
+const watchfile = require('../../util/fs').watchfile
+const logger = require('../util/log')
 
 const log = logger('HTML')
 
-export function buildHtml (destPath, {dev}) {
+module.exports = function buildHtml (destPath, {dev}) {
   log.message('info', 'START')
 
   const copyHtml = () => Observable.merge(

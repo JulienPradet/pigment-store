@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../../dist/index'
+import PigmentStore from '../../../../../../src/index'
 import {Container, Group, Item} from '../../../../../../src/core/display/App/util/View/HorizontalMenu/index'
 
 export default PigmentStore.React.describe('HorizontalMenu', Container)

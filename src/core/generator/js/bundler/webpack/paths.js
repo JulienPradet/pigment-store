@@ -1,5 +1,5 @@
-var path = require('path')
-var fs = require('fs')
+const path = require('path')
+const fs = require('fs')
 
 module.exports = (testDir, styleguideDir) => {
   var appDirectory = fs.realpathSync(process.cwd())

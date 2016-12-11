@@ -1,10 +1,10 @@
-import Component from './Component'
+const Component = require('./Component')
 
 const renderString = (string) => {
-  return string && `'${string.replace(/'/g, '\\\'').replace(/\n/g, '\\n')}'`
+  return string && `'${string.replace(/'/g, '\\\'').replace(/\n/g, '\\n').replace(/\\/g, '\\\\')}'`
 }
 
-export default class Category {
+module.exports = class Category {
   constructor (name) {
     this.name = name
     this.subCategories = []

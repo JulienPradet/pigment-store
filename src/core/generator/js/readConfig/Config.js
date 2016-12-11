@@ -1,9 +1,16 @@
-export default class Config {
+module.exports = class Config {
   constructor (file) {
     this.file = file
   }
 
   render () {
-    return `require('./${this.file}').default`
+    if (this.file) {
+      return `(() => {
+        const config = require('./${this.file}')
+        return config.default ? config.default : {}
+      })()`
+    } else {
+      return '{}'
+    }
   }
 }

@@ -1,4 +1,4 @@
-export default class Component {
+module.exports = class Component {
   constructor (file) {
     this.file = file
   }

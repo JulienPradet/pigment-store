@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../../dist/index'
+import PigmentStore from '../../../../../../src/index'
 import displayOptionsDecorator from '../../.displayOptions.decorator'
 import DisplayOptions from '../../../../../../src/core/display/App/DisplayOptions/index'
 

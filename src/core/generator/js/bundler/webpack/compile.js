@@ -1,5 +1,5 @@
-import {Observable} from 'rx'
-import logger from '../../../util/log'
+const Observable = require('rx').Observable
+const logger = require('../../../util/log')
 
 const log = logger('BUILD')
 
@@ -17,4 +17,4 @@ const compile = () => (compiler) => {
   })
 }
 
-export default compile
+module.exports = compile

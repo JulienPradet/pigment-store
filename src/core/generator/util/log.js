@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+const chalk = require('chalk')
 
 const typeToColor = {
   error: chalk.red,
@@ -19,7 +19,7 @@ const typeToTitleColor = {
 
 let longestTitle = 10
 
-export const message = (subject) => (type, string) => {
+const message = (subject) => (type, string) => {
   if (!typeToColor.hasOwnProperty(type)) {
     console.log(typeToColor.warn(`Type ${type} is not defined as logging type`))
     type = 'info'
@@ -37,6 +37,8 @@ export const message = (subject) => (type, string) => {
   console.log(typeToTitleColor[type](subject + ' ') + ' ' + typeToColor[type](string))
 }
 
-export default (subject) => ({
-  message: message(subject)
-})
+module.exports = function logger (subject) {
+  return {
+    message: message(subject)
+  }
+}
