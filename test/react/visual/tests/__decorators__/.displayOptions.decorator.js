@@ -1,5 +1,5 @@
 import React from 'react'
-import {DisplayOptionsProvider} from '../../../../src/core/display/App/DisplayOptions/ContextProvider'
+import {DisplayOptionsProvider} from '../../../../../src/core/display/App/DisplayOptions/ContextProvider'
 
 const displayOptionsDecorator = (renderFn) => () => (
   <DisplayOptionsProvider>

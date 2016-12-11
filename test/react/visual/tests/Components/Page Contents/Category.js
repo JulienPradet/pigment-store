@@ -1,9 +1,9 @@
 import React from 'react'
 import PigmentStore from 'pigment-store'
 import Category from '../../../../../../src/core/display/App/Category/Current'
-import routerDecorator from '../../.router.decorator'
-import configDecorator from '../../.config.decorator'
-import displayOptionsDecorator from '../../.displayOptions.decorator'
+import routerDecorator from '../../__decorators__/.router.decorator'
+import configDecorator from '../../__decorators__/.config.decorator'
+import displayOptionsDecorator from '../../__decorators__/.displayOptions.decorator'
 
 import fixtures from '../fixtures/index'
 
