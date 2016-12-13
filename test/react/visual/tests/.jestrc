@@ -1,0 +1,9 @@
+{
+  "moduleNameMapper": {
+    "\\.(css|less)$": "identity-obj-proxy",
+    "pigment-store": "/home/julien/code/pigment-store/src/core/tests/mocks/pigment-store/index.js"
+  },
+  "rootDir": "/home/julien/code/pigment-store/test/react/visual/tests",
+  "testRegex": "^[^\\.].*\\.js$",
+  "testPathIgnorePatterns": ["/node_modules/", "/__fixtures__/", "/__decorators__/", "__mocks__"]
+}
