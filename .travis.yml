@@ -10,3 +10,4 @@ script:
   - yarn run test
   - yarn run serve:webpack
   - yarn run serve:browserify
+  - yarn run test:store
