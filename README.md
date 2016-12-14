@@ -116,6 +116,7 @@ node scripts/generateStyleguide
 * [x] Use a index.js or README.md file to add a description for each category
 * [x] Use an iframe to display elements
 * [ ] Disco mode
+* [ ] Improve how components are imported in the app bundle - in order to improve the bundle size
 
 #### API
 
@@ -123,23 +124,26 @@ node scripts/generateStyleguide
 
 #### Testing
 
+* [x] Add snapshot testing tooling
 * [ ] Add visual testing tooling
 
-#### Toolchain ~ need contribution help
+#### Toolchain
 
-* [ ] HMR in dev mode
-* [ ] Move toward webpack (since it's becoming a more serious thing)
+* [x] HMR in dev mode
+* [x] Move toward webpack (since it's becoming a more serious thing)
+* [ ] Read the .babelrc in order to check that the dependencies are used
 
 #### Documentation
 
 * [ ] Add full example for the styleguide itself for view elements
-* [ ] Add architecture documentation so that one can add any kind of renderer
+* [ ] Add architecture documentation so that one can add any kind of renderer (Vue.JS, Cycles, etc.)
+* [ ] Add architecture documentation so that one can add any kind of bundler (Rollup, etc.)
 
 ### 0.3.0
 
 #### Styleguide
 
-* [ ] Styleguide display should be in core, and react/display should only have the renderers (component details, etc.)
+* [x] Styleguide display should be in core, and react/display should only have the renderers (component details, etc.)
 * [ ] Enable tags that select a specific renderer
 * [ ] Add animation on load
 
