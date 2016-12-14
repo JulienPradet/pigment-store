@@ -2,9 +2,24 @@
 
 Welcome to Pigment Store repository!
 
-This project aims at creating a Living Documentation of React components. It is still in early stages of development, however if you are interested, feel free to open an issue or to contact me however you want.
+This project aims at creating a Living Documentation for React components. That means that it will create for you a web page that lists all your React components and present them as a Styleguide.
+
+In order to add a React component to your Styleguide, you only have to write a basic description about how to use your component. That would look like this :
+
+```jsx
+PigmentStore.React.describe('Link', Link)
+  .featureJsx('Default', <Link href='/path'>My super link</Link>)
+  .featureJsx('With no title', <Link href='/path' />)
+```
+
+The page would then look like this :
 
 ![Preview of Pigment Store basic example](https://github.com/JulienPradet/pigment-store/raw/master/doc/images/global-preview.png)
+
+Some other cool things are coming such as automatic Snapshot testing, automatic Visual testing, complete overview of your Components dependencies, etc. Stay tuned! :)
+
+/!\ It is still in early stages of development.  
+However if you are interested, feel free to open an issue or to contact me however you want.
 
 ## Usage
 
@@ -30,7 +45,7 @@ Configure babel by adding the following plugin (`.babelrc` example):
 > Nota Bene: If pigment store is installed locally, either use the npm scripts or use directly ./node_modules/.bin/pigment-store
 
 ```
-pigment-store -s tests -o styleguide
+pigment-store generate -s tests -o styleguide
 ```
 
 ##### Options :
@@ -39,29 +54,21 @@ pigment-store -s tests -o styleguide
 --source, -s   <string> relative path to your tests directory
 --output, -o   <string> relative path to your styleguide directory
 --dev          [<bool>] watch file changes
+--bundler      <string> (webpack|browserify)
 ```
 
-#### With a custom script file
+### Use the snapshot testing
 
-Create the following file :
-```js
-// file: scripts/generateStyleguide.js
-import path from 'path'
-import browserifyBundler from 'pigment-store/dist/core/generator/js/bundler/browserify'
+#### With CLI
 
-// Define where are your tests (here it is {YOUR_PROJECT}/tests)
-const testDir = path.join(__dirname, 'tests')
-// Define where will your styleguide is built (here it is {YOUR_PROJECT}/tests)
-const styleguideDir = path.join(__dirname, 'styleguide')
-
-generator(testDir, styleguideDir, {
-  bundler: browserifyBundler, // See `Configure the rendering pipeline` in `doc/README.md`
-})
+```
+pigment-store snapshot -s tests -- [jestOptions]
 ```
 
-Add it to your task runner pipeline or directly use it :
+#### With CLI and watch mode
+
 ```
-node scripts/generateStyleguide
+pigment-store snapshot -s tests -- --watch
 ```
 
 ## Development
@@ -73,16 +80,13 @@ node scripts/generateStyleguide
 ### Test example on your machine
 
 * `cd pigment-store`
-* `npm run build`
 * `npm run serve`
-* `node examples/basic/styleguide/server.js`
+* `open test/visual/react/styleguide/index.html`
 
 ### Run development env on your machine
 
 * `cd pigment-store`
-* `npm run dev`
 * `npm run serve:watch`
-* `node examples/basic/styleguide/server.js`
 
 ## Roadmap
 
@@ -111,7 +115,7 @@ node scripts/generateStyleguide
 
 #### Styleguide
 
-* [x] Add proptypes to component description
+* [ ] Add PropTypes to component description
 * [x] Use a index.js or README.md file on test root dir in order to populate the home page
 * [x] Use a index.js or README.md file to add a description for each category
 * [x] Use an iframe to display elements
@@ -120,7 +124,7 @@ node scripts/generateStyleguide
 
 #### API
 
-* [x] Enable CSS inline and relative
+* [ ] Enable CSS link into the previews
 
 #### Testing
 
