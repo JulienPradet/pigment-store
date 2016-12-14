@@ -2,20 +2,21 @@
   "name": "pigment-store",
   "version": "0.1.1",
   "bin": {
-    "pigment-store": "cli/index.js"
+    "pigment-store": "./cli/index.js"
   },
   "main": "dist/index.js",
   "scripts": {
-    "start": "node cli/index.js",
+    "start": "pigment-store",
     "serve": "npm run serve:webpack",
     "serve:watch": "npm run serve:webpack:watch",
-    "serve:webpack": "NODE_ENV=production node cli/index.js --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:webpack:watch": "NODE_ENV=development node cli/index.js --dev --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:browserify": "NODE_ENV=production node cli/index.js --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:browserify:watch": "NODE_ENV=development node cli/index.js --dev --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:webpack": "NODE_ENV=production pigment-store generate --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:webpack:watch": "NODE_ENV=development pigment-store generate --dev --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:browserify": "NODE_ENV=production pigment-store generate --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:browserify:watch": "NODE_ENV=development pigment-store generate --dev --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
     "test": "NODE_ENV=test babel-tape-runner test/**/*.test.js | faucet",
     "test:dev": "NODE_ENV=test babel-tape-runner test/**/*.test.js",
-    "test:store": "NODE_ENV=test jest --config ./test/react/visual/styleguide/tests/.jestrc"
+    "test:store": "NODE_ENV=test pigment-store snapshot -s test/react/visual/tests -o test/react/visual/styleguide",
+    "test:store:watch": "NODE_ENV=test pigment-store snapshot -s test/react/visual/tests -o test/react/visual/styleguide -- --watch"
   },
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",

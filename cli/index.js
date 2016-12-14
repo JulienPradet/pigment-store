@@ -1,58 +1,28 @@
 #!/usr/bin/env node
 
-var parseArgs = require('minimist')
-var path = require('path')
-var generator = require('../src/core/generator')
-var browserifyBundler = require('../src/core/generator/js/bundler/browserify')
-var webpackBundler = require('../src/core/generator/js/bundler/webpack')
+var generate = require('./generate')
+var snapshot = require('./snapshot')
 
-var argsOptions = parseArgs(process.argv.slice(2), {
-  boolean: ['dev', 'help'],
-  strings: ['source', 'output', 'bundler']
-})
-
-var source = argsOptions.source || argsOptions.s
-var output = argsOptions.output || argsOptions.o
-
-if (argsOptions.help || !source || !output) {
-  console.log('\
-    Welcome to PigmentStore!\n\
-\n\
-    Usage : pigment-store -s=tests -s=styleguide\n\
-\n\
-    Arguments :\n\
-      --source, -s    <string> relative path to your tests directory\n\
-      --output, -o    <string> relative path to your styleguide directory\n\
-      --dev           [<bool>] watch file changes\n\
-      --bundler, -b   <string> choose your bundler (webpack|browserify)\n\
+const usage = () => {
+  console.log('Welcome to PigmentStore!\n\
+  \n\
+  Usage : pigment-store [command] [options]\n\
+  \n\
+  Commands :\n\
+  \n\
+  help        displays usage information\n\
+  generate    generates the styleguide that of your application\n\
+  snapshot    tests regressions of your app using Jest\'s snapshots\n\
   ')
+}
+
+if (process.argv.length < 2 || process.argv[2] === 'help') {
+  usage()
+} else if (process.argv[2] === 'generate') {
+  generate(process.argv.slice(3))
+} else if (process.argv[2] === 'snapshot') {
+  snapshot(process.argv.slice(3))
 } else {
-  var bundler = argsOptions.bundler || argsOptions.b
-  var bundlers = {
-    webpack: webpackBundler,
-    browserify: browserifyBundler
-  }
-  var options = Object.assign({
-    bundler: bundler && bundlers.hasOwnProperty(bundler)
-      ? bundlers[bundler]
-      : webpackBundler,
-    dev: argsOptions.dev || false
-  })
-
-  var testDir = source
-  var styleguideDir = output
-
-  var generator$ = generator(testDir, styleguideDir, options)
-
-  var styleguideRelativeDir = path.relative(process.cwd(), styleguideDir)
-  var runStyleguideCmd = path.resolve(styleguideRelativeDir, 'index.html')
-
-  generator$.subscribe(
-    function () {},
-    function () {
-      console.log('\nAn error occured. Feel free to leave an issue at https://github.com/JulienPradet/pigment-store if you need help solving your issue.')
-      process.exit(1)
-    },
-    function () { console.log('\nYou can now open your styleguide by opening the index.html in your browser:\n' + runStyleguideCmd) }
-  )
+  usage()
+  process.exit(1)
 }
