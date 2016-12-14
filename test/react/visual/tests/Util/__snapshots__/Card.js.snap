@@ -1,0 +1,138 @@
+exports[`Card Card with a component as a title 1`] = `
+<div
+  className="container"
+  id={undefined}>
+  <div
+    className="titleContainer"
+    onClick={[Function]}>
+    <div
+      className="title">
+      <div
+        className="titleContent">
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }>
+          Title
+        </span>
+      </div>
+      <div
+        className="titleButton">
+        <button
+          onClick={[Function]}>
+          <i
+            className="material-icons">
+            keyboard_arrow_down
+          </i>
+        </button>
+      </div>
+    </div>
+    <div
+      className="content">
+      Short summary of the card
+    </div>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`Card Closable card 1`] = `
+<div
+  className="container"
+  id={undefined}>
+  <div
+    className="titleContainer"
+    onClick={[Function]}>
+    <div
+      className="title">
+      <div
+        className="titleContent">
+        Card Title
+      </div>
+      <div
+        className="titleButton">
+        <button
+          onClick={[Function]}>
+          <i
+            className="material-icons">
+            keyboard_arrow_up
+          </i>
+        </button>
+      </div>
+    </div>
+    <div
+      className="content">
+      Short summary of the card
+    </div>
+  </div>
+  <div>
+    <div
+      className="collapsibleContent">
+      Actual description of the card. The content can be very versatile and as long as needed.
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Closable card initialized as closed 1`] = `
+<div
+  className="container"
+  id={undefined}>
+  <div
+    className="titleContainer"
+    onClick={[Function]}>
+    <div
+      className="title">
+      <div
+        className="titleContent">
+        Card Title
+      </div>
+      <div
+        className="titleButton">
+        <button
+          onClick={[Function]}>
+          <i
+            className="material-icons">
+            keyboard_arrow_down
+          </i>
+        </button>
+      </div>
+    </div>
+    <div
+      className="content">
+      Short summary of the card
+    </div>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`Card Default 1`] = `
+<div
+  className="container"
+  id={undefined}>
+  <div
+    className="titleContainer"
+    onClick={undefined}>
+    <div
+      className="title">
+      <div
+        className="titleContent">
+        Card Title
+      </div>
+    </div>
+    <div
+      className="content">
+      Short summary of the card
+    </div>
+  </div>
+  <div>
+    <div
+      className="collapsibleContent">
+      Actual description of the card. The content can be very versatile and as long as needed.
+    </div>
+  </div>
+</div>
+`;

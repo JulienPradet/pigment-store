@@ -1,0 +1,109 @@
+exports[`SidebarMenu Default 1`] = `
+<div>
+  <h2
+    className="title">
+    <a
+      href="/">
+      Pigment Store
+    </a>
+  </h2>
+  <li
+    className="item">
+    <div
+      className="search">
+      <input
+        onChange={[Function]}
+        placeholder="Search..."
+        type="text"
+        value="Current search" />
+      <button
+        onClick={[Function]}>
+        <i
+          className="material-icons">
+          close
+        </i>
+      </button>
+    </div>
+  </li>
+  <li
+    className="item">
+    <ul
+      className="list">
+      <li
+        className="item">
+        <a
+          href="/menu">
+          About
+        </a>
+      </li>
+    </ul>
+  </li>
+</div>
+`;
+
+exports[`SidebarMenu With sub categories 1`] = `
+<div>
+  <h2
+    className="title">
+    <a
+      href="/">
+      Pigment Store
+    </a>
+  </h2>
+  <li
+    className="item">
+    <div
+      className="search">
+      <input
+        onChange={[Function]}
+        placeholder="Search..."
+        type="text"
+        value="Current search" />
+      <button
+        onClick={[Function]}>
+        <i
+          className="material-icons">
+          close
+        </i>
+      </button>
+    </div>
+  </li>
+  <li
+    className="item">
+    <ul
+      className="list">
+      <li
+        className="item activeItem">
+        <a
+          href="/category">
+          Category
+        </a>
+        <ul
+          className="list">
+          <li
+            className="item">
+            <a
+              href="/category/section1">
+              Section 1
+            </a>
+          </li>
+          <li
+            className="item">
+            <a
+              href="/category/section2">
+              Section 2
+            </a>
+          </li>
+          <li
+            className="item">
+            <a
+              href="/category/section3">
+              Section 3
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</div>
+`;

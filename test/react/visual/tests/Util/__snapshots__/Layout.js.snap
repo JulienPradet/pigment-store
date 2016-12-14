@@ -1,0 +1,20 @@
+exports[`Layout Default 1`] = `
+<div
+  className="container">
+  <div
+    className="nav">
+    Left navigation
+  </div>
+  <div
+    className="contentContainer">
+    <div
+      className="horizontalNav">
+      Top navigation
+    </div>
+    <div
+      className="content">
+      Content
+    </div>
+  </div>
+</div>
+`;
