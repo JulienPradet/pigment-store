@@ -3,18 +3,14 @@ const Observable = require('rx').Observable
 const exists = require('../../util/fs').exists
 const writefile = require('../../util/fs').writefile
 
-const generateConfig = (testDir, styleguideDir, configPath) => {
+const generateConfig = (testDir, rootDir, configPath) => {
   const jestConfigFile = `{
   "moduleNameMapper": {
     "\\\\.(css|less)$": "identity-obj-proxy",
-    "pigment-store": "${path.resolve(__dirname, './mocks/pigment-store/index.js')}"
+    "pigment-store": "<rootDir>/${path.relative(rootDir, path.resolve(__dirname, './mocks/pigment-store/index.js'))}"
   },
-  "rootDir": "${path.resolve(testDir)}",
-  "testRegex": "^${path.resolve(testDir)}/[^\\\\.].*\\\\.js$",
-  "testPathDirs": [
-    "${path.resolve(process.cwd())}",
-    "${path.resolve(testDir)}"
-  ],
+  "rootDir": "${path.relative(path.dirname(configPath), rootDir)}",
+  "testRegex": "${path.relative(rootDir, testDir)}/[^\\\\.].*\\\\.js$",
   "testPathIgnorePatterns": ["/node_modules/", "/__fixtures__/", "/__decorators__/", "__mocks__"]
 }`
 

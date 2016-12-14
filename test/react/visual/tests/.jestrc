@@ -1,9 +1,9 @@
 {
   "moduleNameMapper": {
     "\\.(css|less)$": "identity-obj-proxy",
-    "pigment-store": "/home/julien/code/pigment-store/src/core/tests/snapshot/mocks/pigment-store/index.js"
+    "pigment-store": "<rootDir>/src/core/tests/snapshot/mocks/pigment-store/index.js"
   },
-  "rootDir": "/home/julien/code/pigment-store",
-  "testRegex": "^/home/julien/code/pigment-store/test/react/visual/tests/[^\\.].*\\.js$",
+  "rootDir": "../../../..",
+  "testRegex": "test/react/visual/tests/[^\\.].*\\.js$",
   "testPathIgnorePatterns": ["/node_modules/", "/__fixtures__/", "/__decorators__/", "__mocks__"]
 }

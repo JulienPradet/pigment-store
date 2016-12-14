@@ -15,7 +15,7 @@ const readCategory = (testDir, categoryDir, indexDir) => {
     return readCategories[categoryDir]
   }
 
-  if (/__fixtures__|__mocks__|__decorators__/.test(categoryDir)) {
+  if (/__snapshots__|__fixtures__|__mocks__|__decorators__/.test(categoryDir)) {
     return Observable.empty()
   }
 

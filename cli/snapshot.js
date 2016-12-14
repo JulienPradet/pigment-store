@@ -4,13 +4,13 @@ const snapshoter = require('../src/core/tests/snapshot')
 const snapshot = (argv) => {
   const argsOptions = parseArgs(argv, {
     boolean: ['help'],
-    strings: ['source', 'output']
+    strings: ['source', 'rootDir']
   })
 
   const source = argsOptions.source || argsOptions.s
-  const output = argsOptions.output || argsOptions.o
+  const rootDir = argsOptions.rootDir || argsOptions.r || process.cwd()
 
-  if (argsOptions.help || !source || !output) {
+  if (argsOptions.help || !source || !rootDir) {
     console.log('\
     Welcome to PigmentStore!\n\
 \n\
@@ -18,17 +18,17 @@ const snapshot = (argv) => {
 \n\
     Arguments:\n\
     --source, -s    <string> relative path to your tests directory\n\
-    --output, -o    <string> relative path to your styleguide directory\n\
-    --config        <string> relative path to your jest config. If none\n\
-                             given, one will be generated in your styleguide\n\
-                             directory\n\
+    --rootDir, -r   [<string>] relative path to your rootDirectory \n\
+    --config        [<string>] relative path to your jest config. If none\n\
+                               given, one will be generated in your styleguide\n\
+                               directory\n\
 \n\
     Options:\n\
     The additional options are the one you want to pass directly to jest\'s\n\
     command\n\
 ')
   } else {
-    snapshoter(source, output, { jestOptions: argsOptions._ }).subscribe(
+    snapshoter(source, rootDir, { jestOptions: argsOptions._ }).subscribe(
       function () {},
       function (error) {
         console.log(error)

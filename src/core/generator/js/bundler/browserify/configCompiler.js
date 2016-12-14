@@ -15,6 +15,7 @@ const config = (testDir, styleguideDir, {dev}, name = 'index') => (stream) => {
       global: true
     })
     .transform('babelify')
+    .transform('aliasify', {aliases: {'pigment-store': path.resolve(__dirname, '../../../../../index.js')}})
 
   return dev ? watchify(b) : b
 }
