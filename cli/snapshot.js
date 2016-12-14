@@ -30,8 +30,7 @@ const snapshot = (argv) => {
   } else {
     snapshoter(source, rootDir, { jestOptions: argsOptions._ }).subscribe(
       function () {},
-      function (error) {
-        console.log(error)
+      function () {
         console.log('An error occured. Feel free to leave an issue at https://github.com/JulienPradet/pigment-store if you need help solving your issue.')
         process.exit(1)
       },

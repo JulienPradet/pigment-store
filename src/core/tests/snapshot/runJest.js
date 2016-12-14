@@ -14,8 +14,12 @@ const runJest = (testDir, configPath, options) => {
       }
     )
 
-    child.on('close', function () {
-      observer.onCompleted()
+    child.on('close', function (code) {
+      if (code > 0) {
+        observer.onError()
+      } else {
+        observer.onCompleted()
+      }
     })
   })
 }
