@@ -1,13 +1,15 @@
 import React from 'react'
-import PigmentStore from '../../../../../../src/index'
+import PigmentStore from 'pigment-store'
 import Category from '../../../../../../src/core/display/App/Category/Current'
-import routerDecorator from '../../.router.decorator'
-import configDecorator from '../../.config.decorator'
-import displayOptionsDecorator from '../../.displayOptions.decorator'
+import rendererDecorator from '../../__decorators__/.renderer.decorator'
+import routerDecorator from '../../__decorators__/.router.decorator'
+import configDecorator from '../../__decorators__/.config.decorator'
+import displayOptionsDecorator from '../../__decorators__/.displayOptions.decorator'
 
-import fixtures from '../fixtures/index'
+import fixtures from '../__fixtures__/index'
 
 export default PigmentStore.React.describe('Category', Category)
+  .addDecorator(rendererDecorator)
   .addDecorator(routerDecorator)
   .addDecorator(configDecorator)
   .addDecorator(displayOptionsDecorator)

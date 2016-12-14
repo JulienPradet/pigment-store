@@ -1,0 +1,22 @@
+exports[`Markdown Default 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<h1>Hi!</h1>
+    <p>Here is some <strong>basic</strong> markdown</p>
+    ",
+    }
+  } />
+`;
+
+exports[`Markdown With code 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<pre class=\"language-jsx\"><code><span class=\"token comment\" spellcheck=\"true\">// Comment</span>
+    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>test<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">></span></span>HTML<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">></span></span>
+    </code></pre>
+    ",
+    }
+  } />
+`;

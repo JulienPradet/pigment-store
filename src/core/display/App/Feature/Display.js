@@ -32,8 +32,9 @@ class Display extends React.Component {
   }
 
   componentDidMount () {
-    this.iframe.contentWindow.renderCallback = () => {
-      Promise.resolve()
+    if (this.iframe) {
+      this.iframe.contentWindow.renderCallback = () => {
+        Promise.resolve()
         .then(() => {
           if (this.props.fullHeight) {
             return 'auto'
@@ -46,6 +47,7 @@ class Display extends React.Component {
             height: height
           })
         })
+      }
     }
   }
 

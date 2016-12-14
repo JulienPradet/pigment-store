@@ -1,0 +1,6 @@
+exports[`Meta Default 1`] = `
+<div
+  className="meta">
+  Faded text
+</div>
+`;

@@ -1,0 +1,252 @@
+exports[`Component Default 1`] = `
+<div>
+  <div
+    className="container"
+    id="component">
+    <div
+      className="titleContainer"
+      onClick={[Function]}>
+      <div
+        className="title">
+        <div
+          className="titleContent">
+          <div>
+            <h1>
+              Title
+            </h1>
+            <div
+              className="meta">
+              test/react/visual/tests/Components/__fixtures__/Title
+            </div>
+          </div>
+        </div>
+        <div
+          className="titleButton">
+          <button
+            onClick={[Function]}>
+            <i
+              className="material-icons">
+              keyboard_arrow_down
+            </i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div />
+  </div>
+  <div>
+    <div
+      className="container"
+      id={undefined}>
+      <div
+        className="titleContainer"
+        onClick={[Function]}>
+        <div
+          className="title">
+          <div
+            className="titleContent">
+            <h2>
+              <a
+                className=""
+                href="/full/feature-Default"
+                onClick={[Function]}
+                style={Object {}}>
+                Default
+              </a>
+            </h2>
+          </div>
+          <div
+            className="titleButton">
+            <button
+              onClick={[Function]}>
+              <i
+                className="material-icons">
+                keyboard_arrow_down
+              </i>
+            </button>
+          </div>
+        </div>
+        <div
+          className="content">
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "margin": "0 auto",
+                "width": "100%",
+              }
+            }>
+            <iframe
+              src="iframe.html#/feature-Default"
+              style={
+                Object {
+                  "border": 0,
+                  "height": "100px",
+                  "transform": "scale(1)",
+                  "transformOrigin": "top left",
+                  "width": "100%",
+                }
+              } />
+          </div>
+        </div>
+      </div>
+      <div />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Component With multiple features 1`] = `
+<div>
+  <div
+    className="container"
+    id="component">
+    <div
+      className="titleContainer"
+      onClick={[Function]}>
+      <div
+        className="title">
+        <div
+          className="titleContent">
+          <div>
+            <h1>
+              Avatar
+            </h1>
+            <div
+              className="meta">
+              test/react/visual/tests/Components/__fixtures__/Avatar
+            </div>
+          </div>
+        </div>
+        <div
+          className="titleButton">
+          <button
+            onClick={[Function]}>
+            <i
+              className="material-icons">
+              keyboard_arrow_down
+            </i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div />
+  </div>
+  <div>
+    <div
+      className="container"
+      id={undefined}>
+      <div
+        className="titleContainer"
+        onClick={[Function]}>
+        <div
+          className="title">
+          <div
+            className="titleContent">
+            <h2>
+              <a
+                className=""
+                href="/full/feature-Default"
+                onClick={[Function]}
+                style={Object {}}>
+                Default
+              </a>
+            </h2>
+          </div>
+          <div
+            className="titleButton">
+            <button
+              onClick={[Function]}>
+              <i
+                className="material-icons">
+                keyboard_arrow_down
+              </i>
+            </button>
+          </div>
+        </div>
+        <div
+          className="content">
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "margin": "0 auto",
+                "width": "100%",
+              }
+            }>
+            <iframe
+              src="iframe.html#/feature-Default"
+              style={
+                Object {
+                  "border": 0,
+                  "height": "100px",
+                  "transform": "scale(1)",
+                  "transformOrigin": "top left",
+                  "width": "100%",
+                }
+              } />
+          </div>
+        </div>
+      </div>
+      <div />
+    </div>
+    <div
+      className="container"
+      id={undefined}>
+      <div
+        className="titleContainer"
+        onClick={[Function]}>
+        <div
+          className="title">
+          <div
+            className="titleContent">
+            <h2>
+              <a
+                className=""
+                href="/full/feature-Placeholder"
+                onClick={[Function]}
+                style={Object {}}>
+                Placeholder
+              </a>
+            </h2>
+          </div>
+          <div
+            className="titleButton">
+            <button
+              onClick={[Function]}>
+              <i
+                className="material-icons">
+                keyboard_arrow_down
+              </i>
+            </button>
+          </div>
+        </div>
+        <div
+          className="content">
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "margin": "0 auto",
+                "width": "100%",
+              }
+            }>
+            <iframe
+              src="iframe.html#/feature-Placeholder"
+              style={
+                Object {
+                  "border": 0,
+                  "height": "100px",
+                  "transform": "scale(1)",
+                  "transformOrigin": "top left",
+                  "width": "100%",
+                }
+              } />
+          </div>
+        </div>
+      </div>
+      <div />
+    </div>
+  </div>
+</div>
+`;

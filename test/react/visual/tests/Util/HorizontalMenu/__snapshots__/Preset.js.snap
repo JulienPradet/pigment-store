@@ -1,0 +1,53 @@
+exports[`PresetList Default 1`] = `
+<div
+  className="presetList">
+  <div
+    className="preset">
+    <button
+      onClick={[Function]}>
+      S
+    </button>
+  </div>
+  <div
+    className="preset">
+    <button
+      onClick={[Function]}>
+      M
+    </button>
+  </div>
+  <div
+    className="preset">
+    <button
+      onClick={[Function]}>
+      L
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PresetList With selected preset 1`] = `
+<div
+  className="presetList">
+  <div
+    className="preset">
+    <button
+      onClick={[Function]}>
+      S
+    </button>
+  </div>
+  <div
+    className="preset presetActive">
+    <button
+      onClick={[Function]}>
+      M
+    </button>
+  </div>
+  <div
+    className="preset">
+    <button
+      onClick={[Function]}>
+      L
+    </button>
+  </div>
+</div>
+`;

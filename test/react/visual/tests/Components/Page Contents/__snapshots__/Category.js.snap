@@ -1,0 +1,214 @@
+exports[`Category Default 1`] = `
+<div>
+  <div
+    className="container"
+    id={undefined}>
+    <div
+      className="titleContainer"
+      onClick={undefined}>
+      <div
+        className="title">
+        <div
+          className="titleContent">
+          <h1>
+            <a
+              className=""
+              href=""
+              onClick={[Function]}
+              style={Object {}}>
+              Index Category
+            </a>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        className="collapsibleContent">
+        <div
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<p>The main description of the styleguide.</p>
+            ",
+            }
+          } />
+        <div
+          className="container">
+          <div
+            className="title">
+            Subcategories
+          </div>
+          <div
+            className="content">
+            <ul>
+              <li>
+                <a
+                  className=""
+                  href="/category-Atom"
+                  onClick={[Function]}
+                  style={Object {}}>
+                  Atom
+                </a>
+              </li>
+              <li>
+                <a
+                  className=""
+                  href="/category-Molecules"
+                  onClick={[Function]}
+                  style={Object {}}>
+                  Molecules
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`Category With components 1`] = `
+<div>
+  <div
+    className="container"
+    id={undefined}>
+    <div
+      className="titleContainer"
+      onClick={undefined}>
+      <div
+        className="title">
+        <div
+          className="titleContent">
+          <h1>
+            <a
+              className=""
+              href="undefined"
+              onClick={[Function]}
+              style={Object {}}>
+              Atom
+            </a>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="container"
+      id={undefined}>
+      <div
+        className="titleContainer"
+        onClick={[Function]}>
+        <div
+          className="title">
+          <div
+            className="titleContent">
+            <h2>
+              <a
+                className=""
+                href="undefined/component-Title"
+                onClick={[Function]}
+                style={Object {}}>
+                Title
+              </a>
+            </h2>
+          </div>
+          <div
+            className="titleButton">
+            <button
+              onClick={[Function]}>
+              <i
+                className="material-icons">
+                keyboard_arrow_down
+              </i>
+            </button>
+          </div>
+        </div>
+        <div
+          className="content">
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "margin": "0 auto",
+                "width": "100%",
+              }
+            }>
+            <iframe
+              src="iframe.html#undefined/component-Title/feature-Default"
+              style={
+                Object {
+                  "border": 0,
+                  "height": "100px",
+                  "transform": "scale(1)",
+                  "transformOrigin": "top left",
+                  "width": "100%",
+                }
+              } />
+          </div>
+        </div>
+      </div>
+      <div />
+    </div>
+    <div
+      className="container"
+      id={undefined}>
+      <div
+        className="titleContainer"
+        onClick={[Function]}>
+        <div
+          className="title">
+          <div
+            className="titleContent">
+            <h2>
+              <a
+                className=""
+                href="undefined/component-Avatar"
+                onClick={[Function]}
+                style={Object {}}>
+                Avatar
+              </a>
+            </h2>
+          </div>
+          <div
+            className="titleButton">
+            <button
+              onClick={[Function]}>
+              <i
+                className="material-icons">
+                keyboard_arrow_down
+              </i>
+            </button>
+          </div>
+        </div>
+        <div
+          className="content">
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "margin": "0 auto",
+                "width": "100%",
+              }
+            }>
+            <iframe
+              src="iframe.html#undefined/component-Avatar/feature-Default"
+              style={
+                Object {
+                  "border": 0,
+                  "height": "100px",
+                  "transform": "scale(1)",
+                  "transformOrigin": "top left",
+                  "width": "100%",
+                }
+              } />
+          </div>
+        </div>
+      </div>
+      <div />
+    </div>
+  </div>
+</div>
+`;

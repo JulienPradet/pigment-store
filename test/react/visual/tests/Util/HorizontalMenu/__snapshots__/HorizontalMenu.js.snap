@@ -1,0 +1,26 @@
+exports[`HorizontalMenu Default 1`] = `
+<div
+  className="container">
+  <div
+    className="group">
+    <div
+      className="item">
+      Item 1
+    </div>
+  </div>
+  <div
+    className="group">
+    <div
+      className="item">
+      Item 2
+    </div>
+  </div>
+  <div
+    className="group">
+    <div
+      className="item">
+      Item 3
+    </div>
+  </div>
+</div>
+`;

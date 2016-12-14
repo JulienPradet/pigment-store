@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from '../../../../../src/index'
+import PigmentStore from 'pigment-store'
 import {SidebarMenu, MenuTitle, Item, Search, Container} from '../../../../../src/core/display/App/util/View/SidebarMenu/index'
 
 const onSearchChange = (newSearch) => {

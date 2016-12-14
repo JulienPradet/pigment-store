@@ -1,0 +1,143 @@
+exports[`DisplayOptions Default 1`] = `
+<div
+  className="container">
+  <div
+    className="group">
+    <div
+      className="size">
+      <div
+        className="sizeInput">
+        <div>
+          <span
+            checked={false}
+            className="rc-switch"
+            defaultChecked={false}
+            onChange={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseUp={[Function]}
+            tabIndex="0">
+            <span
+              className="rc-switch-inner" />
+          </span>
+        </div>
+        <div>
+          Width
+        </div>
+        <div>
+          <input
+            disabled={true}
+            onChange={[Function]}
+            type="number"
+            value={0} />
+          px
+        </div>
+      </div>
+      <div
+        className="sizeInput">
+        <div>
+          <span
+            checked={false}
+            className="rc-switch"
+            defaultChecked={false}
+            onChange={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseUp={[Function]}
+            tabIndex="0">
+            <span
+              className="rc-switch-inner" />
+          </span>
+        </div>
+        <div>
+          Height
+        </div>
+        <div>
+          <input
+            disabled={true}
+            onChange={[Function]}
+            type="number"
+            value={0} />
+          px
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="group">
+    <div
+      className="zoom">
+      <div
+        className="zoomItem">
+        Zoom
+        <input
+          onChange={[Function]}
+          step="5"
+          type="number"
+          value={100} />
+        %
+      </div>
+      <div
+        className="zoomItem zoomSlider">
+        <div
+          className="rc-slider"
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}>
+          <div
+            className="rc-slider-rail" />
+          <div
+            className="rc-slider-track rc-slider-track-1"
+            style={
+              Object {
+                "left": "0%",
+                "visibility": "visible",
+                "width": "20%",
+              }
+            } />
+          <div
+            className="rc-slider-step" />
+          <div
+            className="rc-slider-handle rc-slider-handle-2 rc-slider-handle-upper"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            style={
+              Object {
+                "left": "20%",
+              }
+            } />
+          <div
+            className="rc-slider-mark" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="group">
+    <div
+      className="presetList">
+      <div
+        className="preset">
+        <button
+          onClick={[Function]}>
+          S
+        </button>
+      </div>
+      <div
+        className="preset">
+        <button
+          onClick={[Function]}>
+          M
+        </button>
+      </div>
+      <div
+        className="preset">
+        <button
+          onClick={[Function]}>
+          L
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

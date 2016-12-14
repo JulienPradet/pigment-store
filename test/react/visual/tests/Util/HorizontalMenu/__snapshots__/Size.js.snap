@@ -1,0 +1,185 @@
+exports[`Size Default 1`] = `
+<div
+  className="size">
+  <div
+    className="sizeInput">
+    <div>
+      <span
+        checked={true}
+        className="rc-switch rc-switch-checked"
+        defaultChecked={false}
+        onChange={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0">
+        <span
+          className="rc-switch-inner" />
+      </span>
+    </div>
+    <div>
+      Width
+    </div>
+    <div>
+      <input
+        disabled={false}
+        onChange={[Function]}
+        type="number"
+        value="1920" />
+      px
+    </div>
+  </div>
+  <div
+    className="sizeInput">
+    <div>
+      <span
+        checked={false}
+        className="rc-switch"
+        defaultChecked={false}
+        onChange={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0">
+        <span
+          className="rc-switch-inner" />
+      </span>
+    </div>
+    <div>
+      Height
+    </div>
+    <div>
+      <input
+        disabled={true}
+        onChange={[Function]}
+        type="number"
+        value={0} />
+      px
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Size With auto values 1`] = `
+<div
+  className="size">
+  <div
+    className="sizeInput">
+    <div>
+      <span
+        checked={false}
+        className="rc-switch"
+        defaultChecked={false}
+        onChange={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0">
+        <span
+          className="rc-switch-inner" />
+      </span>
+    </div>
+    <div>
+      Width
+    </div>
+    <div>
+      <input
+        disabled={true}
+        onChange={[Function]}
+        type="number"
+        value={0} />
+      px
+    </div>
+  </div>
+  <div
+    className="sizeInput">
+    <div>
+      <span
+        checked={false}
+        className="rc-switch"
+        defaultChecked={false}
+        onChange={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0">
+        <span
+          className="rc-switch-inner" />
+      </span>
+    </div>
+    <div>
+      Height
+    </div>
+    <div>
+      <input
+        disabled={true}
+        onChange={[Function]}
+        type="number"
+        value={0} />
+      px
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Size With fixed values 1`] = `
+<div
+  className="size">
+  <div
+    className="sizeInput">
+    <div>
+      <span
+        checked={true}
+        className="rc-switch rc-switch-checked"
+        defaultChecked={false}
+        onChange={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0">
+        <span
+          className="rc-switch-inner" />
+      </span>
+    </div>
+    <div>
+      Width
+    </div>
+    <div>
+      <input
+        disabled={false}
+        onChange={[Function]}
+        type="number"
+        value="360" />
+      px
+    </div>
+  </div>
+  <div
+    className="sizeInput">
+    <div>
+      <span
+        checked={true}
+        className="rc-switch rc-switch-checked"
+        defaultChecked={false}
+        onChange={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0">
+        <span
+          className="rc-switch-inner" />
+      </span>
+    </div>
+    <div>
+      Height
+    </div>
+    <div>
+      <input
+        disabled={false}
+        onChange={[Function]}
+        type="number"
+        value="720" />
+      px
+    </div>
+  </div>
+</div>
+`;

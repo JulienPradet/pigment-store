@@ -2,23 +2,26 @@
   "name": "pigment-store",
   "version": "0.1.1",
   "bin": {
-    "pigment-store": "cli/index.js"
+    "pigment-store": "./cli/index.js"
   },
   "main": "dist/index.js",
   "scripts": {
-    "start": "node cli/index.js",
+    "start": "pigment-store",
     "serve": "npm run serve:webpack",
     "serve:watch": "npm run serve:webpack:watch",
-    "serve:webpack": "NODE_ENV=production node cli/index.js --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:webpack:watch": "NODE_ENV=development node cli/index.js --dev --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:browserify": "NODE_ENV=production node cli/index.js --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
-    "serve:browserify:watch": "NODE_ENV=development node cli/index.js --dev --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:webpack": "NODE_ENV=production ./cli/index.js generate --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:webpack:watch": "NODE_ENV=development ./cli/index.js generate --dev --bundler webpack -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:browserify": "NODE_ENV=production ./cli/index.js generate --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
+    "serve:browserify:watch": "NODE_ENV=development ./cli/index.js generate --dev --bundler browserify -s test/react/visual/tests -o test/react/visual/styleguide",
     "test": "NODE_ENV=test babel-tape-runner test/**/*.test.js | faucet",
-    "test:dev": "NODE_ENV=test babel-tape-runner test/**/*.test.js"
+    "test:dev": "NODE_ENV=test babel-tape-runner test/**/*.test.js",
+    "test:store": "NODE_ENV=test ./cli/index.js snapshot -s test/react/visual/tests",
+    "test:store:watch": "NODE_ENV=test ./cli/index.js snapshot -s test/react/visual/tests -- --watch"
   },
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",
   "dependencies": {
+    "aliasify": "^2.1.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
@@ -34,6 +37,9 @@
     "css-modulesify": "^0.25.1",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^17.0.3",
     "json-loader": "^0.5.4",
     "markdown-it": "^8.2.1",
     "mkdirp": "^0.5.1",
@@ -48,6 +54,7 @@
     "react-highlight-words": "^0.6.0",
     "react-motion": "^0.4.0",
     "react-router": "next",
+    "react-test-renderer": "^15.4.1",
     "recompose": "^0.20.0",
     "rx": "^4.1.0",
     "style-loader": "^0.13.1",

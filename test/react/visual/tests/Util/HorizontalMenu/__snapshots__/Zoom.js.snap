@@ -1,0 +1,146 @@
+exports[`Zoom Default 1`] = `
+<div
+  className="zoom">
+  <div
+    className="zoomItem">
+    Zoom
+    <input
+      onChange={[Function]}
+      step="5"
+      type="number"
+      value={100} />
+    %
+  </div>
+  <div
+    className="zoomItem zoomSlider">
+    <div
+      className="rc-slider"
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}>
+      <div
+        className="rc-slider-rail" />
+      <div
+        className="rc-slider-track rc-slider-track-1"
+        style={
+          Object {
+            "left": "0%",
+            "visibility": "visible",
+            "width": "20%",
+          }
+        } />
+      <div
+        className="rc-slider-step" />
+      <div
+        className="rc-slider-handle rc-slider-handle-2 rc-slider-handle-upper"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        style={
+          Object {
+            "left": "20%",
+          }
+        } />
+      <div
+        className="rc-slider-mark" />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Zoom With max value 1`] = `
+<div
+  className="zoom">
+  <div
+    className="zoomItem">
+    Zoom
+    <input
+      onChange={[Function]}
+      step="5"
+      type="number"
+      value={200} />
+    %
+  </div>
+  <div
+    className="zoomItem zoomSlider">
+    <div
+      className="rc-slider"
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}>
+      <div
+        className="rc-slider-rail" />
+      <div
+        className="rc-slider-track rc-slider-track-1"
+        style={
+          Object {
+            "left": "0%",
+            "visibility": "visible",
+            "width": "46.666666666666664%",
+          }
+        } />
+      <div
+        className="rc-slider-step" />
+      <div
+        className="rc-slider-handle rc-slider-handle-2 rc-slider-handle-upper"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        style={
+          Object {
+            "left": "46.666666666666664%",
+          }
+        } />
+      <div
+        className="rc-slider-mark" />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Zoom With min value 1`] = `
+<div
+  className="zoom">
+  <div
+    className="zoomItem">
+    Zoom
+    <input
+      onChange={[Function]}
+      step="5"
+      type="number"
+      value={10} />
+    %
+  </div>
+  <div
+    className="zoomItem zoomSlider">
+    <div
+      className="rc-slider"
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}>
+      <div
+        className="rc-slider-rail" />
+      <div
+        className="rc-slider-track rc-slider-track-1"
+        style={
+          Object {
+            "left": "0%",
+            "visibility": "visible",
+            "width": "0%",
+          }
+        } />
+      <div
+        className="rc-slider-step" />
+      <div
+        className="rc-slider-handle rc-slider-handle-2 rc-slider-handle-upper"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        style={
+          Object {
+            "left": "0%",
+          }
+        } />
+      <div
+        className="rc-slider-mark" />
+    </div>
+  </div>
+</div>
+`;
