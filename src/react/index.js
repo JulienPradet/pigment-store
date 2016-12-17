@@ -1,11 +1,9 @@
-import describe from './definition/Component'
-import Usage from './display/Usage'
-import Render from './display/Render'
-import renderApp from '../core/display/App'
-import renderIframe from '../core/display/Iframe'
+import describe from './describe'
+import renderApp from './renderApp'
+import renderIframe from './renderIframe'
 
 export default {
-  renderApp: renderApp({Render, Usage}),
-  renderIframe: renderIframe({Render, Usage}),
+  renderApp,
+  renderIframe,
   describe
 }
