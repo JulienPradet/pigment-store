@@ -1,7 +1,7 @@
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import TextField from '../../../src/components/form/TextField'
 
-export default PigmentStore.React.describe('TextField', TextField)
+export default describe('TextField', TextField)
   .feature(
     'Default',
     { value: 'value', name: 'name' }

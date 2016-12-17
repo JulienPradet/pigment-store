@@ -1,6 +1,4 @@
 import React from 'react'
-import TextField from '../form/TextField'
-import InputField from '../form/NumberField'
 
 const styles = {
   link: {

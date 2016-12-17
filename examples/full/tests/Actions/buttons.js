@@ -1,7 +1,7 @@
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Link from '../../src/components/buttons/Link'
 
-export default PigmentStore.React.describe('Link', Link)
+export default describe('Link', Link)
   .setDescription(`
 A link is a super awesome stuff that links to another page.
   `)
