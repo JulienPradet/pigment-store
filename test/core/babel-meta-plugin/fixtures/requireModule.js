@@ -1,1 +1,0 @@
-var react = require('react')

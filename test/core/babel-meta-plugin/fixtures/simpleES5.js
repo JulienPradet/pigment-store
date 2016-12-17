@@ -1,1 +1,0 @@
-var Component = require('./componentWithoutDependency')
