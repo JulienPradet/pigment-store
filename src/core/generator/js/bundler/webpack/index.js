@@ -4,7 +4,7 @@ const createCompiler = require('./createCompiler')
 const serve = require('./serve')
 const compile = require('./compile')
 
-const bundler = (testDir, styleguideDir, options) => (baseAppIndexFile$, baseIframeIndexFile$) => {
+const bundler = (sourceDir, testDir, styleguideDir, options) => (baseAppIndexFile$, baseIframeIndexFile$) => {
   const appIndexFile$ = saveFiles(
     baseAppIndexFile$.map((file) => ({
       file: file.toString(),
@@ -19,7 +19,7 @@ const bundler = (testDir, styleguideDir, options) => (baseAppIndexFile$, baseIfr
     }))
   )
 
-  const compiler = createCompiler(testDir, styleguideDir, options)
+  const compiler = createCompiler(sourceDir, testDir, styleguideDir, options)
 
   return appIndexFile$.combineLatest(iframeIndexFile$, () => {})
     .flatMap(() => options.dev

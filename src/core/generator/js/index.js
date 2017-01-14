@@ -7,7 +7,7 @@ const logger = require('../util/log')
 
 const log = logger('BUILD')
 
-module.exports = function buildApp (testDir, styleguideDir, options) {
+module.exports = function buildApp (sourceDir, testDir, styleguideDir, options) {
   log.message('info', 'START')
 
   const appIndexFile$ = exists(path.join(testDir, 'index.js'))
@@ -28,7 +28,7 @@ module.exports = function buildApp (testDir, styleguideDir, options) {
       }
     })
 
-  const bundler = options.bundler(testDir, styleguideDir, options)
+  const bundler = options.bundler(sourceDir, testDir, styleguideDir, options)
 
   return bundler(appIndexFile$, iframeIndexFile$)
     .tap(

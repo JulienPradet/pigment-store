@@ -18,6 +18,15 @@ const extractComponentsFromCategory = (path = []) => (category) => {
 }
 
 const resolveComponentDependencies = ({path, component}, components) => {
+  if (!component.Component.__PIGMENT_META) {
+    console.warn('No meta found. Check your webpack config.')
+    component.Component.__PIGMENT_META = {
+      reliesOn: [],
+      isReliedOnBy: []
+    }
+    return {path, component}
+  }
+
   const currentFile = component.Component.__PIGMENT_META.file
   const currentDependencies = component.Component.__PIGMENT_META.dependencies
 

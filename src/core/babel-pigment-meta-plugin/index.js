@@ -3,29 +3,16 @@ const template = require('babel-template')
 const babel = require('babel-core')
 const detective = require('babel-plugin-detective')
 
-const buildInitialExport = template(`
-  module.exports = {
-    __esModule: true
-  };
-`)
+const buildImportReplacement = (identifier) => (opts) => template(`
+  function IDENTIFIER() {
+    return null
+  }
 
-const buildExportDefault = template(`
-  module.exports.default = {
-    __PIGMENT_META: {
-      file: FILEPATH,
-      dependencies: DEPENDENCIES
-    }
+  IDENTIFIER.__PIGMENT_META = {
+    file: FILEPATH,
+    dependencies: DEPENDENCIES
   };
-`)
-
-const buildExportNamed = (identifier) => (opts) => template(`
-  module.exports.COMPONENT = {
-    __PIGMENT_META: {
-      file: FILEPATH,
-      dependencies: DEPENDENCIES
-    }
-  };
-`)(Object.assign({}, opts, {COMPONENT: identifier}))
+`)(Object.assign({}, opts, {IDENTIFIER: identifier}))
 
 const isModuleDependency = (path) => {
   return !path.startsWith('/') &&
@@ -34,8 +21,10 @@ const isModuleDependency = (path) => {
     !path.endsWith('.js')
 }
 
+const appendJs = (filepath) => filepath.endsWith('.js') ? filepath : filepath + '.js'
+
 const getDependencies = (filepath) => {
-  const filepathWithExtension = filepath.endsWith('.js') ? filepath : filepath + '.js'
+  const filepathWithExtension = appendJs(filepath)
   var result = babel.transformFileSync(filepathWithExtension, {
     plugins: ['detective']
   })
@@ -43,19 +32,53 @@ const getDependencies = (filepath) => {
   return metadata && metadata.strings ? metadata.strings : []
 }
 
-const buildMetaData = (t, rootpath, filepath, template) => {
+const buildMetaData = (t, rootpath, originpath, dependency, template) => {
+  const filepath = appendJs(
+    path.relative(
+      rootpath,
+      path.join(path.dirname(originpath), dependency)
+    )
+  )
+
   return template({
-    FILEPATH: t.stringLiteral(path.relative(rootpath, filepath)),
+    FILEPATH: t.stringLiteral(filepath),
     DEPENDENCIES: t.arrayExpression(
-      getDependencies(filepath)
+      getDependencies(path.join(rootpath, filepath))
         .filter((dependency) => !isModuleDependency(dependency))
-        .map((dependency) => (
-          path.relative(rootpath, path.join(path.dirname(filepath), dependency))
-        ))
-        .map((dependency) => dependency.endsWith('.js') ? dependency : dependency + '.js')
+        .map((dependency) => path.join(path.dirname(filepath), dependency))
+        .map((dependency) => appendJs(dependency))
         .map((dependency) => t.stringLiteral(dependency))
     )
   })
+}
+
+const extractVariable = (specifier) => {
+  if (specifier.type === 'ImportDefaultSpecifier') {
+    return specifier.local
+  } else if (specifier.type === 'ImportSpecifier') {
+    return specifier.local
+  } else {
+    console.log(`WARNING: Unknown specifier type (${specifier.type}). Please report to https://github.com/JulienPradet/pigment-store.`)
+  }
+}
+
+const isInSourceDirectory = (sourcepath, filepath) => {
+  return !path.relative(sourcepath, filepath).startsWith('..')
+}
+
+const getMetasFromImportDeclaration = (rootpath, filepath, node) => {
+  const source = node.source.value
+
+  if (!isModuleDependency(source) && isInSourceDirectory(rootpath, path.join(path.dirname(filepath), source))) {
+    const specifiers = node.specifiers
+
+    return specifiers
+      .map(extractVariable)
+      .map((identifier) => ({
+        source,
+        identifier
+      }))
+  }
 }
 
 module.exports = function (b) {
@@ -69,30 +92,27 @@ module.exports = function (b) {
           const rootpath = state.opts.rootDir
           const filepath = state.file.parserOpts.sourceFileName
 
-          console.log(filepath)
+          for (let path of body) {
+            let metas = []
 
-          if (filepath.startsWith(rootpath)) {
-            mainPath.unshiftContainer('body', buildInitialExport())
+            if (path.isImportDeclaration()) {
+              metas = getMetasFromImportDeclaration(rootpath, filepath, path.node)
+            } else {
+              continue
+            }
 
-            for (let path of body) {
-              if (path.isExportDefaultDeclaration()) {
-                path.replaceWith(
-                  buildMetaData(t, rootpath, filepath, buildExportDefault)
-                )
-              } else if (path.isExportNamedDeclaration()) {
-                if (path.node.specifiers.length > 0) {
-                  let exports = path.node.specifiers.map((specifier) => (
-                    buildMetaData(t, rootpath, filepath, buildExportNamed(specifier.local))
+            if (metas && metas.length > 0) {
+              path.replaceWithMultiple(
+                metas
+                  .map(({source, identifier}) => buildMetaData(
+                    t,
+                    rootpath,
+                    filepath,
+                    source,
+                    buildImportReplacement(identifier)
                   ))
-                  path.replaceWithMultiple(exports)
-                } else {
-                  path.replaceWith(
-                    buildMetaData(t, rootpath, filepath, buildExportNamed(path.node.declaration.declarations[0].id))
-                  )
-                }
-              } else {
-                path.remove()
-              }
+                  .reduce((acc, arr) => acc.concat(arr), [])
+              )
             }
           }
         }

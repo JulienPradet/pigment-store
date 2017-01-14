@@ -9,12 +9,13 @@ function makeFixtureFilePath (filePath) {
 }
 
 function runTest (fixtureFile, callback) {
-  const plugins = [[metaPlugin, {
-    'rootDir': '.'
-  }]]
   const babelOpts = {
-    presets: ['es2015', 'react'],
-    plugins: plugins
+    presets: ['react-app'],
+    plugins: [
+      [metaPlugin, {
+        'rootDir': path.resolve(__dirname)
+      }]
+    ]
   }
 
   const expectedPath = makeFixtureFilePath(path.join(fixtureFile, 'expected'))
@@ -27,35 +28,47 @@ function runTest (fixtureFile, callback) {
 
   readFile(expectedPath, function (err, expected) {
     if (err) { throw new Error(err.message) }
-    callback(actual.trim('\n'), expected.toString().trim('\n'))
+
+    callback(
+      actual.replace(/( |\t)+/, ' ').trim('\n'),
+      expected.toString().replace(/( |\t)+/, ' ').trim('\n')
+    )
   })
 }
 
-test('ES2015 export default', (t) => {
+test('ES2015 import default', (t) => {
   t.plan(1)
   runTest(
-    'es2015/export-default',
+    'es2015/import-default',
     (actual, expected) => t.equals(actual, expected)
   )
 })
 
-test('ES2015 named export', (t) => {
+test('ES2015 named import', (t) => {
   t.plan(1)
   runTest(
-    'es2015/simple-named-export',
+    'es2015/named-import',
     (actual, expected) => t.equals(actual, expected)
   )
 })
 
-test('ES2015 multiple named export', (t) => {
+test('ES2015 mixed import', (t) => {
   t.plan(1)
   runTest(
-    'es2015/multiple-named-export',
+    'es2015/mixed-import',
     (actual, expected) => t.equals(actual, expected)
   )
 })
 
-test('ES2015 export with dependencies', (t) => {
+test('ES2015 module import', (t) => {
+  t.plan(1)
+  runTest(
+    'es2015/module-import',
+    (actual, expected) => t.equals(actual, expected)
+  )
+})
+
+test('ES2015 with dependencies', (t) => {
   t.plan(1)
   runTest(
     'es2015/with-dependencies',

@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const babelPigmentMetaPlugin = require('../../../../babel-pigment-meta-plugin')
 
 module.exports = ({paths}) => ({
   devtool: 'cheap-module-source-map',
@@ -17,41 +17,83 @@ module.exports = ({paths}) => ({
   },
   output: {
     path: paths.appBuild,
-    pathinfo: true,
     filename: '[name].js',
     publicPath: '/'
   },
   resolve: {
-    fallback: paths.nodePaths,
-    extensions: ['.js', '.json', '.jsx', ''],
     alias: {
       'pigment-store': paths.pigmentStoreEntry
     }
   },
+  performance: {
+    hints: false
+  },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        oneOf: [
+          {
+            test: /\.js$/,
+            include: paths.test,
+            issuer: {
+              include: paths.appIndexJs
+            },
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                'react-app'
+              ],
+              plugins: [
+                [babelPigmentMetaPlugin, {rootDir: paths.src}]
+              ]
+            }
+          },
+          {
+            test: /\.js$/,
+            exclude: [
+              /(node_modules|bower_components)/
+            ],
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                'react-app'
+              ]
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              localIdentName: '[folder]_[path]__[name]_[local]__[hash:base64:16]',
+              modules: true,
+              importLoaders: 1
+            }
+          }
+        ]
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      options: {
+        context: paths.src
+      }
+    })
   ]
 })

@@ -7,13 +7,14 @@ var webpackBundler = require('../src/core/generator/js/bundler/webpack')
 function generate (argv) {
   var argsOptions = parseArgs(argv, {
     boolean: ['dev', 'help'],
-    strings: ['source', 'output', 's', 'o', 'bundler']
+    strings: ['source', 'test', 'output', 's', 't', 'o', 'bundler']
   })
 
   var source = argsOptions.source || argsOptions.s
+  var test = argsOptions.test || argsOptions.t
   var output = argsOptions.output || argsOptions.o
 
-  if (argsOptions.help || !source || !output) {
+  if (argsOptions.help || !source || !output || !test) {
     console.log('\
     Welcome to PigmentStore!\n\
 \n\
@@ -38,12 +39,9 @@ function generate (argv) {
       dev: argsOptions.dev || false
     })
 
-    var testDir = source
-    var styleguideDir = output
+    var generator$ = generator(source, test, output, options)
 
-    var generator$ = generator(testDir, styleguideDir, options)
-
-    var styleguideRelativeDir = path.relative(process.cwd(), styleguideDir)
+    var styleguideRelativeDir = path.relative(process.cwd(), output)
     var runStyleguideCmd = path.resolve(styleguideRelativeDir, 'index.html')
 
     generator$.subscribe(

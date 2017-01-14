@@ -1,11 +1,10 @@
 'use strict';
 
-module.exports = {
-  __esModule: true
-};
-module.exports.default = {
-  __PIGMENT_META: {
-    file: 'test/core/babel-pigment-meta-plugin/fixtures/es2015/with-dependencies/actual.js',
-    dependencies: ['test/core/babel-pigment-meta-plugin/fixtures/es2015/with-dependencies/dependency.js']
-  }
+function Dependency() {
+  return null;
+}
+
+Dependency.__PIGMENT_META = {
+  file: 'fixtures/es2015/with-dependencies/dependency.js',
+  dependencies: ['fixtures/es2015/with-dependencies/sub-dependency.js']
 };
