@@ -5,7 +5,9 @@ import Layout from '../../../../../src/core/display/App/util/View/Layout/Basic/i
 export default describe('Layout', Layout)
   .featureJsx(
     'Default',
-    <Layout nav='Left navigation' horizontalNav='Top navigation'>
-      Content
-    </Layout>
+    () => (
+      <Layout nav='Left navigation' horizontalNav='Top navigation'>
+        Content
+      </Layout>
+    )
   )

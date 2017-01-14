@@ -15,13 +15,13 @@ const aSizeConfig = {
 export default describe('Size', Size)
   .featureJsx(
     'Default',
-    <Size {...aSizeConfig} />
+    () => <Size {...aSizeConfig} />
   )
   .featureJsx(
     'With auto values',
-    <Size {...aSizeConfig} size={{height: 'auto', width: 'auto'}} />
+    () => <Size {...aSizeConfig} size={{height: 'auto', width: 'auto'}} />
   )
   .featureJsx(
     'With fixed values',
-    <Size {...aSizeConfig} size={{height: '720', width: '360'}} />
+    () => <Size {...aSizeConfig} size={{height: '720', width: '360'}} />
   )

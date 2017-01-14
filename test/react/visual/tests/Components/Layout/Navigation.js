@@ -10,7 +10,7 @@ The left navigation that allows to explore the styleguide
   `)
   .featureJsx(
     'Default',
-    (
+    () => (
       <MemoryRouter>
         <Navigation indexCategory={indexCategory} />
       </MemoryRouter>
@@ -18,7 +18,7 @@ The left navigation that allows to explore the styleguide
   )
   .featureJsx(
     'With an active category',
-    (
+    () => (
       <MemoryRouter location='/category-Atom'>
         <Navigation indexCategory={indexCategory} />
       </MemoryRouter>
@@ -26,7 +26,7 @@ The left navigation that allows to explore the styleguide
   )
   .featureJsx(
     'With an active component',
-    (
+    () => (
       <MemoryRouter location='/category-Atom/component-Avatar'>
         <Navigation indexCategory={indexCategory} />
       </MemoryRouter>

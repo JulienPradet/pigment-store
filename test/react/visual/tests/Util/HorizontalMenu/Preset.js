@@ -39,9 +39,9 @@ const aPresetListConfig = {
 export default describe('PresetList', PresetList)
   .featureJsx(
     'Default',
-    <PresetList {...aPresetListConfig} />
+    () => <PresetList {...aPresetListConfig} />
   )
   .featureJsx(
     'With selected preset',
-    <PresetList {...aPresetListConfig} selected={aPresetListConfig.presets[1].preset} />
+    () => <PresetList {...aPresetListConfig} selected={aPresetListConfig.presets[1].preset} />
   )

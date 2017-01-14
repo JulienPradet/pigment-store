@@ -12,10 +12,10 @@ export default describe('Category', Category)
   .addDecorator(routerDecorator)
   .addDecorator(configDecorator)
   .addDecorator(displayOptionsDecorator)
-  .featureJsx('Default', <Category category={fixtures} pathname='' />)
+  .featureJsx('Default', () => <Category category={fixtures} pathname='' />)
   .featureJsx(
     'With components',
-    (
+    () => (
       <Category category={fixtures.categories[0]} />
     )
   )

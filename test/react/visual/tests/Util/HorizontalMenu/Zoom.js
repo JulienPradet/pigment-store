@@ -12,13 +12,13 @@ const aZoomConfig = {
 export default describe('Zoom', Zoom)
   .featureJsx(
     'Default',
-    <Zoom {...aZoomConfig} />
+    () => <Zoom {...aZoomConfig} />
   )
   .featureJsx(
     'With max value',
-    <Zoom {...aZoomConfig} zoom={200} />
+    () => <Zoom {...aZoomConfig} zoom={200} />
   )
   .featureJsx(
     'With min value',
-    <Zoom {...aZoomConfig} zoom={10} />
+    () => <Zoom {...aZoomConfig} zoom={10} />
   )

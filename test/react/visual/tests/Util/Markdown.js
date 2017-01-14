@@ -5,18 +5,22 @@ import Markdown from '../../../../../src/core/display/App/util/View/Markdown/ind
 export default describe('Markdown', Markdown)
   .featureJsx(
     'Default',
-    <Markdown>
-      {`# Hi!
+    () => (
+      <Markdown>
+        {`# Hi!
 
-Here is some **basic** markdown`}
-    </Markdown>
+  Here is some **basic** markdown`}
+      </Markdown>
+    )
   )
   .featureJsx(
     'With code',
-    <Markdown>
-      ```jsx
-      {`// Comment
-<div class="test">HTML</div>`}
-      ```
-    </Markdown>
+    () => (
+      <Markdown>
+        ```jsx
+        {`// Comment
+  <div class="test">HTML</div>`}
+        ```
+      </Markdown>
+    )
   )

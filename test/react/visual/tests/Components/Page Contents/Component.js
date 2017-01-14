@@ -14,13 +14,13 @@ export default describe('Component', Component)
   .addDecorator(displayOptionsDecorator)
   .featureJsx(
     'Default',
-    (
+    () => (
       <Component pathname='' component={fixtures.categories[0].components[0]} />
     )
   )
   .featureJsx(
     'With multiple features',
-    (
+    () => (
       <Component pathname='' component={fixtures.categories[0].components[1]} />
     )
   )

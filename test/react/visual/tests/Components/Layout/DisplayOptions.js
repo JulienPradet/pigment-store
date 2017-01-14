@@ -10,7 +10,7 @@ The left navigation that allows to explore the styleguide
   .addDecorator(displayOptionsDecorator)
   .featureJsx(
     'Default',
-    (
+    () => (
       <DisplayOptions />
     )
   )

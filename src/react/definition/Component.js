@@ -19,7 +19,14 @@ export default (name, Component) => {
       this.features.push(Feature(Component, featureName, props, actions))
       return this
     },
-    featureJsx (featureName, jsx, actions) {
+    featureJsx (featureName, render, actions) {
+      let jsx
+      if (typeof render === 'function') {
+        jsx = render()
+      } else {
+        console.warn('Your feature should be defered in a function. Unexpected behaviors might occurs if not.')
+        jsx = render
+      }
       this.features.push(Feature(jsx.type, featureName, jsx.props, actions))
       return this
     }
