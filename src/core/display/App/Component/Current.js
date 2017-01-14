@@ -17,7 +17,7 @@ export default class Component extends React.Component {
 
     const title = <div>
       <PageTitle>{component.name}</PageTitle>
-      <Meta>{component.Component.__PIGMENT_META.file}</Meta>
+      { component.Component.__PIGMENT_META && <Meta>{component.Component.__PIGMENT_META.file}</Meta> }
     </div>
 
     const subTitle = component.description
@@ -26,7 +26,7 @@ export default class Component extends React.Component {
 
     return <div>
       <Card id='component' title={title} subTitle={subTitle} closable defaultClosed>
-        <Dependencies component={component} />
+        { component.Component.__PIGMENT_META && <Dependencies component={component} /> }
       </Card>
 
       <FeatureList component={component} pathname={this.props.pathname} />

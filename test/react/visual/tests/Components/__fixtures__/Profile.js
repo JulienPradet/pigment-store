@@ -7,4 +7,9 @@ const Profile = (props) => <div>
   <div><Title>{props.children}</Title></div>
 </div>
 
+Profile.__PIGMENT_META = {
+  file: 'Profile.js',
+  dependencies: ['Avatar.js', 'Title.js']
+}
+
 export default Profile
