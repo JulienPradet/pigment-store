@@ -1,18 +1,18 @@
 import React from 'react'
-import {Match} from 'react-router'
-import CurrentComponent from './Current'
-import Feature from '../Feature/Main'
+import SplitMatch from '../util/Router/SplitMatch'
 
 const Component = ({component, pathname}) => {
   return <div>
-    <Match
+    <SplitMatch
       exactly
       pattern={`${pathname}`}
-      render={({pathname}) => <CurrentComponent component={component} pathname={pathname} />}
+      import={() => System.import('./Current').then((module) => module.default)}
+      render={(CurrentComponent) => ({pathname}) => <CurrentComponent component={component} pathname={pathname} />}
     />
-    <Match
+    <SplitMatch
       pattern={`${pathname}/:featureName`}
-      render={({pathname, params}) => {
+      import={() => System.import('../Feature/Main').then((module) => module.default)}
+      render={(Feature) => ({pathname, params}) => {
         const featureName = params.featureName
         const feature = component.features.find((feature) => feature.name === featureName)
         return <Feature feature={feature} component={component} pathname={pathname} />

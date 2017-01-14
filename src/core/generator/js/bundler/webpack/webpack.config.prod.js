@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const babelPigmentMetaPlugin = require('../../../../babel-pigment-meta-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = ({paths}) => ({
   devtool: 'source-map',
@@ -9,7 +10,8 @@ module.exports = ({paths}) => ({
   },
   output: {
     path: paths.appBuild,
-    filename: '[name].js',
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[hash].js',
     publicPath: '/'
   },
   resolve: {
@@ -72,9 +74,25 @@ module.exports = ({paths}) => ({
     ]
   },
   plugins: [
+    // Generates an `index.html` file with the <script> injected.
+    new HtmlWebpackPlugin({
+      template: paths.appHtml,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
-      filename: 'commons.js'
+      minChunks: 2
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -97,6 +115,7 @@ module.exports = ({paths}) => ({
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
+      debug: false,
       options: {
         context: paths.src
       }

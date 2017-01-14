@@ -15,6 +15,7 @@ module.exports = (sourceDir, testDir, styleguideDir) => {
     iframeIndexJs: path.resolve(styleguideDir, '.iframe.js'),
     src: resolveApp(sourceDir),
     test: resolveApp(testDir),
-    nodePaths: resolveApp('node_modules')
+    nodePaths: resolveApp('node_modules'),
+    appHtml: path.resolve(__dirname, './index.html')
   }
 }

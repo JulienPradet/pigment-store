@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const babelPigmentMetaPlugin = require('../../../../babel-pigment-meta-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = ({paths}) => ({
   devtool: 'cheap-module-source-map',
@@ -17,16 +18,13 @@ module.exports = ({paths}) => ({
   },
   output: {
     path: paths.appBuild,
-    filename: '[name].js',
-    publicPath: '/'
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[hash].js'
   },
   resolve: {
     alias: {
       'pigment-store': paths.pigmentStoreEntry
     }
-  },
-  performance: {
-    hints: false
   },
   module: {
     rules: [
@@ -83,6 +81,14 @@ module.exports = ({paths}) => ({
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: paths.appHtml
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      minChunks: 2
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')
