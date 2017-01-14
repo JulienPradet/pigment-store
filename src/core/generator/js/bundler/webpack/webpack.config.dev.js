@@ -82,7 +82,7 @@ module.exports = ({paths}) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: false,
+      inject: true,
       template: paths.appHtml
     }),
     new webpack.optimize.CommonsChunkPlugin({
