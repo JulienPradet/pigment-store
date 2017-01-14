@@ -34,28 +34,29 @@
     "chokidar": "^1.5.2",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
-    "css-modulesify": "^0.25.1",
+    "css-modulesify": "^0.27.1",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "beta",
     "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.26.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^18.0.0",
+    "jest": "^18.1.0",
     "json-loader": "^0.5.4",
     "markdown-it": "^8.2.2",
     "mkdirp": "^0.5.1",
-    "postcss-loader": "^1.2.0",
+    "postcss-loader": "^1.2.2",
     "prismjs": "^1.6.0",
-    "rc-slider": "^5.4.0",
-    "rc-switch": "^1.4.2",
-    "react": "^15.4.1",
+    "rc-slider": "^5.4.3",
+    "rc-switch": "^1.4.3",
+    "react": "^15.4.2",
     "react-collapse": "^2.3.0",
-    "react-dom": "^15.4.1",
+    "react-dom": "^15.4.2",
     "react-height": "^2.1.1",
     "react-highlight-words": "^0.6.0",
     "react-motion": "^0.4.7",
     "react-router": "next",
-    "react-test-renderer": "^15.4.1",
-    "recompose": "^0.21.0",
+    "react-test-renderer": "^15.4.2",
+    "recompose": "^0.21.2",
     "rx": "^4.1.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -69,6 +70,8 @@
     "tape": "^4.5.1"
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   }
 }
