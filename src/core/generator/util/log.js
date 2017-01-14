@@ -17,24 +17,33 @@ const typeToTitleColor = {
   success: chalk.bgGreen.white.bold
 }
 
+const appendChar = ' '
 let longestTitle = 10
 
-const message = (subject) => (type, string) => {
+const appendSpaces = (n, subject = '') => {
+  while (subject.length < n) {
+    subject = appendChar + subject
+  }
+  return subject
+}
+
+const message = (subject) => (type, string, displayTitle = true) => {
   if (!typeToColor.hasOwnProperty(type)) {
     console.log(typeToColor.warn(`Type ${type} is not defined as logging type`))
     type = 'info'
   }
 
   if (subject.length < longestTitle) {
-    const appendChar = ' '
-    while (subject.length < longestTitle) {
-      subject = appendChar + subject
-    }
+    subject = appendSpaces(longestTitle, subject)
   } else {
     longestTitle = subject.length
   }
 
-  console.log(typeToTitleColor[type](subject + ' ') + ' ' + typeToColor[type](string))
+  const title = displayTitle
+    ? typeToTitleColor[type](subject + ' ')
+    : appendSpaces(longestTitle + 1)
+  const message = typeToColor[type](string)
+  console.log(title + ' ' + message)
 }
 
 module.exports = function logger (subject) {
