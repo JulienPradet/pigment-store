@@ -1,7 +1,6 @@
 import React from 'react'
 import {compose, lifecycle, withState, withHandlers} from 'recompose'
-import Switch from 'rc-switch'
-import './switch.css'
+import Switch from './Switch'
 import styles from './horizontalmenu.css'
 
 const SizeInput = compose(
