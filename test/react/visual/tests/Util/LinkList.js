@@ -1,8 +1,8 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import {Container, Title, Content} from '../../../../../src/core/display/App/util/View/LinkList/index'
 
-export default PigmentStore.React.describe('LinkList', Container)
+export default describe('LinkList', Container)
   .featureJsx(
     'Default',
     <Container>

@@ -1,10 +1,10 @@
 import React from 'react'
 import {MemoryRouter} from 'react-router'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Navigation from '../../../../../../src/core/display/App/Navigation/Vertical/index'
 import indexCategory from '../__fixtures__/index'
 
-export default PigmentStore.React.describe('Navigation', Navigation)
+export default describe('Navigation', Navigation)
   .setDescription(`
 The left navigation that allows to explore the styleguide
   `)

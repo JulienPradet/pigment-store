@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Size from '../../../../../../src/core/display/App/util/View/HorizontalMenu/Size'
 
 const aSizeConfig = {
@@ -12,7 +12,7 @@ const aSizeConfig = {
   }
 }
 
-export default PigmentStore.React.describe('Size', Size)
+export default describe('Size', Size)
   .featureJsx(
     'Default',
     <Size {...aSizeConfig} />

@@ -1,8 +1,8 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import {Container, Group, Item} from '../../../../../../src/core/display/App/util/View/HorizontalMenu/index'
 
-export default PigmentStore.React.describe('HorizontalMenu', Container)
+export default describe('HorizontalMenu', Container)
   .featureJsx(
     'Default',
     <Container>

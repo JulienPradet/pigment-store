@@ -1,8 +1,8 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Markdown from '../../../../../src/core/display/App/util/View/Markdown/index'
 
-export default PigmentStore.React.describe('Markdown', Markdown)
+export default describe('Markdown', Markdown)
   .featureJsx(
     'Default',
     <Markdown>

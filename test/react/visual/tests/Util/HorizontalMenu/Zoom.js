@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Zoom from '../../../../../../src/core/display/App/util/View/HorizontalMenu/Zoom'
 
 const aZoomConfig = {
@@ -9,7 +9,7 @@ const aZoomConfig = {
   }
 }
 
-export default PigmentStore.React.describe('Zoom', Zoom)
+export default describe('Zoom', Zoom)
   .featureJsx(
     'Default',
     <Zoom {...aZoomConfig} />

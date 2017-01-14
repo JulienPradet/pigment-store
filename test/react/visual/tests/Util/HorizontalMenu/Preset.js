@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import PresetList from '../../../../../../src/core/display/App/util/View/HorizontalMenu/Preset'
 
 const aPresetListConfig = {
@@ -36,7 +36,7 @@ const aPresetListConfig = {
   }
 }
 
-export default PigmentStore.React.describe('PresetList', PresetList)
+export default describe('PresetList', PresetList)
   .featureJsx(
     'Default',
     <PresetList {...aPresetListConfig} />

@@ -1,12 +1,12 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import {SidebarMenu, MenuTitle, Item, Search, Container} from '../../../../../src/core/display/App/util/View/SidebarMenu/index'
 
 const onSearchChange = (newSearch) => {
   console.log(newSearch)
 }
 
-export default PigmentStore.React.describe('SidebarMenu', SidebarMenu)
+export default describe('SidebarMenu', SidebarMenu)
   .featureJsx(
     'Default',
     <SidebarMenu>

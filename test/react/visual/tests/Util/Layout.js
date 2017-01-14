@@ -1,8 +1,8 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Layout from '../../../../../src/core/display/App/util/View/Layout/Basic/index'
 
-export default PigmentStore.React.describe('Layout', Layout)
+export default describe('Layout', Layout)
   .featureJsx(
     'Default',
     <Layout nav='Left navigation' horizontalNav='Top navigation'>

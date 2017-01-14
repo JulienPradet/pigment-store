@@ -1,5 +1,5 @@
 import React from 'react'
-import PigmentStore from 'pigment-store'
+import describe from 'pigment-store/react/describe'
 import Card from '../../../../../src/core/display/App/util/View/Card/index'
 
 const cardContent = {
@@ -10,7 +10,7 @@ const cardContent = {
 
 const Span = (props) => <span {...props} />
 
-export default PigmentStore.React.describe('Card', Card)
+export default describe('Card', Card)
   .setDescription(`
 A card is a block containing a title and a content that serves as a detailed description.
 
