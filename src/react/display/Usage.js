@@ -1,5 +1,6 @@
 import React from 'react'
 import getUsage from './definitionToJsx'
+import Code from '../../core/display/App/util/View/Code'
 
 const getUsageFromFeature = (feature) => {
   const ComponentProps = feature.props || {}
@@ -14,20 +15,16 @@ const FeatureUsage = ({feature, component, displayActions = true}) => {
   return <div>
     <div>
       <h3>Usage:</h3>
-      <pre className='language-jsx'>
-        <code>
-          {usage}
-        </code>
-      </pre>
+      <Code lang='jsx'>
+        {usage}
+      </Code>
     </div>
     {displayActions && feature.actions
       ? <div>
         <h5>Actions taken:</h5>
-        <pre className='language-jsx'>
-          <code>
-            {feature.actions.toString()}
-          </code>
-        </pre>
+        <Code lang='jsx'>
+          {feature.actions.toString()}
+        </Code>
       </div>
       : null}
   </div>
