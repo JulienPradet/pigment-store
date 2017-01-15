@@ -61,6 +61,10 @@ module.exports = ({paths}) => ({
         ]
       },
       {
+        test: /\.md/,
+        loader: paths.markdownLoader
+      },
+      {
         oneOf: [
           {
             test: /\.m.css$/,

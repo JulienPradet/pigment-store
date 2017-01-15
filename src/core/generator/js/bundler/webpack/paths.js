@@ -8,14 +8,20 @@ module.exports = (sourceDir, testDir, styleguideDir) => {
     return path.resolve(appDirectory, relativePath)
   }
 
+  const pigmentStoreEntry = path.resolve(__dirname, '../../../../../')
+  const markdownLoader = './' + path.relative(
+    process.cwd(),
+    path.join(pigmentStoreEntry, 'core/generator/js/bundler/webpack/pigment-store-markdown-loader')
+  )
   return {
-    pigmentStoreEntry: path.resolve(__dirname, '../../../../../'),
+    pigmentStoreEntry: pigmentStoreEntry,
     appBuild: resolveApp(styleguideDir),
     appIndexJs: path.resolve(styleguideDir, '.app.js'),
     iframeIndexJs: path.resolve(styleguideDir, '.iframe.js'),
     src: resolveApp(sourceDir),
     test: resolveApp(testDir),
     nodePaths: resolveApp('node_modules'),
-    appHtml: path.resolve(__dirname, './index.html')
+    appHtml: path.resolve(__dirname, './index.html'),
+    markdownLoader: markdownLoader
   }
 }

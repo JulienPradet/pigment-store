@@ -44,7 +44,9 @@ module.exports = class Category {
   render () {
     const render = `{
       name: ${renderString(this.name)},
-      description: ${renderString(this.description)},
+      description: ${this.description
+        ? `require(${renderString(this.description)})`
+        : '\'\''},
       categories: [${this.subCategories.map(
         ({name, category}) => category.render()
       ).join(',')}],

@@ -1,5 +1,4 @@
 import React from 'react'
-import Markdown from '../../core/display/App/util/View/Markdown'
 import getUsage from './definitionToJsx'
 
 const getUsageFromFeature = (feature) => {
@@ -10,26 +9,25 @@ const getUsageFromFeature = (feature) => {
 
 const FeatureUsage = ({feature, component, displayActions = true}) => {
   const importLine = `import ${component.name} from '${component.Component.__PIGMENT_META.file}'\n`
+  const usage = `${importLine}\n${getUsageFromFeature(feature)}`
 
   return <div>
     <div>
       <h3>Usage:</h3>
-      <Markdown>
-        ```jsx
-        {importLine}
-
-        {getUsageFromFeature(feature)}
-        ```
-      </Markdown>
+      <pre className='language-jsx'>
+        <code>
+          {usage}
+        </code>
+      </pre>
     </div>
     {displayActions && feature.actions
       ? <div>
         <h5>Actions taken:</h5>
-        <Markdown>
-          ```jsx
-          {feature.actions.toString()}
-          ```
-        </Markdown>
+        <pre className='language-jsx'>
+          <code>
+            {feature.actions.toString()}
+          </code>
+        </pre>
       </div>
       : null}
   </div>

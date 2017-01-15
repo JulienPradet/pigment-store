@@ -53,11 +53,10 @@ const readCategory = (testDir, categoryDir, indexDir) => {
       )
     }))
 
-  const descriptionPath = path.join(categoryDir, 'index.md')
+  const descriptionPath = path.resolve(categoryDir, 'index.md')
   const description$ = exists(descriptionPath)
     .filter((exists) => exists)
-    .flatMap(() => readfile(descriptionPath))
-    .map(({file}) => (parent) => parent.setDescription(file))
+    .map(() => (parent) => parent.setDescription(path.relative(indexDir, descriptionPath)))
 
   let categoryToReturn
   const category$ = new Subject()
