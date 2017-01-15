@@ -1,7 +1,7 @@
 import React from 'react'
 import Collapse from 'react-collapse'
 import {compose, branch, withHandlers, withState} from 'recompose'
-import styles from './card.css'
+import styles from './card.m.css'
 
 const Title = ({closed, onClick, children}) => <div className={styles.title}>
   <div className={styles.titleContent}>

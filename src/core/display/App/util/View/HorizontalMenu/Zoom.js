@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import {withHandlers} from 'recompose'
-import styles from './horizontalmenu.css'
+import styles from './horizontalmenu.m.css'
 
 const Zoom = (
   withHandlers({

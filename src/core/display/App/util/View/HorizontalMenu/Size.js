@@ -1,7 +1,7 @@
 import React from 'react'
 import {compose, lifecycle, withState, withHandlers} from 'recompose'
 import Switch from './Switch'
-import styles from './horizontalmenu.css'
+import styles from './horizontalmenu.m.css'
 
 const SizeInput = compose(
   withState('auto', 'setAuto', (props) => props.value === 'auto'),

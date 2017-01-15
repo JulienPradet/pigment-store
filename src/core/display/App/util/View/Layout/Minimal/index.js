@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './layout.css'
+import styles from './layout.m.css'
 
 const Layout = class Layout extends React.Component {
   constructor () {

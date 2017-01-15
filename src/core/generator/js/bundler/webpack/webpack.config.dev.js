@@ -61,16 +61,27 @@ module.exports = ({paths}) => ({
         ]
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
+        oneOf: [
           {
-            loader: 'css-loader',
-            options: {
-              localIdentName: '[folder]_[path]__[name]_[local]__[hash:base64:16]',
-              modules: true,
-              importLoaders: 1
-            }
+            test: /\.m.css$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  localIdentName: '[folder]_[path]__[name]_[local]__[hash:base64:16]',
+                  modules: true,
+                  importLoaders: 1
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              'css-loader'
+            ]
           }
         ]
       },

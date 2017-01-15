@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import styles from './sidebar.css'
+import styles from './sidebar.m.css'
 
 export const SidebarMenu = ({children}) => <div>{children}</div>
 SidebarMenu.displayName = 'SidebarMenu.SidebarMenu'

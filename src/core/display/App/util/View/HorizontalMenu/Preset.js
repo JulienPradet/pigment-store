@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import styles from './horizontalmenu.css'
+import styles from './horizontalmenu.m.css'
 
 const PresetList = ({presets, onSelect, selected}) => <div className={styles.presetList}>
   {presets.map((preset, index) => <Preset key={index} active={preset.preset === selected} preset={preset} onSelect={onSelect} />)}

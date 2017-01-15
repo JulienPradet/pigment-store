@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './horizontalmenu.css'
+import styles from './horizontalmenu.m.css'
 
 export const Container = ({children}) => <div className={styles.container}>{children}</div>
 Container.displayName = 'HorizontalMenu.Container'
