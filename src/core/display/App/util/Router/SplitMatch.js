@@ -9,6 +9,10 @@ const asyncComponent = (getImport, render) => {
     }
 
     componentWillMount () {
+      this.updateModule()
+    }
+
+    updateModule () {
       getImport().then((module) => {
         this.setState({
           module
@@ -28,6 +32,9 @@ const asyncComponent = (getImport, render) => {
 
 export default class SplitMatch extends React.Component {
   componentWillMount () {
+    this.Component = asyncComponent(this.props.import, this.props.render)
+  }
+  componentWillUpdate () {
     this.Component = asyncComponent(this.props.import, this.props.render)
   }
 
