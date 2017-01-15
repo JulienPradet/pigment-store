@@ -97,8 +97,14 @@ module.exports = ({paths}) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml
+      template: paths.appHtml,
+      filename: 'index.html',
+      chunks: ['commons', 'app']
+    }),
+    new HtmlWebpackPlugin({
+      template: paths.appHtml,
+      filename: 'iframe.html',
+      chunks: ['commons', 'iframe']
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
