@@ -3,16 +3,28 @@ const template = require('babel-template')
 const babel = require('babel-core')
 const detective = require('babel-plugin-detective')
 
-const buildImportReplacement = (identifier) => (opts) => template(`
-  function IDENTIFIER() {
-    return null
+const buildImportReplacement = (t, {identifier, parent = null}) => (opts) => {
+  let replacements = template(`
+    function IDENTIFIER() {
+      return null
+    }
+
+    IDENTIFIER.__PIGMENT_META = {
+      file: FILEPATH,
+      dependencies: DEPENDENCIES
+    };
+  `)(Object.assign({}, opts, {IDENTIFIER: identifier}))
+
+  if (parent) {
+    replacements.push(
+      template(`
+        IDENTIFIER.displayName = DISPLAYNAME;
+      `)({IDENTIFIER: identifier, DISPLAYNAME: t.stringLiteral(`${parent}.${identifier.name}`)})
+    )
   }
 
-  IDENTIFIER.__PIGMENT_META = {
-    file: FILEPATH,
-    dependencies: DEPENDENCIES
-  };
-`)(Object.assign({}, opts, {IDENTIFIER: identifier}))
+  return replacements
+}
 
 const isModuleDependency = (path) => {
   return !path.startsWith('/') &&
@@ -52,11 +64,16 @@ const buildMetaData = (t, rootpath, originpath, dependency, template) => {
   })
 }
 
-const extractVariable = (specifier) => {
+const extractVariable = (source) => (specifier) => {
   if (specifier.type === 'ImportDefaultSpecifier') {
-    return specifier.local
+    return {
+      identifier: specifier.local
+    }
   } else if (specifier.type === 'ImportSpecifier') {
-    return specifier.local
+    return {
+      parent: source,
+      identifier: specifier.local
+    }
   } else {
     console.log(`WARNING: Unknown specifier type (${specifier.type}). Please report to https://github.com/JulienPradet/pigment-store.`)
   }
@@ -72,11 +89,17 @@ const getMetasFromImportDeclaration = (rootpath, filepath, node) => {
   if (!isModuleDependency(source) && isInSourceDirectory(rootpath, path.join(path.dirname(filepath), source))) {
     const specifiers = node.specifiers
 
+    let parent = path.basename(source)
+    if (parent === 'index') {
+      parent = path.basename(path.dirname(source))
+    }
+
     return specifiers
-      .map(extractVariable)
-      .map((identifier) => ({
+      .map(extractVariable(parent))
+      .map(({identifier, parent}) => ({
         source,
-        identifier
+        identifier,
+        parent
       }))
   }
 }
@@ -104,12 +127,12 @@ module.exports = function (b) {
             if (metas && metas.length > 0) {
               path.replaceWithMultiple(
                 metas
-                  .map(({source, identifier}) => buildMetaData(
+                  .map(({source, identifier, parent}) => buildMetaData(
                     t,
                     rootpath,
                     filepath,
                     source,
-                    buildImportReplacement(identifier)
+                    buildImportReplacement(t, {identifier, parent})
                   ))
                   .reduce((acc, arr) => acc.concat(arr), [])
               )

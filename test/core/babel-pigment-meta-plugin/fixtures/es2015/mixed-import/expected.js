@@ -17,3 +17,4 @@ Named.__PIGMENT_META = {
   file: 'fixtures/es2015/mixed-import/dependency.js',
   dependencies: []
 };
+Named.displayName = 'dependency.Named';
