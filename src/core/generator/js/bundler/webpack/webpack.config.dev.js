@@ -19,7 +19,8 @@ module.exports = ({paths}) => ({
   output: {
     path: paths.appBuild,
     filename: '[name].[hash].js',
-    chunkFilename: '[name].[hash].js'
+    chunkFilename: '[name].[hash].js',
+    publicPath: '/'
   },
   resolve: {
     alias: {

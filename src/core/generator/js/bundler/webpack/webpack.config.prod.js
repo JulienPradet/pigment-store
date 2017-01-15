@@ -54,16 +54,31 @@ module.exports = ({paths}) => ({
         ]
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
+        test: /\.md/,
+        loader: paths.markdownLoader
+      },
+      {
+        oneOf: [
           {
-            loader: 'css-loader',
-            options: {
-              localIdentName: '[folder]_[path]__[name]_[local]__[hash:base64:16]',
-              modules: true,
-              importLoaders: 1
-            }
+            test: /\.m.css$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  localIdentName: '[folder]_[path]__[name]_[local]__[hash:base64:16]',
+                  modules: true,
+                  importLoaders: 1
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              'css-loader'
+            ]
           }
         ]
       },
@@ -74,10 +89,27 @@ module.exports = ({paths}) => ({
     ]
   },
   plugins: [
-    // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
-      inject: true,
       template: paths.appHtml,
+      filename: 'index.html',
+      chunks: ['commons', 'app'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: paths.appHtml,
+      filename: 'iframe.html',
+      chunks: ['commons', 'iframe'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
