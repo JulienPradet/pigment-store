@@ -18,7 +18,7 @@ const asyncComponent = (getImport, render) => {
 
     render () {
       if (this.state.module) {
-        return render(this.state.module)(this.props)
+        return render(this.state.module)(this.props.matchProps)
       } else {
         return null
       }
